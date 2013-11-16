@@ -13,70 +13,44 @@ body {
     margin-top: 30px;
 }
 
-h1,h2,h3,h4 {
-    font-weight: normal;
-}
-
-a, a:focus, a:hover {
-    outline: none;
-}
-
-#menu {
-    margin: 0;
-    color: #FFFFFF;
-    background-color: #2FACAC;
-    height: 50px;
-    line-height: 50px;
-    font-size: 1.2em;
-    border-top: solid 1px #5AD7D7;
-}
-
-#menu a {
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-#menu ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-#menu ul li {
-    float: left;
-    padding-right: 40px;
-}
-
-/*#menu ul li:first-child {
-    padding-left: 30px;
-}*/
-
-.event-info {
-    border-bottom: 1px solid #D4D4D4;
-    padding: 20px 0;
-}
-.event-info a {
-    color: #5C5B5B;
-    text-decoration: none;
-}
-.event-info.list img {
-    float: left;
-    margin: 0 10px 10px 0;
-}
-
-.event-info h2 {
-    margin-top: 0;
-}
-
-#header, #footer, #content {
+#footer, #content {
     padding: 30px;
 }
 
-#header, #footer {
+#footer {
     color: yellow;
     background-color: red;
 }
 
+#header {
+    color: blueviolet;
+    background-color: aqua;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 36px;
+    border-bottom: solid 1px yellow;
+}
+
+#header .logo {
+    margin: 5px;
+}
+
+
+#header .button {
+    border: solid 1px yellow;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-color: white;
+    font-family: arial;
+}
+
+#header .button:hover{
+ border:1px solid #44adc6;
+ background-color: #ff0;
+}
 
 
 .clear {

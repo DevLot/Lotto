@@ -10,12 +10,17 @@
     </head>
     <body>
 
-        <div id="wrap">
+        
             <div id="header">
-                <div id="logo">
-                    <a href="/home"><img src="/images/logo_site.png" alt="Logo"  /></a>
+                <div class="logo">
+                    <a href="/home"><img src="/images/logo_site.png" alt="Logo" height="26"/></a>
+                    
+                    <div class="button"><a href="">Logout</a></div>
+                    
                 </div>
-            </div>
+                
+            <div id="wrap">    
+           
 
             <div id="menu">
            
