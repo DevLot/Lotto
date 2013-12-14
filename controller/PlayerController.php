@@ -1,6 +1,6 @@
 <?php
 
-include_once 'lib/MysqlAdapter.php';
+include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 //include_once 'model/Event.php';
 //include_once 'model/MusicEvent.php';
@@ -13,7 +13,7 @@ class PlayerController extends Controller {
     private $mysqlAdapter;
 
     function __construct() {
-      $this->mysqlAdapter = new MysqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+      $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
 
     protected function index() {
@@ -33,9 +33,25 @@ class PlayerController extends Controller {
     }
 
     protected function create() {
-       $this->mysqlAdapter->createPlayer();
+        
+        $player = new Player($_POST['firstname'],$_POST['surname'],
+                $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
+                $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail']);
+        
+              
+        $firstname = $player->getFirstname();
+        $surname = $player->getSurname();
+        $birthdate = $player->getBirthdate();
+        $address = $player->getAddress();
+        $zipcode = $player->getZipcode();
+        $city = $player->getCity();
+        $phone = $player->getPhone();
+        $mobile = $player->getMobile();
+        $mail = $player->getMail();
+                
+        $this->mysqlAdapter->createPlayer($firstname,$surname,$birthdate,$address,$zipcode,$city,$phone,$mobile,$mail);
       
-       
+           
     }
    
 

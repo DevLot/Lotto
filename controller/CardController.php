@@ -2,35 +2,29 @@
 
 include_once 'config/config.php';
 include_once 'model/Card.php';
-include_once 'model/Player.php';
 include_once 'lib/MySqlAdapter.php';
 
-class CardController {
+class CardController extends Controller {
     
-    private $mysqlAdapter;
+    private $mySqlAdapter;
     
     function __construct() {
-        $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $this->mySqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
-    
-    function getLine1() {
-       $list = $this->mysqlAdapter->getCard();
-       
-       return $list; 
+    //Erstellt neue Spielkarte
+    function create($card) {
+        
+        $cardnr = $card->getCardnr();
+        $line1 = $card->getLine1();
+        $line2 = $card->getLine2();
+        $line3 = $card->getLine3();
+        $player = $card->getPlayer();
+        
+        $this->mySqlAdapter->createCard($cardnr,$line1,$line2,$line3,$player);
     }
-    function createPlayer($player) {
+    //Aktuallisiert Spielkarte
+    function update($card) {
         
-        $firstname = $player->getFirstname();
-        $surname = $player->getSurname();
-        $birthdate = $player->getBirthdate();
-        $address = $player->getAddress();
-        $zipcode = $player->getZipcode();
-        $city = $player->getCity();
-        $phone = $player->getPhone();
-        $mobile = $player->getMobile();
-        $mail = $player->getMail();
-        
-        $this->mysqlAdapter->createPlayer($firstname,$surname,$birthdate,$address,$zipcode,$city,$phone,$mobile,$mail);
     }
 
 }

@@ -1,13 +1,13 @@
 <?php
 
 echo '  
-         <form id="form" action="create">
+         <form id="form" action="create"  method="post">
 
      <label>Vorname</label>
-<input type="text" id="surname" name="surname">
+<input type="text" id="firstname" name="firstname">
 
 <label>Name</label>
-<input type="text" id="name" name="name">
+<input type="text" id="surname" name="surname">
 
 <label>Geb.-Datum</label>
 <input type="date" id="birthdate" name="birthdate">
@@ -26,6 +26,10 @@ echo '
 
 <label>Mobiltelefon</label>
 <input type="tel" id="mobile" name="mobile">
+
+<label>Mail</label>
+<input type="mail" id="mail" name="mail">
+
 
 <label>Spielkarten</label>
 <input type="text" id="cards" name="cards">
