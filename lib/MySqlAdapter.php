@@ -7,6 +7,7 @@ final class MysqlAdapter {
     private $password;
     private $db;
     private $con;
+    private $sql;
 
     function __construct($host, $user, $password, $db) {
         $this->host = $host;
@@ -40,11 +41,44 @@ final class MysqlAdapter {
 
     public function getCard() {
         
-        $res = $this->con->query("SELECT line1 FROM fabingo.cards WHERE id=2;");
-        $list = $res;
-        $res->free();
-        return $list;
+        $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id=2;");
+        //$res->free();
+        $row = $res->fetch_object()->line1;        
+        
+        return $row;
+    }
+    public function setCard() {
+        $sql = 
+        $this->con->query("INSERT INTO cards(cardnr, line1, line2, line3, player, create_on, update_on) VALUES(9999,'12,15,2,48,1','45,66,23,21,7','35,19,58,39,8','Max Muster', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());");           
+    }
+    public function getPlayers() {
+        
+    }
+    public function createPlayer($fn,$sn,$bd,$ad,$zc,$ci,$ph,$mo,$ma) {
+        
+        $firstname = $fn;
+        $surname = $sn;
+        $birthdate = $bd;
+        $address = $ad;
+        $zipcode = $zc;
+        $city = $ci;
+        $phone = $ph;
+        $mobile = $mo;
+        $mail = $ma;
+        
+        $sql = "INSERT INTO players
+                (
+                    firstname,surname,birthdate,address,zipcode,city,phone,mobile,mail,create_on,update_on
+                )
+                VALUES
+                (
+                    '$firstname','$surname','$birthdate','$address','$zipcode','$city','$phone','$mobile','$mail',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()
+                    
+                );
+         ";
+        
+        $this->con->query($sql);
+        //'.$firstname.','.$surname.','$birthdate.','.$address.','.$zipcode.','.$city.','.$phone.','.$mobile.','.$mail.',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()
     }
 
 }
-
