@@ -28,15 +28,14 @@ include_once 'config/config.php';
                 <div id="wrap">             
 
                     <div id="navtree">
-                        Home > Start
+                        Home > <?php $currentUri = getCurrentURI(); echo $currentUri; ?>
                     </div>
 
 
                     <div id="content">
                         <?php
-                        $currentUri = getCurrentURI();
+                                           
                         
-                        echo $currentUri;
 
                         $controller = null;
                         switch (getCurrentURI()) {
@@ -55,6 +54,15 @@ include_once 'config/config.php';
                             case URI_PLAYER:
                                 include_once 'controller/PlayerController.php';
                                 $controller = new PlayerController();
+                                break;
+                            case URI_PLAYER_NEW:
+                                include_once 'controller/PlayerNewController.php';
+                                $controller = new PlayerNewController();
+                                break;
+                         
+                            case URI_CARD:
+                                include_once 'controller/CardController.php';
+                                $controller = new CardController();
                                 break;
                             case URI_ACCOUNT:
                                 include_once 'controller/AccountController.php';
@@ -93,6 +101,7 @@ function getMenu() {
         URI_HOME => 'Home',
         URI_EVENT => 'Veranstaltung',
         URI_PLAYER => 'Spieler',
+        URI_CARD => 'Spielkarten',
         URI_ACCOUNT => 'Account'
     );
 }

@@ -2,13 +2,12 @@
 
 //include_once 'lib/CSVAdapter.php';
 include_once 'controller/Controller.php';
-//include_once 'model/Event.php';
 //include_once 'model/MusicEvent.php';
 //include_once 'model/Artist.php';
 include_once 'view/View.php';
-include_once 'view/player/PlayerView.php';
+include_once 'view/card/CardView.php';
 
-class PlayerController extends Controller {
+class CardController extends Controller {
 
 //    private $csvAdapter;
 
@@ -18,7 +17,7 @@ class PlayerController extends Controller {
 
     protected function index() {
 //        $eventList = $this->csvAdapter->getEventList();
-        $view = new PlayerView();
+        $view = new CardView();
 //        $view->assign('list', $eventList);
         $view->display();
     }
@@ -28,15 +27,12 @@ class PlayerController extends Controller {
     }
 
     protected function init() {
-
-        $view = new PlayerView();
-        $view->newform();
+        echo "not implemented";
     }
 
     protected function create() {
-       echo "creeeate not implemented";
+        echo "not implemented";
     }
-   
 
 }
 

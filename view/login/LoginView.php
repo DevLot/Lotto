@@ -3,7 +3,7 @@
 class LoginView extends View {
 
     public function display() {
-        echo "Das wäre der Login";
+        echo "<h1>Das wäre der Login</h1><br />";
         
         
         echo '<a href="/home">home</a><br />';

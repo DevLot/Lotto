@@ -65,7 +65,7 @@ body {
 	margin-left: 10px;
 	margin-right: 10px;
         width:300px;
-        background: #262626;
+        background: #143352;
         
 }
 
@@ -84,7 +84,6 @@ body {
    margin-right: 0.4em;
    text-decoration: none;
    padding: 0.5em 0 0.5em 1.3em;
-   color: white;
    list-style: none;
 }
 .grid a:hover{
@@ -102,9 +101,79 @@ body {
         
 }
 
+.grid ul {
+   
+    list-style: none;
+}
+
+
 #navtree {
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.9em;
     padding: 30px;
     color: white;
+}
+
+
+#content table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9em;
+    padding: 1em;
+    
+}
+
+#content thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit
+}
+
+#content .button a{
+   font-family: arial;
+   border: solid 1px #143352;
+   color: black;
+   margin-left: 0.2em;
+   margin-top: 0.2em;
+   text-decoration: none;
+   padding: 0.5em;
+}
+#content .button a:hover{
+   background-color: #143352;
+   color: white;
+   text-decoration: none;
+}
+
+tbody tr:nth-child(2n) {
+  background: #143352;
+  color: white;
+}
+
+#content tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+/* Centre the form within the page */
+#form {
+    margin:0 auto;
+    width:20em;
+}
+
+/* Style the text boxes */
+#form input, textarea {
+	width:20em;
+	height:1.8em;
+	background:white;
+	border:1px solid #dedede;
+	padding:0.2em;
+	margin-bottom:1.2em;
+	font-size:0.9em;
+	color:black;
+}
+
+#form textarea {
+	height:4em;
 }
