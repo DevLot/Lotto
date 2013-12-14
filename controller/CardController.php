@@ -1,37 +1,22 @@
 <?php
 
-//include_once 'lib/CSVAdapter.php';
-include_once 'controller/Controller.php';
-//include_once 'model/MusicEvent.php';
-//include_once 'model/Artist.php';
-include_once 'view/View.php';
-include_once 'view/card/CardView.php';
+include_once 'config/config.php';
+include_once 'model/Card.php';
+include_once 'lib/MySqlAdapter.php';
 
-class CardController extends Controller {
-
-//    private $csvAdapter;
-
+class CardController {
+    
+    private $mysqlAdapter;
+    
     function __construct() {
-//        $this->csvAdapter = new CSVAdapter("{$_SERVER['DOCUMENT_ROOT']}/resources/eventlist.csv");
+        $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
-
-    protected function index() {
-//        $eventList = $this->csvAdapter->getEventList();
-        $view = new CardView();
-//        $view->assign('list', $eventList);
-        $view->display();
-    }
-
-    protected function show() {
-        echo "not implemented";
-    }
-
-    protected function init() {
-        echo "not implemented";
-    }
-
-    protected function create() {
-        echo "not implemented";
+    
+    function getLine1() {
+       $list = $this->mysqlAdapter->getCard();
+       var_dump($list);
+       return $list;
+       
     }
 
 }

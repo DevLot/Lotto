@@ -1,6 +1,4 @@
 <!doctype html>
-
-﻿<!doctype html>
 <?php
 include_once 'config/config.php';
 ?>
@@ -31,7 +29,7 @@ include_once 'config/config.php';
                         Home > <?php $currentUri = getCurrentURI(); echo $currentUri; ?>
                     </div>
 
-
+         
                     <div id="content">
                         <?php
                                            
@@ -54,12 +52,7 @@ include_once 'config/config.php';
                             case URI_PLAYER:
                                 include_once 'controller/PlayerController.php';
                                 $controller = new PlayerController();
-                                break;
-                            case URI_PLAYER_NEW:
-                                include_once 'controller/PlayerNewController.php';
-                                $controller = new PlayerNewController();
-                                break;
-                         
+                                break;                         
                             case URI_CARD:
                                 include_once 'controller/CardController.php';
                                 $controller = new CardController();
