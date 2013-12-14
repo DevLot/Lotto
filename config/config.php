@@ -12,8 +12,7 @@ define('URI_ACCOUNT', '/account');
 
 # DB configs
 define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'sysuser');
-define('DB_PASSWORD', 'dU3BdUej');
-define('DB_NAME', 'ticsys');
+define('DB_USER', 'fabingo');
+define('DB_PASSWORD', 'lotto');
+define('DB_NAME', 'fabingo');
 
-?>
