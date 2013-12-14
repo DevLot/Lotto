@@ -2,35 +2,36 @@ body {
     font-family: Georgia, serif;
     font-size: 100%;
     line-height: 1.5em;
-    color: red;
+    //color: red;
     background: #79c3d2;
 }
 
 #wrap {
     width: 960px;
     margin: 0 auto;
-    background-color: #d9eef2;
-    margin-top: 30px;
+    /*background-color: white;*/
+    margin-top: 60px;
 }
 
-#footer, #content {
-    padding: 30px;
+#content {
+    background-color:#d9eef2;
+    padding: 40px 0px;
+    display: block;
 }
 
 #footer {
-    color: yellow;
-    background-color: red;
+    background-color:#d9eef2;
+    padding: 15px;
 }
 
 #header {
-    color: blueviolet;
-    background-color: aqua;
+    background-color: #143352;
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     height: 36px;
-    border-bottom: solid 1px yellow;
+    border-bottom: solid 3px #d9eef2;
 }
 
 #header .logo {
@@ -55,4 +56,55 @@ body {
 
 .clear {
     clear: both;
+}
+
+
+.grid {
+	float: left;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+        width:300px;
+        background: #262626;
+        
+}
+
+.grid ul {
+   
+    list-style: none;
+}
+
+.grid a{
+   font-family: arial;
+   border: solid 1px white;
+   display: block;
+   color: white;
+   margin-left: -2em;
+   margin-bottom: 0.2em;
+   margin-right: 0.4em;
+   text-decoration: none;
+   padding: 0.5em 0 0.5em 1.3em;
+   color: white;
+   list-style: none;
+}
+.grid a:hover{
+   background-color: #d9eef2;
+   color: #262626;
+   text-decoration: none;
+}
+
+
+.grid h1 {
+    font-family: 'Ubuntu', sans-serif;
+    padding-left: 1.2em;
+    color: #d9eef2;
+    font-size: 1.2em;
+        
+}
+
+#navtree {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.9em;
+    padding: 30px;
+    color: white;
 }
