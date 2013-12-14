@@ -1,6 +1,6 @@
 <?php
 
-include_once 'lib/MysqlAdapter.php';
+include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 //include_once 'model/Event.php';
 //include_once 'model/MusicEvent.php';
@@ -13,7 +13,7 @@ class PlayerController extends Controller {
     private $mysqlAdapter;
 
     function __construct() {
-      $this->mysqlAdapter = new MysqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+      $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
 
     protected function index() {
