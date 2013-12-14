@@ -57,7 +57,7 @@ class Player {
         $this->birthdate = $birthdate;
     }
     //Holt Adresse
-    public function getAddsress() {
+    public function getAddress() {
         return $this->address;
     }
     //Setzt Adresse

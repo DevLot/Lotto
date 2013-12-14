@@ -1,30 +1,29 @@
 <?php
 
-//include_once 'lib/CSVAdapter.php';
+//include_once 'lib/MysqlAdapter.php';
 include_once 'controller/Controller.php';
 //include_once 'model/Event.php';
 //include_once 'model/MusicEvent.php';
-//include_once 'model/Artist.php';
+include_once 'model/Player.php';
 include_once 'view/View.php';
 include_once 'view/player/PlayerView.php';
 
 class PlayerController extends Controller {
 
-//    private $csvAdapter;
+    private $mysqlAdapter;
 
     function __construct() {
-//        $this->csvAdapter = new CSVAdapter("{$_SERVER['DOCUMENT_ROOT']}/resources/eventlist.csv");
+      $this->mysqlAdapter = new MysqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
 
     protected function index() {
-//        $eventList = $this->csvAdapter->getEventList();
         $view = new PlayerView();
-//        $view->assign('list', $eventList);
+        $view->assign('playerlist', $this->mysqlAdapter->getPlayers());
         $view->display();
     }
 
     protected function show() {
-        echo "not implemented";
+        echo "shoooww is not implemented";
     }
 
     protected function init() {
@@ -34,7 +33,9 @@ class PlayerController extends Controller {
     }
 
     protected function create() {
-       echo "creeeate not implemented";
+       $this->mysqlAdapter->createPlayer();
+      
+       
     }
    
 

@@ -5,7 +5,7 @@ define('URI_LOGIN', '/login');
 define('URI_HOME', '/home');
 define('URI_EVENT', '/event');
 define('URI_PLAYER', '/player');
-define('URI_PLAYER_NEW', '/player/new');
+//define('URI_PLAYER_NEW', '/player/new');
 define('URI_CARD', '/card');
 define('URI_ACCOUNT', '/account');
 
