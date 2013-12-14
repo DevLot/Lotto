@@ -37,8 +37,8 @@
                         <ul>
                             
                             <li><a href="index.php">Spiel starten</a></li>
-                            <li><a href="index.php">Nächste Veranstaltungen</a></li>
-                            <li><a href="index.php">Vergangene Veranstaltungen</a></li>
+                            <li><a href="index.php">Spieler hinzufügen</a></li>
+                            
                         </ul>
                        
                     </div>
@@ -49,9 +49,9 @@
                         
                         <ul class="nav">
                             
-                            <li><a href="index.php">Spieler hinzufügen</a></li>
-                            <li><a href="index.php">Spieler</a></li>
-                            <li><a href="index.php">Spielkarten bearbeiten</a></li>
+                            <li><a href="index.php">Veranstaltungen anzeigen</a></li>
+                            <li><a href="index.php">Veranstaltung hinzufügen</a></li>
+                            <li><a href="index.php">Veranstaltung bearbeiten</a></li>
                          </ul>
                     </div>
 
@@ -59,10 +59,9 @@
                         <h1>Verwaltung</h1>
                         
                         <ul>
-                            <li><a href="index.php">Spieler hinzufügen</a></li>
-                            <li><a href="index.php">Spieler anzeigen</a></li>
-                            <li><a href="index.php">Spielkarten bearbeiten</a></li>
-                            <li><a href="index.php">Passwort ändern</a></li>
+                            <li><a href="index.php">Spieler</a></li>
+                            <li><a href="index.php">Spielkarten</a></li>
+                            <li><a href="index.php">Eigene Einstellungen</a></li>
                         </ul>
                             
                     </div>
