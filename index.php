@@ -15,75 +15,72 @@ include_once 'config/config.php';
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     </head>
     <body>
-                <div id="header">
-                    <div class="logo">
-                        <a href="/home"><img src="/images/logo_site.png" alt="Logo" height="26"/></a>
-                    </div>
-                    <div class="button"><a href="">Logout</a></div>
+        <div id="header">
+            <div class="logo">
+                <a href="/home"><img src="/images/logo_site.png" alt="Logo" height="26"/></a>
+            </div>
+            <div class="button"><a href="/login">Logout</a></div>
 
-                </div>
+        </div>
 
-                <div id="wrap">             
+        <div id="wrap">             
 
-                    <div id="navtree">
-                        Home > <?php $currentUri = getCurrentURI(); echo $currentUri; ?>
-                    </div>
+            <div id="navtree">
+                Home > <?php $currentUri = getCurrentURI();
+echo $currentUri; ?>
+            </div>
 
-         
-                    <div id="content">
-                        <?php
-                                           
-                        
 
-                        $controller = null;
-                        switch (getCurrentURI()) {
-                            case URI_LOGIN:
-                                include_once 'controller/LoginController.php';
-                                $controller = new LoginController();
-                                break;
-                            case URI_HOME:
-                                include_once 'controller/HomeController.php';
-                                $controller = new HomeController();
-                                break;
-                            case URI_EVENT:
-                                include_once 'controller/EventController.php';
-                                $controller = new EventController();
-                                break;
-                            case URI_PLAYER:
-                                include_once 'controller/PlayerController.php';
-                                $controller = new PlayerController();
-                                break;                         
-                            case URI_CARD:
-                                include_once 'controller/CardController.php';
-                                $controller = new CardController();
-                                break;
-                            case URI_ACCOUNT:
-                                include_once 'controller/AccountController.php';
-                                $controller = new AccountController();
-                                break;
-                            default :
-                                include_once 'controller/HomeController.php';
-                                $controller = new HomeController();
-                                break;
-                        }
-                        if ($controller != null) {
-                            $controller->route();
-                        }
-                        ?>
+            <div id="content">
+                <?php
+                $controller = null;
+                switch (getCurrentURI()) {
+                    case URI_LOGIN:
+                        include_once 'controller/LoginController.php';
+                        $controller = new LoginController();
+                        break;
+                    case URI_HOME:
+                        include_once 'controller/HomeController.php';
+                        $controller = new HomeController();
+                        break;
+                    case URI_EVENT:
+                        include_once 'controller/EventController.php';
+                        $controller = new EventController();
+                        break;
+                    case URI_PLAYER:
+                        include_once 'controller/PlayerController.php';
+                        $controller = new PlayerController();
+                        break;
+                    case URI_CARD:
+                        include_once 'controller/CardController.php';
+                        $controller = new CardController();
+                        break;
+                    case URI_ACCOUNT:
+                        include_once 'controller/AccountController.php';
+                        $controller = new AccountController();
+                        break;
+                    default :
+                        include_once 'controller/HomeController.php';
+                        $controller = new HomeController();
+                        break;
+                }
+                if ($controller != null) {
+                    $controller->route();
+                }
+                ?>
 
-                    </div>
+            </div>
 
-                    <div id="footer">
-                        by Oliver und Fabian
-                    </div>
-                </div>
+            <div id="footer">
+                by Oliver und Fabian
+            </div>
+        </div>
 
-                </body>
-                </html>
-                
-                
+    </body>
+</html>
+
+
 <?php
-
 
 /**
  * @return array containing all menu items in format [base href] => [title]

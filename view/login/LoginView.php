@@ -6,10 +6,8 @@ class LoginView extends View {
         echo "<h1>Das wäre der Login</h1><br />";
         
         
-        echo '<a href="/home">home</a><br />';
-            echo '<a href="/event">event</a><br />';
-        echo '<a href="/player">player</a><br />';
-            echo '<a href="/account">account</a><br />';
+        echo '<a href="/home">Geht klar chef! Jetzt weiter</a><br />';
+
     }
 
 }

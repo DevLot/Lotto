@@ -9,17 +9,17 @@ class PlayerView extends View {
 
         foreach ($this->vars['playerlist'] as $player) {
 
-            echo '<tr>' .
-            '<td>' . $player->firstname() . '</td>' .
-            '<td>' . $player->surname() . '</td>' .
-            '<td>' . $player->birthdate() . '</td>' .
-            '<td>' . $player->address() . '</td>' .
-            '<td>' . $player->zipcode() . '</td>' .
-            '<td>' . $player->zipcode() . '</td>' .
-            '<td>' . $player->phone() . '</td>' .
-            '<td>' . $player->mobile() . '</td>' .
-            '<td>' . $player->mail() . '</td>' .
-            '<td>28,32,32,32</td>';
+            echo "<tr><td>[]</td>" .
+            "<td>" . $player->getFirstname() . "</td>" .
+            "<td>" . $player->getSurname() . "</td>" .
+            "<td>" . $player->getBirthdate() . "</td>" .
+            "<td>" . $player->getAddress() . "</td>" .
+            "<td>" . $player->getZipcode() . "</td>" .
+            "<td>" . $player->getCity() . "</td>" .
+            "<td>" . $player->getPhone() . "</td>" .
+            "<td>" . $player->getMobile() . "</td>" .
+            "<td>" . $player->getMail() . "</td>" .
+            "<td>28,32,32,32</td>";
         }
         echo '</tr></tbody></table>';
     }

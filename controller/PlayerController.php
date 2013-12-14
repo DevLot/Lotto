@@ -1,6 +1,6 @@
 <?php
 
-//include_once 'lib/MysqlAdapter.php';
+include_once 'lib/MysqlAdapter.php';
 include_once 'controller/Controller.php';
 //include_once 'model/Event.php';
 //include_once 'model/MusicEvent.php';

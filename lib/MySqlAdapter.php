@@ -38,13 +38,26 @@ final class MysqlAdapter {
         }
     }
 
-    public function getCard() {
-        
-        $res = $this->con->query("SELECT line1 FROM fabingo.cards WHERE id=2;");
-        $list = $res;
-        $res->free();
-        return $list;
-    }
+//    public function getCard() {
+//
+//        $res = $this->con->query("SELECT line1 FROM fabingo.cards WHERE id=2;");
+//        $list = $res;
+//        $res->free();
+//        return $list;
+//    }
 
+    public function getPlayers() {
+        $playerlist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.player ORDER BY id");
+        while ($row = $res->fetch_assoc()) {
+            $player = new Player($row['firstname'], $row['surname'], 
+                    $row['birthdate'], $row['address'], $row['zipcode'],
+                    $row['city'], $row['phone'], $row['mobile'], $row['mail']);
+            $playerlist[] = $player;
+        }
+        $res->free();
+        return $playerlist;
+           
+}
 }
 
