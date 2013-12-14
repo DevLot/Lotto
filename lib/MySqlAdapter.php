@@ -54,7 +54,7 @@ final class MysqlAdapter {
 
     public function getPlayers() {
         $playerlist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.player ORDER BY id");
+        $res = $this->con->query("SELECT * FROM fabingo.players ORDER BY id");
         while ($row = $res->fetch_assoc()) {
             $player = new Player($row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail']);
             $playerlist[] = $player;
@@ -75,7 +75,7 @@ final class MysqlAdapter {
         $mobile = $mo;
         $mail = $ma;
 
-        $sql = "INSERT INTO players
+        $sql = "INSERT INTO fabingo.players
                 (
                     firstname,surname,birthdate,address,zipcode,city,phone,mobile,mail,create_on,update_on
                 )
@@ -87,6 +87,9 @@ final class MysqlAdapter {
          ";
 
         $this->con->query($sql);
+                
+        echo '<p>Eintrag erfolgreich!</p>
+        <div class="button"><a href="/player">Danke!</a></div>';
     }
 
 }
