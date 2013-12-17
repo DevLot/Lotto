@@ -3,10 +3,19 @@
 class LoginView extends View {
 
     public function display() {
-        echo "<h1>Das wäre der Login</h1><br />";
-        
-        
-        echo '<a href="/home">Geht klar chef! Jetzt weiter</a><br />';
+        echo '
+            
+<div class="grid grid_3">
+                        <h1>Login</h1>
+                        
+                        
+                        
+                        <ul class="nav">
+                        
+                                                       
+                            <li><a href="/home">Login</a></li>
+                             <li><a href="/home">Passwort vergessen</a></li>
+</ul></div>';
 
     }
 

@@ -20,8 +20,12 @@ body {
 }
 
 #footer {
-    background-color:#d9eef2;
+    background-color:#262626;
     padding: 15px;
+    font-family: arial;
+    color: #666666;
+    font-size: 0.8em;
+    font-weight:100;
 }
 
 #header {
@@ -35,22 +39,37 @@ body {
 }
 
 #header .logo {
-    margin: 5px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 1.6em;
+    color: #dedede;
+    margin-left: 0.3em;
+    margin-top: 0.3em;
+    font-style: none;
+
+}
+
+a {
+    text-decoration: none;
 }
 
 
-#header .button {
-    border: solid 1px yellow;
+#header .button a{
+    border: solid 1px #d9eef2;
     position: absolute;
-    right: 5px;
-    top: 5px;
-    background-color: white;
+    right: -1px;
+    top: -1px;
     font-family: arial;
+    font-size: 0.8em;
+    text-decoration: none;
+    padding: 0.5em 1em 0.5em 1em;
+    list-style: none;
+    color: white;
 }
 
-#header .button:hover{
- border:1px solid #44adc6;
- background-color: #ff0;
+#header .button a:hover{
+    background-color: #d9eef2;
+    color: #262626;
+    text-decoration: none;
 }
 
 
@@ -60,49 +79,56 @@ body {
 
 
 .grid {
-	float: left;
-	position: relative;
-	margin-left: 10px;
-	margin-right: 10px;
-        width:300px;
-        background: #143352;
-        
+    position: relative;
+    margin-left: 10px;
+    background: #143352;
+    float: left; 
 }
 
+.grid_3 {
+     
+    width:940px;
+        
+    }
+    
+.grid_1 {
+        width: 306px;
+    }
+
 .grid ul {
-   
+
     list-style: none;
 }
 
 .grid a{
-   font-family: arial;
-   border: solid 1px white;
-   display: block;
-   color: white;
-   margin-left: -2em;
-   margin-bottom: 0.2em;
-   margin-right: 0.4em;
-   text-decoration: none;
-   padding: 0.5em 0 0.5em 1.3em;
-   list-style: none;
+    font-family: arial;
+    border: solid 1px white;
+    display: block;
+    color: white;
+    margin-left: -2em;
+    margin-bottom: 0.2em;
+    margin-right: 0.4em;
+    text-decoration: none;
+    padding: 0.5em 0 0.5em 1.3em;
+    list-style: none;
 }
 .grid a:hover{
-   background-color: #d9eef2;
-   color: #262626;
-   text-decoration: none;
+    background-color: #d9eef2;
+    color: #262626;
+    text-decoration: none;
 }
-
 
 .grid h1 {
     font-family: 'Ubuntu', sans-serif;
     padding-left: 1.2em;
     color: #d9eef2;
     font-size: 1.2em;
-        
+  
+    
 }
 
 .grid ul {
-   
+
     list-style: none;
 }
 
@@ -135,24 +161,24 @@ body {
 }
 
 #content .button a{
-   font-family: arial;
-   border: solid 1px #143352;
-   color: black;
-   margin-left: 1.5em;
-   margin-bottom: 1em;
-   text-decoration: none;
-   padding: 0.5em;
-   display: inline-block;
+    font-family: arial;
+    border: solid 1px #143352;
+    color: black;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    text-decoration: none;
+    padding: 0.5em;
+    display: inline-block;
 }
 #content .button a:hover{
-   background-color: #143352;
-   color: white;
-   text-decoration: none;
+    background-color: #143352;
+    color: white;
+    text-decoration: none;
 }
 
 tbody tr:nth-child(2n) {
-  background: #143352;
-  color: white;
+    background: #143352;
+    color: white;
 }
 
 #content tbody {
@@ -169,16 +195,16 @@ tbody tr:nth-child(2n) {
 
 /* Style the text boxes */
 #form input, textarea {
-	width:20em;
-	height:1.8em;
-	background:white;
-	border:1px solid #dedede;
-	padding:0.2em;
-	margin-bottom:1.2em;
-	font-size:0.9em;
-	color:black;
+    width:20em;
+    height:1.8em;
+    background:white;
+    border:1px solid #dedede;
+    padding:0.2em;
+    margin-bottom:1.2em;
+    font-size:0.9em;
+    color:black;
 }
 
 #form textarea {
-	height:4em;
+    height:4em;
 }

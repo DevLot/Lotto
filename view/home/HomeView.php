@@ -3,7 +3,7 @@
 class HomeView extends View {
 
     public function display() {
-        echo '<div class="grid">
+        echo '<div class="grid grid_1">
                         <h1>Event</h1>
                         
                         <ul>
@@ -15,7 +15,7 @@ class HomeView extends View {
                        
                     </div>
 
-                    <div class="grid">
+                    <div class="grid grid_1">
                         <h1>Eventmanagement</h1>
                         
                         
@@ -27,7 +27,7 @@ class HomeView extends View {
                          </ul>
                     </div>
 
-                    <div class="grid">
+                    <div class="grid grid_1">
                         <h1>Verwaltung</h1>
                         
                         <ul>
@@ -36,7 +36,7 @@ class HomeView extends View {
                             <li><a href="/account">Eigene Einstellungen</a></li>
                         </ul>
                             
-                    </div>';
+                    </div> Gaga';
     }
 
 }

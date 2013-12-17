@@ -9,7 +9,10 @@ class PlayerView extends View {
 
         foreach ($this->vars['playerlist'] as $player) {
 
-            echo "<tr><td>[]</td>" .
+            echo '<tr><td><input type="checkbox" /> &#8239;
+                <img src="/images/icon_write_full.png" height="14" />
+                <img src="/images/icon_del_full.png" height="14" /></td>
+                    ' .
             "<td>" . $player->getFirstname() . "</td>" .
             "<td>" . $player->getSurname() . "</td>" .
             "<td>" . $player->getBirthdate() . "</td>" .

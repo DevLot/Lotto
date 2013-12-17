@@ -5,7 +5,7 @@ echo '
 
 <table>
 <tbody><tr>
-   <th></th>
+ <th>Bearbeiten</th>
   <th>Vorname</th>
   <th>Name</th>
   <th>Geburtsdatum</th>
