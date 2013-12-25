@@ -58,32 +58,44 @@ final class MySqlAdapter {
 
     //Holt History
     public function getHistory() {
-    
+        
+        $historylist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.history ORDER BY id");
+        while ($row = $res->fetch_assoc()) {
+            $history = new History($row['id'],$row['event'], $row['set'], $row['numbers']);
+            $historylist[] = $history;
+        }
+        $res->free();
+        return $historylist;
     }
     //Aktuallisiert History
-    public function updateHistory($object) {
+    public function updateHistory($history) {
         
     }
     //Holt Spielkarten
     public function getCard() {
-
+      
+        $res = $this->con->query("SELECT * FROM fabingo.cards ORDER BY id");
         
-        $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id=2");
-        //$res->free();
-        $row = $res->fetch_object()->line1;
-
-        return $row;
+        $cardlist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.cards ORDER BY id");
+        while ($row = $res->fetch_assoc()) {
+            $cards = new Card($row['id'],$row['cardnr'], $row['line1'], $row['line2'],$row['line3'],$row['player']);
+            $cardlist[] = $cards;
+        }
+        $res->free();
+        return $cardlist;
     }
 
     
     //Erstellt Spielkarte
-    public function createCard($cn,$l1,$l2,$l3,$pl) {
+    public function createCard($card) {
         
-        $cardnr = $cn;
-        $line1 = $l1;
-        $line2 = $l2;
-        $line3 = $l3;
-        $player = $pl;
+        $cardnr = $card->getCardnr();
+        $line1 = $card->getLine1();
+        $line2 = $card->getLine2();
+        $line3 = $card->getLine3();
+        $player = $card->getPlayer();
         
         $sql = "INSERT INTO cards
                 (
@@ -91,33 +103,32 @@ final class MySqlAdapter {
                 )
                 VALUES
                 (
-                    '$cardnr','$line1','$line2','$line3','$player',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()
-                    
+                    '$cardnr','$line1','$line2','$line3','$player',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()                   
                 );
          ";
         
         $this->con->query($sql);
     }
     //Aktualisiert Spielkarte
-    public function updateCards($cn,$l1,$l2,$l3,$pl) {
+    public function updateCards($card) {
         
-        $cardnr = $cn;
-        $line1 = $l1;
-        $line2 = $l2;
-        $line3 = $l3;
-        $player = $pl;
+        $cardnr = $card->getCardnr();
+        $line1 = $card->getLine1();
+        $line2 = $card->getLine2();
+        $line3 = $card->getLine3();
+        $player = $card->getPlayer();
         
         $sql = "UPDATE";
         
         $this->con->query($sql);
     }
     //Holt Spieler
-
     public function getPlayers() {
+        
         $playerlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.players ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $player = new Player($row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail']);
+            $player = new Player($row['id'],$row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail']);
             $playerlist[] = $player;
         }
         $res->free();
@@ -125,18 +136,17 @@ final class MySqlAdapter {
     }
 
     //Erstellt Spieler
-    public function createPlayer($fn,$sn,$bd,$ad,$zc,$ci,$ph,$mo,$ma) {
-        
-
-        $firstname = $fn;
-        $surname = $sn;
-        $birthdate = $bd;
-        $address = $ad;
-        $zipcode = $zc;
-        $city = $ci;
-        $phone = $ph;
-        $mobile = $mo;
-        $mail = $ma;
+    public function createPlayer($player) {
+       
+        $firstname = $player->getFirstname();
+        $surname = $player->getSurname();
+        $birthdate = $player->getBirthdate();
+        $address = $player->getAddress();
+        $zipcode = $player->getZipcode();
+        $city = $player->getCity();
+        $phone = $player->getPhone();
+        $mobile = $player->getMobile();
+        $mail = $player->getMail();
 
         $sql = "INSERT INTO fabingo.players
                 (
@@ -144,8 +154,7 @@ final class MySqlAdapter {
                 )
                 VALUES
                 (
-                    '$firstname','$surname','$birthdate','$address','$zipcode','$city','$phone','$mobile','$mail',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()
-                    
+                    '$firstname','$surname','$birthdate','$address','$zipcode','$city','$phone','$mobile','$mail',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()               
                 );
          ";
 
@@ -157,17 +166,17 @@ final class MySqlAdapter {
 
     }
     //Aktuallisier Spieler
-    public function updatePlayer($fn,$sn,$bd,$ad,$zc,$ci,$ph,$mo,$ma) {
+    public function updatePlayer($player) {
         
-        $firstname = $fn;
-        $surname = $sn;
-        $birthdate = $bd;
-        $address = $ad;
-        $zipcode = $zc;
-        $city = $ci;
-        $phone = $ph;
-        $mobile = $mo;
-        $mail = $ma;
+        $firstname = $player->getFirstname();
+        $surname = $player->getSurname();
+        $birthdate = $player->getBirthdate();
+        $address = $player->getAddress();
+        $zipcode = $player->getZipcode();
+        $city = $player->getCity();
+        $phone = $player->getPhone();
+        $mobile = $player->getMobile();
+        $mail = $player->getMail();
         
         $sql = "UPDATE";
         
@@ -178,24 +187,32 @@ final class MySqlAdapter {
         
     }
     //Erstellt Event
-    public function createEvents($nm,$da,$lo,$ho) {
+    public function createEvents($event) {
         
-        $name = $nm;
-        $date = $da;
-        $location = $lo;
-        $host = $ho;
+        $name = $event->getName();
+        $date = $event->getDate();
+        $location = $event->getLocation();
+        $host = $event->getHost();
         
-        $sql = "INSERT INTO";
-        
+        $sql = "INSERT INTO fabingo.events
+                (
+                    name,date,location,create_on,update_on
+                )
+                VALUES
+                (
+                    '$name','$date','$location','$host',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                );
+         ";
+       
         $this->con->query($sql);
     }
     //Aktuallisiert Event
-    public function updateEvents($nm,$da,$lo,$ho) {
+    public function updateEvents($event) {
      
-        $name = $nm;
-        $date = $da;
-        $location = $lo;
-        $host = $ho;
+        $name = $event->getName();
+        $date = $event->getDate();
+        $location = $event->getLocation();
+        $host = $event->getHost();
         
         $sql = "UPDATE";
         
@@ -206,7 +223,7 @@ final class MySqlAdapter {
         
     }
     //Erstellt Preis
-    public function createPrice($nm,$ev,$st) {
+    public function createPrice($preic) {
         
         $name = $nm;
         $event = $ev;

@@ -37,21 +37,8 @@ class PlayerController extends Controller {
         $player = new Player($_POST['firstname'],$_POST['surname'],
                 $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
                 $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail']);
-        
-              
-        $firstname = $player->getFirstname();
-        $surname = $player->getSurname();
-        $birthdate = $player->getBirthdate();
-        $address = $player->getAddress();
-        $zipcode = $player->getZipcode();
-        $city = $player->getCity();
-        $phone = $player->getPhone();
-        $mobile = $player->getMobile();
-        $mail = $player->getMail();
-                
-        $this->mysqlAdapter->createPlayer($firstname,$surname,$birthdate,$address,$zipcode,$city,$phone,$mobile,$mail);
-      
-           
+                       
+        $this->mysqlAdapter->createPlayer($player);           
     }
    
 
