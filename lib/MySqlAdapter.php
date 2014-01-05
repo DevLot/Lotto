@@ -129,7 +129,7 @@ final class MySqlAdapter {
         $cardlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.cards ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $cards = new Card($row['cardnr'], $row['line1'], $row['line2'],$row['line3'],$row['player'], $row['create_on'], $row['update_on']);
+            $cards = new Card($row['id'],$row['cardnr'], $row['line1'], $row['line2'],$row['line3'],$row['player'], $row['create_on'], $row['update_on']);
             $cardlist[] = $cards;
         }
         $res->free();
@@ -177,7 +177,7 @@ final class MySqlAdapter {
         $playerlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.players ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $player = new Player($row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['create_on'], $row['update_on']);
+            $player = new Player($row['id'],$row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['create_on'], $row['update_on']);
             $playerlist[] = $player;
         }
         $res->free();

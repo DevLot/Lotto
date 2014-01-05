@@ -17,7 +17,8 @@ class Player {
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail) {
+    function __construct($id, $firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail) {
+        $this->id = $id;
         $this->firstname = $firstname;
         $this->surname = $surname;
         $this->birthdate = $birthdate;

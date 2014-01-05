@@ -13,7 +13,8 @@ class Card {
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($cardnr, $line1, $line2, $line3, $player) {
+    function __construct($id, $cardnr, $line1, $line2, $line3, $player) {
+        $this->id = $id;
         $this->cardnr = $cardnr;
         $this->line1 = $line1;
         $this->line2 = $line2;
