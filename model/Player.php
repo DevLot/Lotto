@@ -17,7 +17,7 @@ class Player {
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($firstname="", $surname="", $birthdate="", $address="", $zipcode="", $city="", $phone="", $mobile="", $mail="") {
+    function __construct($firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail) {
         $this->firstname = $firstname;
         $this->surname = $surname;
         $this->birthdate = $birthdate;
@@ -27,6 +27,8 @@ class Player {
         $this->phone = $phone;
         $this->mobile = $mobile;
         $this->mail = $mail;
+        //$this->create_on = $create_on;
+        //$this->update_on = $update_on;
         
  
     }

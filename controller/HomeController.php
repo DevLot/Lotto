@@ -1,10 +1,7 @@
 <?php
 
-//include_once 'lib/CSVAdapter.php';
+include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
-//include_once 'model/Event.php';
-//include_once 'model/MusicEvent.php';
-//include_once 'model/Artist.php';
 include_once 'view/View.php';
 include_once 'view/home/HomeView.php';
 
