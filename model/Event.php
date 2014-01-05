@@ -1,6 +1,6 @@
 <?php
 
-class Card {
+class Event {
     
     /* Variabeln definieren */
     private $id;

@@ -43,6 +43,7 @@ final class MySqlAdapter {
  * - getHistory()
  * - updateHistory()
  * - getCards()
+ * - getCard($id)
  * - createCards()
  * - updateCards()
  * - getPlayers()
@@ -64,16 +65,32 @@ final class MySqlAdapter {
     public function updateHistory($object) {
         
     }
-    //Holt Spielkarten
-    public function getCard() {
+        //Holt Karten
 
-        
-        $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id=2");
-        //$res->free();
-        $row = $res->fetch_object()->line1;
-
-        return $row;
+    public function getCards() {
+        $cardlist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.cards ORDER BY id");
+        while ($row = $res->fetch_assoc()) {
+            $card = new Card($row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player']);
+            $cardlist[] = $card;
+        }
+        $res->free();
+        return $cardlist;
     }
+    
+       /**
+     * Returns the event by given id if present, null otherwiset
+     * @param int $id
+     * @return Card 
+     */
+    public function getCard($id) {
+        $list = $this->getCards();
+        if (!empty($list) && array_key_exists($id, $list)) {
+            return $list[$id];
+        }
+        return null;
+    }
+
 
     
     //Erstellt Spielkarte

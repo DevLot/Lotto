@@ -26,9 +26,7 @@ class Player {
         $this->city = $city;
         $this->phone = $phone;
         $this->mobile = $mobile;
-        $this->mail = $mail;
-        
- 
+        $this->mail = $mail; 
     }
     //Holt Player ID
     public function getId() {
