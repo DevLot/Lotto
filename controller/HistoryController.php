@@ -2,11 +2,11 @@
 
 include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
-include_once 'model/Event.php';
+include_once 'model/History.php';
 include_once 'view/View.php';
-include_once 'view/event/EventView.php';
+//include_once 'view/history/HistoryView.php';
 
-class EventController extends Controller {
+class HistoryController extends Controller {
 
     private $mysqlAdapter;
 
@@ -16,25 +16,24 @@ class EventController extends Controller {
 
     protected function index() {
 //        $eventList = $this->csvAdapter->getEventList();
-        $view = new EventView();
-        $view->assign('eventlist', $this->mysqlAdapter->getEvents());
+        $view = new HistoryView();
+        $view->assign('historylist', $this->mysqlAdapter->getHistory());
         $view->display();
     }
 
     protected function show() {
-        $this->mysqlAdapter->getEvents();
+        $this->mysqlAdapter->getHistory();
     }
 
     protected function init() {
-        $view = new EventView();
+        $view = new HistoryView();
         $view->newform();
     }
 
     protected function create() {
-        $event = new Event($_POST['name'],$_POST['date'],
-                $_POST['location'],$_POST['host'],$_POST['duration']);
+        $event = new Event($_POST['event'],$_POST['set'],$_POST['numbers']);
                        
-        $this->mysqlAdapter->createEvents($event);
+        $this->mysqlAdapter->setHistory($history);
     }
 
 }

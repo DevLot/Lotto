@@ -9,16 +9,20 @@ class Event {
     private $location;
     private $host;
     private $duration;
+    private $players = array();
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($name, $date, $location, $host, $duration) {
+    function __construct($id, $name, $date, $location, $host, $duration) {
+        
+        $this->id = $id;
         $this->name = $name;
         $this->date = $date;
         $this->location = $location;
         $this->host = $host;
         $this->duration = $duration;
+        //$this->players = $players;
         
     }
     //Holt Karten ID
@@ -64,6 +68,12 @@ class Event {
     //Setzt Event Dauer
     public function setDuration($duration) {
         $this->duration = $duration;
+    }
+    public function getPlayers() {
+        return $this->players;
+    }
+    public function setPlayers($players) {
+        $this->players = $players;
     }
     //Holt Erstell Datum/Zeit
     public function getCreateOn() {

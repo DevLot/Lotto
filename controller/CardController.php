@@ -1,9 +1,12 @@
 <?php
 
+
 include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
-//include_once 'model/Event.php';
-//include_once 'model/MusicEvent.php';
+include_once 'config/config.php';
+include_once 'lib/MySqlAdapter.php';
+include_once 'controller/Controller.php';
+
 include_once 'model/Card.php';
 include_once 'view/View.php';
 include_once 'view/card/CardView.php';
@@ -34,12 +37,19 @@ class CardController extends Controller {
     }
 
     protected function init() {
+
         $view = new CardView();
         $view->newform();
     }
 
     protected function create() {
-      
+        
+        $card = new Card($_POST['cardnr'],$_POST['line1'],
+                $_POST['line2'],$_POST['line3'],$_POST['player']);
+                       
+        $this->mysqlAdapter->createCard($card);
+ 
+
     }
 
 }
