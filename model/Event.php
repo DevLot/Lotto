@@ -7,21 +7,21 @@ class Event {
     private $name;
     private $date;
     private $location;
-    private $host;
+    private $organizer;
     private $duration;
     private $players = array();
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $name, $date, $location, $host, $duration) {
+    function __construct($id, $name, $date, $location, $organizer) {
         
         $this->id = $id;
         $this->name = $name;
         $this->date = $date;
         $this->location = $location;
-        $this->host = $host;
-        $this->duration = $duration;
+        $this->organizer = $organizer; 
+        //$this->duration = $duration;
         //$this->players = $players;
         
     }
@@ -53,13 +53,13 @@ class Event {
     public function setLocation($location) {
         $this->location = $location;
     }
-    //Holt Event Host
-    public function getHost() {
-        return $this->host;
+    //Holt Eventveranstalter
+    public function getOrganizer() {
+        return $this->organizer;
     }
-    //Setzt Event Host
-    public function setHost($host) {
-        $this->host = $host;
+    //Setzt Eventveranstalter
+    public function setOrganizer($organizer) {
+        $this->organizer = $organizer;
     }
     //Holt Event Dauer
     public function getDuration() {

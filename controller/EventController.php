@@ -32,7 +32,7 @@ class EventController extends Controller {
 
     protected function create() {
         $event = new Event($_POST['name'],$_POST['date'],
-                $_POST['location'],$_POST['host'],$_POST['duration']);
+                $_POST['location'],$_POST['organizer']);
                        
         $this->mysqlAdapter->createEvents($event);
     }

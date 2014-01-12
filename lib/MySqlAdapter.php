@@ -95,18 +95,19 @@ final class MySqlAdapter {
     }
 
     
-//       /**
-//     * Returns the event by given id if present, null otherwiset
-//     * @param int $id
-//     * @return Card 
-//     */
-//    public function getCard($id) {
-//        $list = $this->getCards();
+       /**
+     * Returns the event by given id if present, null otherwiset
+     * @param int $id
+     * @return Card 
+     */
+    public function getCard($id) {
+        $list = $this->getCards();
+        return $list[$id];
 //        if (!empty($list) && array_key_exists($id, $list)) {
 //            return $list[$id];
 //        }
 //        return null;
-//    }
+    }
 
 
 
@@ -238,7 +239,7 @@ final class MySqlAdapter {
         $eventlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.events ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $event = new Event($row['id'],$row['name'], $row['date'], $row['location'], $row['host'], $row['duration'], $row['create_on'], $row['update_on']);
+            $event = new Event($row['id'],$row['name'], $row['date'], $row['location'], $row['organizer'], $row['duration'], $row['create_on'], $row['update_on']);
             $eventlist[] = $event;
         }
         $res->free();
@@ -251,16 +252,16 @@ final class MySqlAdapter {
         $name = $event->getName();
         $date = $event->getDate();
         $location = $event->getLocation();
-        $host = $event->getHost();
+        $organizer = $event->getOrganizer();
         //$player = $event->getPlayes()
         
         $sql = "INSERT INTO fabingo.events
                 (
-                    name,date,location,host,create_on,update_on
+                    name,date,location,organizer,create_on,update_on
                 )
                 VALUES
                 (
-                    '$name','$date','$location','$host',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                    '$name','$date','$location','$organizer',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
                 );
          ";
        
@@ -273,10 +274,10 @@ final class MySqlAdapter {
         $name = $event->getName();
         $date = $event->getDate();
         $location = $event->getLocation();
-        $host = $event->getHost();
+        $organizer = $event->getOrganizer();
         //$player = $event->getPlayers();
         
-        $sql = "UPDATE fabingo.events SET name = '$name', date = '$date', location = '$location', host = '$host', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
+        $sql = "UPDATE fabingo.events SET name = '$name', date = '$date', location = '$location', organizer = '$organizer', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
         
         $this->con->query($sql);
     }

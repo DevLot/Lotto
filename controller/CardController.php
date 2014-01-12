@@ -28,6 +28,7 @@ class CardController extends Controller {
       
     protected function show() {
         $card = $this->mySqlAdapter->getCard($this->resourceId);
+        //$card = $this->mySqlAdapter->getCard(2);
         echo $card;
         if (!empty($card)) { // Card with transmitted ID was found
             $view = new CardDetailView();
