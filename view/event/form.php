@@ -3,6 +3,8 @@
 echo '  
          <form id="form" action="create"  method="post">
 
+
+
      <label>Eventname</label>
 <input type="text" id="name" name="name">
 

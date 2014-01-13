@@ -12,6 +12,7 @@ class Price {
     
     /* Konstruktor mit Übergabeparameter */
     function __construct($name, $player, $event, $set) {
+         if (isset($id)) { $this->id = $id; }
         $this->name = $name;
         $this->player = $player;
         $this->event = $event;
@@ -20,7 +21,7 @@ class Price {
     //Holt Preis ID
     public function getId() {
         return $this->id;
-    }
+    } 
     //Holt Preisname
     public function getName() {
         return $this->name;

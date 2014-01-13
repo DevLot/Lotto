@@ -45,7 +45,7 @@ class CardController extends Controller {
 
     protected function create() {
         
-        $card = new Card($_POST['cardnr'],$_POST['line1'],
+        $card = new Card(null,$_POST['cardnr'],$_POST['line1'],
                 $_POST['line2'],$_POST['line3'],$_POST['player']);
                        
         $this->mysqlAdapter->createCard($card);

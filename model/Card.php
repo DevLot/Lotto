@@ -5,16 +5,20 @@ class Card {
     /* Variabeln definieren */
     private $id;
     private $cardnr;
-    private $line1=array();
-    private $line2=array();
-    private $line3=array();
+//    private $line1=array();
+//    private $line2=array();
+//    private $line3=array();
+    private $line1;
+    private $line2;
+    private $line3;
     private $player;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
     function __construct($id, $cardnr, $line1, $line2, $line3, $player) {
-        $this->id = $id;
+         
+        if (isset($id)) { $this->id = $id; }
         $this->cardnr = $cardnr;
         $this->line1 = $line1;
         $this->line2 = $line2;

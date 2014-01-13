@@ -48,10 +48,10 @@ final class MySqlAdapter {
  * - createCards()
  * - updateCards()
  * - getPlayers()
- * - createPlayers()
+ * - createPlayer()
  * - updatePlayers()
  * - getEvents()
- * - createEvents()
+ * - createEvent()
  * - updateEvents()
  * - getPrices()
  * - createPrices()
@@ -137,7 +137,7 @@ final class MySqlAdapter {
         return $cardlist;
     }    
     //Erstellt Spielkarte
-    public function createCards($card) {
+    public function createCard($card) {
         
         $cardnr = $card->getCardnr();
         $line1 = $card->getLine1();
@@ -156,6 +156,10 @@ final class MySqlAdapter {
          ";
         
         $this->con->query($sql);
+        
+                        
+        echo '<p>Eintrag erfolgreich!</p>
+        <div class="button"><a href="/card">Danke!</a></div>';
     }
     //Aktualisiert Spielkarte
     public function updateCards($card) {
@@ -185,7 +189,7 @@ final class MySqlAdapter {
         return $playerlist;
     }
     //Erstellt Spieler
-    public function createPlayers($player) {
+    public function createPlayer($player) {
        
         $firstname = $player->getFirstname();
         $surname = $player->getSurname();
@@ -233,21 +237,32 @@ final class MySqlAdapter {
         $this->con->query($sql);      
     }
     
-    //Holt Event
+    //Holt Events
     public function getEvents() {
         
         $eventlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.events ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $event = new Event($row['id'],$row['name'], $row['date'], $row['location'], $row['organizer'], $row['duration'], $row['create_on'], $row['update_on']);
+            $event = new Event($row['id'], $row['name'], $row['date'], $row['location'], $row['organizer'], $row['duration'], $row['create_on'], $row['update_on']);
             $eventlist[] = $event;
+            
         }
         $res->free();
         return $eventlist;
         
     }
+    //Holt Event
+    public function getEvent($id) {
+        
+        $list = $this->getEvents();
+        if (!empty($list) && array_key_exists($id, $list)) {
+            return $list[$id];
+        }
+        return null;
+        
+    }
     //Erstellt Event
-    public function createEvents($event) {
+    public function createEvent($event) {
         
         $name = $event->getName();
         $date = $event->getDate();
@@ -266,6 +281,9 @@ final class MySqlAdapter {
          ";
        
         $this->con->query($sql);
+        
+         echo '<p>Eintrag erfolgreich!</p>
+        <div class="button"><a href="/event">Danke!</a></div>';
     }
     //Aktuallisiert Event
     public function updateEvents($event) {

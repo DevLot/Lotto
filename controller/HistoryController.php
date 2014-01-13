@@ -31,7 +31,7 @@ class HistoryController extends Controller {
     }
 
     protected function create() {
-        $event = new Event($_POST['event'],$_POST['set'],$_POST['numbers']);
+        $event = new Event(null,$_POST['event'],$_POST['set'],$_POST['numbers']);
                        
         $this->mysqlAdapter->setHistory($history);
     }

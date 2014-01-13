@@ -32,11 +32,11 @@ class PlayerController extends Controller {
 
     protected function create() {
         
-        $player = new Player($_POST['firstname'],$_POST['surname'],
+        $player = new Player(null,$_POST['firstname'],$_POST['surname'],
                 $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
                 $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail']);
                        
-        $this->mysqlAdapter->createPlayers($player);           
+        $this->mysqlAdapter->createPlayer($player);           
     }
    
 

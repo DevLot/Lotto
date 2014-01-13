@@ -5,6 +5,7 @@ include_once 'controller/Controller.php';
 include_once 'model/Event.php';
 include_once 'view/View.php';
 include_once 'view/event/EventView.php';
+include_once 'view/event/EventDetailView.php';
 
 class EventController extends Controller {
 
@@ -22,7 +23,12 @@ class EventController extends Controller {
     }
 
     protected function show() {
-        $this->mysqlAdapter->getEvents();
+        $event = $this->mysqlAdapter->getEvent($this->resourceId);
+        if (!empty($event)) { // Event with transmitted ID was found
+            $view = new EventDetailView();
+            $view->assign('event', $event);
+            $view->display();
+        }
     }
 
     protected function init() {
@@ -31,10 +37,10 @@ class EventController extends Controller {
     }
 
     protected function create() {
-        $event = new Event($_POST['name'],$_POST['date'],
+        $event = new Event(null,$_POST['name'],$_POST['date'],
                 $_POST['location'],$_POST['organizer']);
                        
-        $this->mysqlAdapter->createEvents($event);
+        $this->mysqlAdapter->createEvent($event);
     }
 
 }

@@ -14,9 +14,9 @@ class Event {
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $name, $date, $location, $organizer) {
+   function __construct($id, $name, $date, $location, $organizer) {
         
-        $this->id = $id;
+        if (isset($id)) { $this->id = $id; }
         $this->name = $name;
         $this->date = $date;
         $this->location = $location;
@@ -28,7 +28,8 @@ class Event {
     //Holt Karten ID
     public function getId() {
         return $this->id;
-    }
+    }  
+   
     //Holt Event Name
     public function getName() {
         return $this->name;

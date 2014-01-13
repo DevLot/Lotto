@@ -11,10 +11,10 @@ class EventView extends View {
       
         foreach ($this->vars['eventlist'] as $event) {
      
-            echo '<tr><td><input type="checkbox" /> &#8239;
+            echo '<tr><td><a href="/event/'.$event->getId() . '">Show</a> <input type="checkbox" /> &#8239;
                 <img src="/images/icon_write_full.png" height="14" />
                 <img src="/images/icon_del_full.png" height="14" /></td>
-                    ' ."<td>" . $event->getEvent() . "</td>"
+                    ' ."<td>" . $event->getName() . "</td>"
                      ."<td>" . $event->getLocation() . "</td>";
         }
         echo '</tr></tbody></table>';
