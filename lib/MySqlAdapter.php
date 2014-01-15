@@ -52,12 +52,15 @@ final class MySqlAdapter {
      * - createCards()
      * - updateCards()
      * - getPlayers()
+     * - getPlayer($id)
      * - createPlayer()
      * - updatePlayers()
      * - getEvents()
+     * - getEvent($id)
      * - createEvent()
      * - updateEvents()
      * - getPrices()
+     * - getPrice($id)
      * - createPrices()
      * - updatePrices()
      * - getRegistration()
@@ -124,6 +127,7 @@ final class MySqlAdapter {
         $res->free();
         return $cardlist;
     }
+
     /**
      * Returns the event by given id if present, null otherwiset
      * @param int $id
@@ -131,15 +135,13 @@ final class MySqlAdapter {
      */
     public function getCard($id) {
         $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id='$id'");
-        $row = $res->fetch_assoc();
-        if (!empty($row) && array_key_exists($id, $row)) {
+        if ($row = $res->fetch_assoc()) {
             $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
             $res->free();
             return $card;
-        }
-        else {
+        } else {
             return NULL;
-        }       
+        }
     }
 
     //Erstellt Spielkarte
@@ -195,22 +197,21 @@ final class MySqlAdapter {
         $res->free();
         return $playerlist;
     }
-     /**
+
+    /**
      * Returns the Card by given id if present, null otherwiset
      * @param int $id
      * @return Player 
      */
     public function getPlayer($id) {
         $res = $this->con->query("SELECT * FROM fabingo.players WHERE id='$id'");
-        $row = $res->fetch_assoc();
-        if (!empty($row) && array_key_exists($id, $row)) {
+        if ($row = $res->fetch_assoc()) {
             $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['create_on'], $row['update_on']);
             $res->free();
             return $player;
-        }
-        else {
+        } else {
             return NULL;
-        }       
+        }
     }
 
     //Erstellt Spieler
@@ -274,22 +275,22 @@ final class MySqlAdapter {
         $res->free();
         return $eventlist;
     }
-     /**
+
+    /**
      * Returns the Event by given id if present, null otherwiset
      * @param int $id
      * @return Event 
+     * !empty($row) && array_key_exists($id, $row)
      */
     public function getEvent($id) {
         $res = $this->con->query("SELECT * FROM fabingo.events WHERE id='$id'");
-        $row = $res->fetch_assoc();
-        if (!empty($row) && array_key_exists($id, $row)) {
+        if ($row = $res->fetch_assoc()) {           
             $event = new Event($row['id'], $row['name'], $row['date'], $row['location'], $row['organizer'], $row['duration'], $row['create_on'], $row['update_on']);
             $res->free();
             return $event;
-        }
-        else {
+        } else {
             return NULL;
-        }       
+        }
     }
 
     //Erstellt Event
@@ -308,8 +309,8 @@ final class MySqlAdapter {
                 VALUES
                 (
                     '$name','$date','$location','$organizer',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
-                );
-         ";
+                );"
+        ;
 
         $this->con->query($sql);
 
@@ -344,22 +345,21 @@ final class MySqlAdapter {
         $res->free();
         return $pricelist;
     }
-     /**
+
+    /**
      * Returns the Event by given id if present, null otherwiset
      * @param int $id
      * @return Event 
      */
     public function getPrice($id) {
         $res = $this->con->query("SELECT * FROM fabingo.prices WHERE id='$id'");
-        $row = $res->fetch_assoc();
-        if (!empty($row) && array_key_exists($id, $row)) {
+        if ($row = $res->fetch_assoc()) {
             $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['set'], $row['create_on'], $row['update_on']);
             $res->free();
             return $price;
-        }
-        else {
+        } else {
             return NULL;
-        }       
+        }
     }
 
     //Erstellt Preis
