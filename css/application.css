@@ -169,6 +169,7 @@ a {
     text-decoration: none;
     padding: 0.5em;
     display: inline-block;
+    float: left;
 }
 #content .button a:hover{
     background-color: #143352;

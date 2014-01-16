@@ -5,22 +5,23 @@ class PlayerDetailView extends View {
     public function display() {
       
       $player = $this->vars['player'];
-      echo "Player:";
-      echo $player->getFirstname();
-      echo "ID des Objeks:";
-      echo $player->getId();
-      
-        "<td>" . $player->getFirstname() . "</td>" .
-            "<td>" . $player->getSurname() . "</td>" .
-            "<td>" . $player->getBirthdate() . "</td>" .
-            "<td>" . $player->getAddress() . "</td>" .
-            "<td>" . $player->getZipcode() . "</td>" .
-            "<td>" . $player->getCity() . "</td>" .
-            "<td>" . $player->getPhone() . "</td>" .
-            "<td>" . $player->getMobile() . "</td>" .
-            "<td>" . $player->getMail() . "</td>" .
-            "<td>28,32,32,32</td>";
-      
+               
+     echo '<div class="button"><a href="/player/">Übersicht</a></div>';
+     echo '<div class="button"><a href="/player/'.$player->getId().'/edit">Bearbeiten</a></div>';
+     echo '<div class="button"><a href="/player/'.$player->getId().'/delete">Löschen</a></div>';
+      echo  "<table><tr><td>ID</td><td>" . $player->getId() . "</td></tr>
+      <tr><td>Vorname</td><td>" . $player->getFirstname() . "</td></tr>
+      <tr><td>Nachname</td><td>" . $player->getSurname() . "</td></tr>
+      <tr><td>Geburtstag</td><td>" . $player->getBirthdate() . "</td></tr>
+      <tr><td>Adresse</td><td>" . $player->getAddress() . "</td></tr>
+      <tr><td>PLZ</td><td>" . $player->getZipcode() . "</td></tr>
+      <tr><td>Ort</td><td>" . $player->getCity() . "</td></tr>
+      <tr><td>Tel.</td><td>" . $player->getPhone() . "</td></tr>
+      <tr><td>Mobile</td><td>" . $player->getMobile() . "</td></tr>
+      <tr><td>Mail</td><td>" . $player->getMail() . "</td></tr>
+   
+      <table>";
+     
     }
     
      
