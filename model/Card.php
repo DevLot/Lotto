@@ -30,6 +30,8 @@ class Card {
     public function getId() {
         return $this->id;
     }
+    
+    
     //Holt KartenNr.
     public function getCardnr() {
         return $this->cardnr;

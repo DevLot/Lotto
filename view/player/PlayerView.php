@@ -9,26 +9,28 @@ class PlayerView extends View {
 
         foreach ($this->vars['playerlist'] as $player) {
 
-            echo '<tr><td><input type="checkbox" /> &#8239;
-                <img src="/images/icon_write_full.png" height="14" />
-                <img src="/images/icon_del_full.png" height="14" /></td>
-                    ' .
+            echo '<tr class="clickableRow" href="/player/'. $player->getId() . '"><td>
+                <a href="/player/'. $player->getId() .'/edit"><img src="/images/icon_write_full.png" height="14" /></a>
+               <a href="/player/'. $player->getId() .'/delete"> <img src="/images/icon_del_full.png" height="14" /></a></td>' .
             "<td>" . $player->getFirstname() . "</td>" .
             "<td>" . $player->getSurname() . "</td>" .
             "<td>" . $player->getBirthdate() . "</td>" .
             "<td>" . $player->getAddress() . "</td>" .
             "<td>" . $player->getZipcode() . "</td>" .
-            "<td>" . $player->getCity() . "</td>" .
-            "<td>" . $player->getPhone() . "</td>" .
-            "<td>" . $player->getMobile() . "</td>" .
-            "<td>" . $player->getMail() . "</td>" .
-            "<td>28,32,32,32</td>";
+            "<td>" . $player->getCity() . "</td></tr>" ;
         }
         echo '</tr></tbody></table>';
+        
+        echo  '<script type="text/javascript">
+            jQuery(document).ready(function($) {
+      $(".clickableRow").click(function() {
+            window.document.location = $(this).attr("href");
+      });
+});</script>';
+        
+        
+        
     }
-
-    public function newform() {
-        include 'form.php';
-    }
+    
 
 }

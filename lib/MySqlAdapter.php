@@ -245,7 +245,7 @@ final class MySqlAdapter {
     }
 
     //Aktuallisier Spieler
-    public function updatePlayers($player) {
+    public function updatePlayer($player) {
 
         $id = $player->getId();
         $firstname = $player->getFirstname();
@@ -314,8 +314,7 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
 
-        echo '<p>Eintrag erfolgreich!</p>
-        <div class="button"><a href="/event">Danke!</a></div>';
+       
     }
 
     //Aktuallisiert Event

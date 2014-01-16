@@ -208,3 +208,9 @@ tbody tr:nth-child(2n) {
 #form textarea {
     height:4em;
 }
+
+.clickableRow:hover {
+    background: #FFD801;
+    color: black;
+    cursor: pointer; 
+}

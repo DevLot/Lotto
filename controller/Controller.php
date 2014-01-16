@@ -35,25 +35,49 @@ abstract class Controller {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 $matches = array();
-                if (preg_match("@^.*/([0-9]+)@", $_SERVER['REQUEST_URI'], $matches)) {
+                if (preg_match("@^.*/([0-9]+)$@", $_SERVER['REQUEST_URI'], $matches)) {
                     $this->resourceId = $matches[1];
                     $this->show();
                 } elseif (preg_match("@/new$@", $_SERVER['REQUEST_URI'])) {
                     $this->init();
+                } elseif (preg_match("@^.*/([0-9]+)/edit$@", $_SERVER['REQUEST_URI'], $matches)) {
+                    $this->resourceId = $matches[1];
+                    $this->edit();
+                } elseif (preg_match("@^.*/([0-9]+)/delete$@", $_SERVER['REQUEST_URI'], $matches)) {
+                    $this->resourceId = $matches[1];
+                    $this->delete();
                 } else {
                     $this->index();
                 }
                 break;
             case 'POST':
-                $this->create();
+                
+                if (preg_match("@^.*/([0-9]+)/update$@", $_SERVER['REQUEST_URI'], $matches)) {
+                    $this->update();
+                } else {
+                    $this->create();
+                }
                 break;
             default:
                 break;
         }
+        
+     
     }
-
+     
+//    /**
+//     * edit a instance of the resource
+//     */
+//    abstract protected function edit(); 
+//    
+//    /**
+//     * delete a instance of the resource
+//     */
+//    abstract protected function delete(); 
+     
+ 
     public static function encodeUrl($url) {
-        $specialChars = array(
+        $specialChars = array( 
             "ä" => "ae",
             "ö" => "oe",
             "ü" => "ue",
