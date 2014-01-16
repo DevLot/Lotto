@@ -13,11 +13,12 @@ class Player {
     private $phone;
     private $mobile;
     private $mail;
+    private $status;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail) {
+    function __construct($id, $firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail, $status) {
         
         if (isset($id)) { $this->id = $id; }
         $this->firstname = $firstname;
@@ -29,6 +30,7 @@ class Player {
         $this->phone = $phone;
         $this->mobile = $mobile;
         $this->mail = $mail;
+        $this->status = $status;
         
     }
     //Holt Player ID
@@ -106,6 +108,14 @@ class Player {
     //Setzt E-Mail Adresse
     public function setMail($mail) {
         $this->mail = $mail;
+    }
+    //Holt Spieler Status
+    public function getStatus() {
+        return $this->status;
+    }
+    //Setzt Spieler Status
+    public function setStatus($status) {
+        $this->status = $status;        
     }
     //Holt Erstell Datum/Zeit
     public function getCreateOn() {
