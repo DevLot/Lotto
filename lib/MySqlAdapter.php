@@ -84,11 +84,12 @@ final class MySqlAdapter {
         $res->free();
         return $historylist;
     }
+
     //Holt History von Event der Serie
-    public function getHistory($event) {
+    public function getHistory($event, $set) {
 
         $historylist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' ORDER BY id");
+        $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND set='$set' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
             $history = new History($row['id'], $row['event'], $row['set'], $row['numbers'], $row['create_on'], $row['update_on']);
             $historylist[] = $history;
@@ -136,8 +137,8 @@ final class MySqlAdapter {
         $cardlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.cards ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $cards = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
-            $cardlist[] = $cards;
+            $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
+            $cardlist[] = $card;
         }
         $res->free();
         return $cardlist;
@@ -157,6 +158,22 @@ final class MySqlAdapter {
         } else {
             return NULL;
         }
+    }
+
+    /**
+     * Returns all cards of one Player by his id
+     * @param type $id
+     * @return \Card|null
+     */
+    public function getPlayerCards($player) {
+        $cardlist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.cards WHERE player='$player'");
+        while ($row = $res->fetch_assoc()) {
+            $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
+            $cardlist[] = $card;
+        }
+        $res->free();
+        return $cardlist;
     }
 
     //Erstellt Spielkarte
@@ -216,17 +233,16 @@ final class MySqlAdapter {
     /**
      * Returns the Card by given id if present, null otherwiset
      * @param int $id
-     * @return Player 
+     * @return $player 
      */
     public function getPlayer($id) {
         $res = $this->con->query("SELECT * FROM fabingo.players WHERE id='$id'");
-        if ($row = $res->fetch_assoc()) {
-            $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['status'], $row['create_on'], $row['update_on']);
-            $res->free();
-            return $player;
-        } else {
-            return NULL;
+        
+        while ($row = $res->fetch_assoc()) {
+            $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['status'], $row['create_on'], $row['update_on']);     
         }
+        $res->free();
+        return $player;
     }
 
     //Erstellt Spieler
@@ -425,22 +441,24 @@ final class MySqlAdapter {
         $res->free();
         return $registrationlist;
     }
+
     //Holte Registration von einem Event
     public function getRegistration($event) {
-        
+
         $registrationlist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.registration WHERE event='$event'");
+        $res = $this->con->query("SELECT * FROM fabingo.registration WHERE event='$event' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
             $registration = new Registration($row['id'], $row['player'], $row['event'], $row['create_on'], $row['update_on']);
             $registrationlist[] = $registration;
-        } 
+        }
         $res->free();
-            return $registrationlist;
+        return $registrationlist;
     }
+
     //Setzt Registration
     public function setRegistrations($registration) {
 
-        $player = $registrationtration->getPlayer();
+        $player = $registration->getPlayer();
         $event = $registration->getEvent();
 
         $sql = "INSERT INTO fabingo.registration

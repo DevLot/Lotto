@@ -10,7 +10,8 @@ class Registration {
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($player, $event) {
+    function __construct($id, $player, $event) {
+        $this->id = $id;
         $this->player = $player;
         $this->event = $event;
         
