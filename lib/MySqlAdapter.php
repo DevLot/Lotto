@@ -78,7 +78,7 @@ final class MySqlAdapter {
         $historylist = array();
         $res = $this->con->query("SELECT * FROM fabingo.history ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $history = new History($row['id'], $row['event'], $row['set'], $row['numbers'], $row['create_on'], $row['update_on']);
+            $history = new History($row['id'], $row['event'], $row['round'], $row['numbers'], $row['create_on'], $row['update_on']);
             $historylist[] = $history;
         }
         $res->free();
@@ -86,32 +86,34 @@ final class MySqlAdapter {
     }
 
     //Holt History von Event der Serie
-    public function getHistory($event, $set) {
+    public function getHistory($event, $round) {
 
-        $historylist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND set='$set' ORDER BY id");
-        while ($row = $res->fetch_assoc()) {
-            $history = new History($row['id'], $row['event'], $row['set'], $row['numbers'], $row['create_on'], $row['update_on']);
-            $historylist[] = $history;
+        $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND round='$round'");
+        while($row = $res->fetch_object()) {
+            $history = new History($row['id'], $row['event'], $row['round'], $row['numbers'], $row['create_on'], $row['update_on']);
+            $res->free();
+            return $history;
         }
-        $res->free();
-        return $historylist;
+        
+        if(empty($row) || !is_object($row)) {
+            return null;
+        }
     }
 
     //Setzt History
     public function setHistory($history) {
 
         $event = $history->getEvent();
-        $set = $history->getSet();
+        $round = $history->getRound();
         $numbers = $history->getNumbers();
 
         $sql = "INSERT INTO fabingo.history
                 (
-                    event,set,numbers,create_on,update_on
+                    event,round,numbers,create_on,update_on
                 )
                 VALUES
                 (
-                    '$event','$set','$numbers',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()                   
+                    '$event','$round','$numbers',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()                   
                 );
          ";
 
@@ -123,10 +125,10 @@ final class MySqlAdapter {
 
         $id = $history->getId();
         $event = $history->getEvent();
-        $set = $history->getSet();
+        $round = $history->getRound();
         $numbers = $history->getNumbers();
 
-        $sql = "UPDATE fabingo.history SET numbers = '$numbers', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND event = '$event' AND set = '$set'";
+        $sql = "UPDATE fabingo.history SET numbers = '$numbers', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND event = '$event' AND round = '$round'";
 
         $this->con->query($sql);
     }
@@ -151,11 +153,12 @@ final class MySqlAdapter {
      */
     public function getCard($id) {
         $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id='$id'");
-        if ($row = $res->fetch_assoc()) {
+        while ($row = $res->fetch_object()) {
             $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
             $res->free();
             return $card;
-        } else {
+        } 
+        if(empty($row) || !is_object($row)) {
             return NULL;
         }
     }
@@ -397,18 +400,17 @@ final class MySqlAdapter {
     //Erstellt Preis
     public function createPrices($price) {
 
-        $id = $price->getId();
         $name = $price->getName();
         $event = $price->getEvent();
-        $set = $price->getSet();
+        $round = $price->getRound();
 
         $sql = "INSERT INTO fabingo.prices
                 (
-                    name,event,set,create_on,update_on
+                    name,event,round,create_on,update_on
                 )
                 VALUES
                 (
-                    '$name','$event','$set',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                    '$name','$event','$round',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
                 );
          ";
 
@@ -422,9 +424,9 @@ final class MySqlAdapter {
         $name = $price->getName();
         $player = $price->getPlayer();
         $event = $price->getEvent();
-        $set = $price->getSet();
+        $round = $price->getRound();
 
-        $sql = "UPDATE fabingo.prices SET name = '$name', player = '$player', event = '$event', set = '$set', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
+        $sql = "UPDATE fabingo.prices SET name = '$name', player = '$player', event = '$event', round = '$round', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
 
         $this->con->query($sql);
     }

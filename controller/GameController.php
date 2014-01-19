@@ -30,7 +30,7 @@ class GameController extends Controller{
 
     public function show() {
         
-        $game = new Game("3");
+        $game = new Game("2");
         echo $game->getStartTime()," ";
 
         $playerList = $game->getPlayerList();
@@ -40,6 +40,10 @@ class GameController extends Controller{
             }
         } else {
             return null;
+        }
+        $lotteryNr = $game->getLotteryNr();
+        foreach($lotteryNr as $nr) {
+            echo "Nummer:{$nr};";
         }
         $cardList = $game->getCardList();
         

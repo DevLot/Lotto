@@ -31,6 +31,8 @@ class Player {
         $this->mobile = $mobile;
         $this->mail = $mail;
         $this->status = $status;
+        $this->create_on = date("Y-m-d H:i:s");
+        $this->update_on = date("Y-m-d H:i:s");
         
     }
     //Holt Player ID

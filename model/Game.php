@@ -4,14 +4,13 @@ class Game {
     /* Variabeln definieren */
 
     private $event;         //EventID
-    private $set;           //Durchgang 
+    private $round;           //Durchgang 
     private $startTime;     //Startzeit
     private $endTime;       //Stopzeit
     private $duration;      //in Sekunden
-    private $registrationList;
     private $playerList = array();    //Teilnehmerlist
     private $cardList = array();      //Vergebene Spielkarten
-    private $lotteryNr;     //Gezogene Nummern
+    private $lotteryNr = array();     //Gezogene Nummern
     private $winnerList;    //Gewinnerliste
     private $priceList;     //Preisliste
 
@@ -22,7 +21,7 @@ class Game {
         $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         $this->event = $event;
         $this->startTime = time();
-        $this->set = 1;
+        $this->round = 1;
     }
 
     //Holt Event
@@ -36,13 +35,13 @@ class Game {
     }
 
     //Holt Durchgang
-    public function getSet() {
-        return $this->set;
+    public function getRound() {
+        return $this->round;
     }
 
     //Setzt Durchgang
-    public function setSet($set) {
-        $this->set = $set;
+    public function setRound($round) {
+        $this->round = $round;
     }
 
     //Holt Startzeit
@@ -67,10 +66,10 @@ class Game {
 
     //Holt 3. Reihe
     public function getPlayerList() {
-        
-        $this->registrationList = $this->mysqlAdapter->getRegistration($this->event);                   //Holt alle Registrations Objekte von einem Event und speichert sie in einem Array
-        if (!empty($this->registrationList)) {                                                          //Prüft das Array, ob das angegebene Event schon Registrationen besitzt
-            foreach ($this->registrationList as $registration) {                                        //Jedes Registrations Objekt auslesen
+        $registrationList = array();
+        $registrationList = $this->mysqlAdapter->getRegistration($this->event);                   //Holt alle Registrations Objekte von einem Event und speichert sie in einem Array
+        if (!empty($registrationList)) {                                                          //Prüft das Array, ob das angegebene Event schon Registrationen besitzt
+            foreach ($registrationList as $registration) {                                        //Jedes Registrations Objekt auslesen
                 $playerId = $registration->getPlayer();                                                 //PlayerID der Registration holen
                 $this->playerList[] = $this->mysqlAdapter->getPlayer($playerId);                              //Spieler Objekt holen und in ein array() speichern
             }
@@ -101,7 +100,16 @@ class Game {
 
     //Holt Player
     public function getLotteryNr() {
-        return $this->player;
+        $history = $this->mysqlAdapter->getHistory(2, 1);
+        if(!empty($history)) {
+
+            $this->lotteryNr[] = preg_split(',', ($history->getNumbers()), -1, PREG_SPLIT_NO_EMPTY);
+            if(!empty($this->lotteryNr)) {
+                return $this->lotteryNr;
+            } else{
+                return null;
+            }
+        }
     }
 
     //Setzt Player
@@ -120,8 +128,6 @@ class Game {
     }
 
     function eventPlayers($event) {
-        $playerCount = 0;
-        $cardCount = 0;
 
         $this->playerList = $this->mysqlAdapter->getRegistration($event); //Holt alle Spieler eines bestimmten Events
         foreach ($playerList as $player) {
@@ -137,10 +143,10 @@ class Game {
                 }
             }
             /*
-              $historylist[] = $this->mysqlAdapter->getHistory($event,$set); //Holt die History eines bestimmten Events und Serie
+              $historylist[] = $this->mysqlAdapter->getHistory($event,$round); //Holt die History eines bestimmten Events und Serie
               foreach ($historylist as $history) {
               $numbers = $history->getNumbers();//Holt die gezogenen Nummern
-              $set = $history->getSet();//Holt die die dazugehörige Serie
+              $round = $history->getSet();//Holt die die dazugehörige Serie
 
               }
 

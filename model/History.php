@@ -1,20 +1,23 @@
 <?php
 
-class Histroy {
+class History {
     
     /* Variabeln definieren */
     private $id;
     private $event;
-    private $set;
+    private $round;
     private $numbers;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($event, $set, $numbers) {
+    function __construct($id, $event, $round, $numbers, $create_on, $update_on) {
+        $this->id = $id;
         $this->event = $event;
-        $this->set = $set;
+        $this->round = $round;
         $this->numbers = $numbers;
+        $this->create_on = $create_on;
+        $this->update_on = $update_on;
         
     }
     //Holt Karten ID
@@ -30,12 +33,12 @@ class Histroy {
         $this->event = $event;
     }
     //Holt Set(Serie)
-    public function getSet() {
-        return $this->set;
+    public function getRound() {
+        return $this->round;
     }
     //Setzt Set(Serie)
-    public function setSet($set) {
-        $this->set = $set;
+    public function setRound($round) {
+        $this->set = $round;
     }
     //Holt Nummern
     public function getNumbers() {
