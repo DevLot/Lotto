@@ -3,8 +3,8 @@
 class CardView extends View {
 
     public function display() {
-        echo '<div class="button"><a href="/card/new">Neue Karte</a></div>
-                <table>
+        echo '<div class="subcontrol"><div class="button"><a href="/card/new">Neue Karte</a></div>
+                </div><div class="list"><table>
                 <tbody><tr><th></th>
                  <th>Kartennummer</th><th>Zugewiesener Spieler</th>
                 </tr>';
@@ -17,7 +17,7 @@ class CardView extends View {
                     ' ."<td>" . $card->getCardnr() . "</td>"
                      ."<td>" . $card->getPlayer() . "</td>";
         }
-        echo '</tr></tbody></table>';
+        echo '</tr></tbody></table></div>';
     }
     
       public function newform() {

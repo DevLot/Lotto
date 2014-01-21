@@ -1,8 +1,9 @@
 <?php
 
 echo ' 
-<div class="button"><a href="/player/new">Neuer Spieler</a></div>
+<div class="subcontrol"><div class="button"><a href="/player/new">Neuer Spieler</a></div></div>
 
+<div class="list">
 <table>
 <tbody><tr>
  <th></th>

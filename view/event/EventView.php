@@ -3,7 +3,8 @@
 class EventView extends View {
 
     public function display() {
-        echo '<div class="button"><a href="/event/new">Neuer Event</a></div>
+        echo '<div class="subcontrol"><div class="button"><a href="/event/new">Neuer Event</a></div>
+            </div><div class="list">
                 <table>
                 <tbody><tr><th></th>
                  <th>Eventname</th><th>Veranstaltungsort</th>
@@ -17,7 +18,7 @@ class EventView extends View {
                     ' ."<td>" . $event->getName() . "</td>"
                      ."<td>" . $event->getLocation() . "</td>";
         }
-        echo '</tr></tbody></table>';
+        echo '</tr></tbody></table></div>';
     }
     
       public function newform() {

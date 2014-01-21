@@ -30,39 +30,21 @@
         
                                
                 <div id="content">
+                     
+                    <div class="subcontrol">
+                    <div class="button"><a href="/player/">Übersicht</a></div><div class="button"><a href="/player/6/edit">Bearbeiten</a></div><div class="button"><div class="button"><a href="/player/6/edit">Löschen</a></div>                 
+                    </div></div>
+                    <div class="card">
+                    <table>
+                        <tr><td>1</td><td>12</td><td>25</td><td>33</td><td>40</td></tr>
+                        <tr><td>3</td><td>7</td><td>20</td><td>24</td><td>55</td></tr>
+                        <tr><td>4</td><td>19</td><td>21</td><td>23</td><td>47</td></tr>
+                    </table>
+                    <div class="number">293434</div>
+                    </div>
                     
- 
- <form id="form-player-new" action="create">
-
-     <label>Vorname</label>
-<input type="text" id="surname" name="surname">
-
-<label>Name</label>
-<input type="text" id="name" name="name">
-
-<label>Geb.-Datum</label>
-<input type="date" id="birthdate" name="birthdate">
-
-<label>Adresse</label>
-<input type="text" id="address" name="address">
-
-<label>PLZ</label>
-<input type="text" id="zipcode" name="zipcode">
-
-<label>Ort</label>
-<input type="text" id="city" name="city">
-
-<label>Telefon</label>
-<input type="tel" id="phone" name="phone">
-
-<label>Mobiltelefon</label>
-<input type="tel" id="mobile" name="mobile">
-
-<label>Spielkarten</label>
-<input type="text" id="cards" name="cards">
-
-    <input type="submit" value="Submit">   </form>
-
+                    
+                    
                 </div>
 
                 <div id="footer">

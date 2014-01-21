@@ -19,7 +19,7 @@ class PlayerView extends View {
             "<td>" . $player->getZipcode() . "</td>" .
             "<td>" . $player->getCity() . "</td></tr>" ;
         }
-        echo '</tr></tbody></table>';
+        echo '</tr></tbody></table></div>';
         
         echo  '<script type="text/javascript">
             jQuery(document).ready(function($) {
