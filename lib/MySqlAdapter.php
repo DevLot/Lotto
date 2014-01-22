@@ -89,7 +89,7 @@ final class MySqlAdapter {
     public function getHistory($event, $round) {
 
         $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND round='$round'");
-        while($row = $res->fetch_object()) {
+        while($row = $res->fetch_assoc()) {
             $history = new History($row['id'], $row['event'], $row['round'], $row['numbers'], $row['create_on'], $row['update_on']);
             $res->free();
             return $history;
@@ -401,16 +401,17 @@ final class MySqlAdapter {
     public function createPrices($price) {
 
         $name = $price->getName();
+        $player = $price->getPlayer();
         $event = $price->getEvent();
         $round = $price->getRound();
 
         $sql = "INSERT INTO fabingo.prices
                 (
-                    name,event,round,create_on,update_on
+                    name,player,event,round,create_on,update_on
                 )
                 VALUES
                 (
-                    '$name','$event','$round',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                    '$name','$player','$event','$round',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
                 );
          ";
 

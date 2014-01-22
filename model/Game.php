@@ -11,7 +11,7 @@ class Game {
     private $playerList = array();    //Teilnehmerlist
     private $cardList = array();      //Vergebene Spielkarten
     private $lotteryNr = array();     //Gezogene Nummern
-    private $winnerList;    //Gewinnerliste
+    private $winnerList = array();    //Gewinnerliste
     private $priceList;     //Preisliste
 
     /* Konstruktor mit Übergabeparameter */
@@ -57,6 +57,10 @@ class Game {
             return null;
         }
     }
+    
+    public function stopGame($eventId) {
+        
+    }
 
     //Holt Dauer in Sekunden
     public function getDuration() {
@@ -66,7 +70,6 @@ class Game {
 
     //Holt 3. Reihe
     public function getPlayerList() {
-        $registrationList = array();
         $registrationList = $this->mysqlAdapter->getRegistration($this->event);                   //Holt alle Registrations Objekte von einem Event und speichert sie in einem Array
         if (!empty($registrationList)) {                                                          //Prüft das Array, ob das angegebene Event schon Registrationen besitzt
             foreach ($registrationList as $registration) {                                        //Jedes Registrations Objekt auslesen
@@ -83,18 +86,22 @@ class Game {
     //Setzt 3. Reihe
     public function getCardList() {
         $i = 0;
+        $tempCardList = array();
         foreach ($this->playerList as $player) {
             if (!empty($player) && is_object($player)) {
                 $playerId = $player->getId();
                 echo "SpielerID: {$playerId},  ";
-                $this->cardList[] = $this->mysqlAdapter->getPlayerCards($playerId);
+                $tempCardList[] = $this->mysqlAdapter->getPlayerCards($playerId);
             }
         }
-        foreach ($this->cardList as $cards) {
+        foreach ($tempCardList as $cards) {
             $i++;
             echo "Array:{$i}";
-            $this->cardList = array_merge($this->cardList, $cards);
+            foreach ($cards as $card) {
+                $this->cardList[] = $card;
+            }
         }
+
         return $this->cardList;
     }
 
@@ -103,10 +110,11 @@ class Game {
         $history = $this->mysqlAdapter->getHistory(2, 1);
         if(!empty($history)) {
 
-            $this->lotteryNr[] = preg_split(',', ($history->getNumbers()), -1, PREG_SPLIT_NO_EMPTY);
-            if(!empty($this->lotteryNr)) {
+            $this->lotteryNr[] = preg_split("/,/", ($history->getNumbers()), -1, PREG_SPLIT_NO_EMPTY);
+            if(!empty($this->lotteryNr) && is_array($this->lotteryNr)) {
                 return $this->lotteryNr;
             } else{
+                
                 return null;
             }
         }

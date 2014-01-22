@@ -43,7 +43,7 @@ class Card {
         return $this->line1;
     }
     //Setzt 1. Reihe
-    public function setLine1($line1) {
+    public function setLine1($line1/*,$nr*/) {
         $this->line1 = $line1;
     }
     //Holt 2. Reihe

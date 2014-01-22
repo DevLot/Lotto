@@ -36,7 +36,7 @@ class GameController extends Controller{
         $playerList = $game->getPlayerList();
         if(!empty($playerList)) {
             foreach($playerList as $player) {
-                echo "Spieler:{$player->getFirstname()} {$player->getSurname()}, Geb: {$player->getBirthdate()}";
+                echo "Spieler:{$player->getFirstname()} {$player->getSurname()}, Geb: {$player->getBirthdate()}, Erstellt am: {$player->getCreateOn()}";
             }
         } else {
             return null;
@@ -47,16 +47,19 @@ class GameController extends Controller{
         }
         $cardList = $game->getCardList();
         
-        if(!empty($cardList)) {
+        if(!empty($cardList) && is_array($cardList)) {
             echo "True";
             foreach($cardList as $card) {
-                if(!empty($card) && is_array($card)) {
-                    echo "Super";
-                }
                 if(!empty($card) && is_object($card)) {
+                    echo "Super1";
+                    echo "KarteNr: {$card->getId}";
+                }
+                if(is_array($card)) {
                     echo "Bad";
                 }
-                echo "1 Linie:{$card->getLine1()}";
+                else {
+                    echo "Damn!";
+                }
             }
         } else {
             return null;
