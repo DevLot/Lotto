@@ -6,10 +6,10 @@ class PlayerDetailView extends View {
       
       $player = $this->vars['player'];
                
-     echo '<div class="button"><a href="/player/">Übersicht</a></div>';
+     echo '<div class="subcontrol"><div class="button"><a href="/player/">Übersicht</a></div>';
      echo '<div class="button"><a href="/player/'.$player->getId().'/edit">Bearbeiten</a></div>';
      echo '<div class="button"><a href="/player/'.$player->getId().'/delete">Löschen</a></div>';
-      echo  "<table><tr><td>ID</td><td>" . $player->getId() . "</td></tr>
+      echo  "</div><div class=\"list\"><table><tr><td>ID</td><td>" . $player->getId() . "</td></tr>
       <tr><td>Vorname</td><td>" . $player->getFirstname() . "</td></tr>
       <tr><td>Nachname</td><td>" . $player->getSurname() . "</td></tr>
       <tr><td>Geburtstag</td><td>" . $player->getBirthdate() . "</td></tr>
@@ -20,7 +20,7 @@ class PlayerDetailView extends View {
       <tr><td>Mobile</td><td>" . $player->getMobile() . "</td></tr>
       <tr><td>Mail</td><td>" . $player->getMail() . "</td></tr>
    
-      <table>";
+      </table></div>";
      
     }
     

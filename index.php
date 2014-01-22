@@ -82,7 +82,17 @@ echo $currentUri; ?>
             </div>
         </div>
 
+            
     </body>
+    
+           <script type="text/javascript">
+            jQuery(document).ready(function($) {
+      $(".clickableRow").click(function() {
+            window.document.location = $(this).attr("href");
+      });
+});</script>
+    
+    
 </html>
 
 

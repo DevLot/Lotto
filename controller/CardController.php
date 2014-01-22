@@ -11,6 +11,7 @@ include_once 'model/Card.php';
 include_once 'view/View.php';
 include_once 'view/card/CardView.php';
 include_once 'view/card/CardDetailView.php';
+include_once 'view/card/CardFormView.php';
 
 class CardController extends Controller {
     
@@ -38,8 +39,8 @@ class CardController extends Controller {
 
     protected function init() {
 
-        $view = new CardView();
-        $view->newform();
+        $view = new CardFormView();
+        $view->display();
     }
 
     protected function create() {
@@ -55,9 +56,9 @@ class CardController extends Controller {
     protected function edit() {
         $card = $this->mysqlAdapter->getCard($this->resourceId);
         if (!empty($card)) { // Card with transmitted ID was found
-            $view = new CardDetailView();
+            $view = new CardFormView();
             $view->assign('card', $card);
-            $view->editform();
+            $view->display();
         }
     }
     

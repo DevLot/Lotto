@@ -1,80 +1,83 @@
 <?php
 
-class PlayerFormView extends View {
+class CardFormView extends View {
 
     public function display() {
+        
+         echo '<div class="subcontrol"><div class="button"><a href="/card/">Übersicht</a></div></div>';
 
-        if (isset($this->vars['player'])) {
-            $player = $this->vars['player'];
+        if (isset($this->vars['card'])) {
+            $card = $this->vars['card'];
              
              echo '<form id="form" action="update"  method="post">
                  
-<input type="hidden" id="id" name="id" value="'.$player->getId().'">
+             <input type="hidden" id="id" name="id" value="'.$card->getId().'">';
 
-       <label>Vorname</label>
-  <input type="text" id="firstname" name="firstname" value="'.$player->getFirstname().'">
-
-  <label>Name</label>
-  <input type="text" id="surname" name="surname" value="'.$player->getSurname().'">
-
-  <label>Geb.-Datum</label>
-  <input type="date" id="birthdate" name="birthdate" value="'.$player->getBirthdate().'">
-
-  <label>Adresse</label>
-  <input type="text" id="address" name="address" value="'.$player->getAddress().'">
-
-  <label>PLZ</label>
-  <input type="text" id="zipcode" name="zipcode" value="'.$player->getZipcode().'">
-
-  <label>Ort</label>
-  <input type="text" id="city" name="city" value="'.$player->getCity().'">
-
-  <label>Telefon</label>
-  <input type="tel" id="phone" name="phone" value="'.$player->getPhone().'">
-
-  <label>Mobiltelefon</label>
-  <input type="tel" id="mobile" name="mobile" value="'.$player->getMobile().'">
-
-  <label>Mail</label>
-  <input type="mail" id="mail" name="mail" value="'.$player->getMail().'">
+     
+        echo '<div class = "card">
+        <table>
+        <tr>
+            <td><input type="text" id="line1" name="line1" value="'.$card->getLine1().'"></td>
+           <td></td>
+           <td></td>
+           <td></td
+           ><td></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="line1" name="line1" value="' .$card->getLine2(). '"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="line1" name="line1" value="' .$card->getLine3(). '"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </table>
+        
+       <div class = "number">'. $card->getCardnr() .'</div>
+        </div>
 
       <input type="submit" value="Änderungen speichern">   
-      </form>';
-        } else {
-  
-        echo '<form id="form" action="create"  method="post">
+        </form>'; } else {
+            
+            echo '<form id="form" action="new"  method="post">
+        
+      <div class = "card">
+        <table>
+        <tr>
+            <td><input type="text" id="line1" name="line1></td>
+           <td></td>
+           <td></td>
+           <td></td
+           ><td></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="line1" name="line1"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="line1" name="line1" ></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </table>
+        
+     <div class="number">Cardnumber</div> <input type="text" id="cardnr" name="cardnr" >
+        </div>
 
-       <label>Vorname</label>
-  <input type="text" id="firstname" name="firstname">
-
-  <label>Name</label>
-  <input type="text" id="surname" name="surname">
-
-  <label>Geb.-Datum</label>
-  <input type="date" id="birthdate" name="birthdate">
-
-  <label>Adresse</label>
-  <input type="text" id="address" name="address">
-
-  <label>PLZ</label>
-  <input type="text" id="zipcode" name="zipcode">
-
-  <label>Ort</label>
-  <input type="text" id="city" name="city">
-
-  <label>Telefon</label>
-  <input type="tel" id="phone" name="phone">
-
-  <label>Mobiltelefon</label>
-  <input type="tel" id="mobile" name="mobile">
-
-  <label>Mail</label>
-  <input type="mail" id="mail" name="mail">
-
-      <input type="submit" value="Speichern & hinzufügen">   
-      </form>';
+      <input type="submit" value="Karte erstellen">   
+        </form>';
+            
         }
-
-
-    }
-}
+      
+} }

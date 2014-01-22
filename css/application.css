@@ -1,5 +1,5 @@
 body {
-    font-family: Georgia, serif;
+    font-family: Arial;
     font-size: 100%;
     line-height: 1.5em;
     //color: red;
@@ -29,7 +29,7 @@ body {
     color: #666666;
     font-size: 0.8em;
     font-weight:100;
-    }
+}
 
 #header {
     background-color: #143352;
@@ -83,21 +83,21 @@ a {
 
 .grid {
     position: relative;
-    
+
     background: #143352;
     float: left; 
 }
 
 .grid_3 {
-     
+
     width:940px;
-        
-    }
-    
+
+}
+
 .grid_1 {
-        width: 300px;
-        margin-right: 15px;
-    }
+    width: 300px;
+    margin-right: 15px;
+}
 
 .grid ul {
 
@@ -127,8 +127,8 @@ a {
     padding-left: 1.2em;
     color: #d9eef2;
     font-size: 1.2em;
-  
-    
+
+
 }
 
 .grid ul {
@@ -145,39 +145,35 @@ a {
 }
 
 
+
 .list table {
     display: table;
     border-collapse: separate;
     border-spacing: 0;
     font-size: 0.9em;
     width: 925px;
+    border-top: #666666;
+    border-top-style: solid;
 }
 
 .list thead {
     display: table-header-group;
     vertical-align: middle;
-    border-color: inherit
+    border-color: inherit;
+    background-color: #c0c0c0;
+    text-align: left;
+
 }
 
+.list th {
+    padding: 0.3em 1em 0.3em 1em;
+
+}
 .list td {
     padding: 0.3em 1em 0.3em 1em;
 }
 
-.subcontrol .button a{
-    font-family: arial;
-    border: solid 1px #143352;
-    color: black;
-    margin-right: 1.5em;
-    text-decoration: none;
-    padding: 0.6em;
-    display: inline-block;
-    float: left;
-}
-.subcontrol .button a:hover{
-    background-color: #143352;
-    color: white;
-    text-decoration: none;
-}
+
 
 .list tbody tr:nth-child(2n) {
     background: #143352;
@@ -190,10 +186,27 @@ a {
     border-color: inherit;
 }
 
+.subcontrol .button a{
+    font-family: arial;
+    border: solid 1px #143352;
+    color: black;
+    margin-right: 1.5em;
+    text-decoration: none;
+    padding: 0.6em;
+    display: inline-block;
+    float: left;
+    margin-bottom: 15px;
+}
+.subcontrol .button a:hover{
+    background-color: #143352;
+    color: white;
+    text-decoration: none;
+}
+
 /* Centre the form within the page */
 #form {
     margin:0 auto;
-    width:20em;
+/*    width:20em;*/
 }
 
 /* Style the text boxes */
@@ -212,22 +225,22 @@ a {
     height:4em;
 }
 
-.clickableRow:hover {
+.list .clickableRow:hover {
     background: #FFD801;
     color: black;
     cursor: pointer; 
 }
 
 .card {
-  border-width:1em;
-  border-style:solid;
-  border-color:white;
-  background-color: #79c3d2;
-  padding: 15px;
-  width: 25.6em;
-  height: 17em;
-  margin-top: 4em;
-  margin-bottom: 15px;
+    border-width:1em;
+    border-style:solid;
+    border-color:white;
+    background-color: #79c3d2;
+    padding: 15px;
+    width: 25.6em;
+    height: 17em;
+    margin-top: 4em;
+    margin-bottom: 15px;
 }
 
 .card table {
@@ -236,14 +249,18 @@ a {
 }
 
 .card td {
-            
+
     width:5em;
-        height:5em;
-        border-radius:5em;
-       background-color:white;
-       text-align: center;
+    height:5em;
+    border-radius:5em;
+    background-color:white;
+    text-align: center;
 }
 
 .card .number {
-  font-weight: bold;          
+    font-weight: bold;          
+}
+
+.card .number {
+    margin-top: 8px;
 }

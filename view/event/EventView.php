@@ -6,9 +6,9 @@ class EventView extends View {
         echo '<div class="subcontrol"><div class="button"><a href="/event/new">Neuer Event</a></div>
             </div><div class="list">
                 <table>
-                <tbody><tr><th></th>
+                <tbody><thead><th></th>
                  <th>Eventname</th><th>Veranstaltungsort</th>
-                </tr>';
+                </thead><tbody>';
       
         foreach ($this->vars['eventlist'] as $event) {
      

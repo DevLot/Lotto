@@ -5,7 +5,7 @@ echo '
 
 <div class="list">
 <table>
-<tbody><tr>
+<tbody><thead>
  <th></th>
   <th>Vorname</th>
   <th>Name</th>
@@ -13,4 +13,4 @@ echo '
   <th>Adresse</th>
   <th>PLZ</th>
   <th>Ort</th>
-</tr>';
+</thead>';
