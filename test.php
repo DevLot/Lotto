@@ -32,8 +32,8 @@
                 <div id="content">
                      
                     <div class="subcontrol">
-                    <div class="button"><a href="/player/">Übersicht</a></div><div class="button"><a href="/player/6/edit">Bearbeiten</a></div><div class="button"><div class="button"><a href="/player/6/edit">Löschen</a></div>                 
-                    </div></div>
+                        <div class="button"><a href="/game/stop">Spiel stoppen</a></div>                 
+                    </div>
                     <div class="card">
                     <table>
                         <tr><td>1</td><td>12</td><td>25</td><td>33</td><td>40</td></tr>
