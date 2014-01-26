@@ -54,27 +54,35 @@ class Game {
         $this->startTime = $date->format("Y-m-d H:i:s");
     }
 
-    //Setzt Durchgang
+    //creates actuall History object
     private function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
         $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
+    /**
+     * Returns the History object of the actuall round
+     * @return object $this->history
+     */
     public function getHistory() {
-        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+        return $this->history;
     }
     //Holt Durchgang
     public function getRound() {
         return $this->round;
     }
 
-    //Setzt Durchgang
+    //Beenden der Runde
     public function endRound() {
         ++$this->round;
         $this->lotteryNr = null;
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
         $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+    }
+    //Beenden des Spiels
+    public function endGame() {
+
     }
 
     //Holt Durchgang
