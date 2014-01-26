@@ -106,6 +106,8 @@ final class MySqlAdapter {
         $event = $history->getEvent();
         $round = $history->getRound();
         $numbers = $history->getNumbers();
+        $create_on = $history->getCreateOn();
+        $update_on = $history->getUpdateOn();
 
         $sql = "INSERT INTO fabingo.history
                 (
@@ -113,7 +115,7 @@ final class MySqlAdapter {
                 )
                 VALUES
                 (
-                    '$event','$round','$numbers',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()                   
+                    '$event','$round','$numbers','$create_on','$update_on'                   
                 );
          ";
 
@@ -128,7 +130,7 @@ final class MySqlAdapter {
         $round = $history->getRound();
         $numbers = $history->getNumbers();
 
-        $sql = "UPDATE fabingo.history SET numbers = '$numbers', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND event = '$event' AND round = '$round'";
+        $sql = "UPDATE fabingo.history SET numbers='$numbers', update_on=CURRENT_TIMESTAMP() WHERE id='$id' AND event='$event' AND round='$round'";
 
         $this->con->query($sql);
     }

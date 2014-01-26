@@ -30,10 +30,12 @@ class GameController extends Controller{
 
     public function show() {
         
-        $game = new Game("2");
-        echo $game->getStartTime()," ";
-
-        $playerList = $game->getPlayerList();
+        $game = new Game(2);
+        echo $game->createDate()," ";
+        $playerList = $game->createPlayerList();
+        echo $game->addNumber(26);
+        echo $game->addNumber(33);
+        echo $game->addNumber(44);
         if(!empty($playerList)) {
             foreach($playerList as $player) {
                 echo "Spieler:{$player->getFirstname()} {$player->getSurname()}, Geb: {$player->getBirthdate()}, Erstellt am: {$player->getCreateOn()}";
@@ -52,7 +54,7 @@ class GameController extends Controller{
             foreach($cardList as $card) {
                 if(!empty($card) && is_object($card)) {
                     echo "Super1";
-                    echo "KarteNr: {$card->getId}";
+                    echo "KarteNr: {$card->getCardnr()}";
                 }
                 if(is_array($card)) {
                     echo "Bad";
