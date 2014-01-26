@@ -6,17 +6,17 @@ class Price {
     private $name;
     private $player;
     private $event;
-    private $set;
+    private $round;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($name, $player, $event, $set) {
-         if (isset($id)) { $this->id = $id; }
+    function __construct($id, $name, $player, $event, $round) {
+        if (isset($id)) { $this->id = $id; }
         $this->name = $name;
         $this->player = $player;
         $this->event = $event;
-        $this->set = $set;
+        $this->round = $round;
     }
     //Holt Preis ID
     public function getId() {
@@ -47,12 +47,12 @@ class Price {
         $this->event = $event;
     }
     //Holt Serie
-    public function getSet() {
-        return $this->set;
+    public function getRound() {
+        return $this->round;
     }
     //Setzt Serie
-    public function setSet($set) {
-        $this->set = $set;
+    public function setSet($round) {
+        $this->round = $round;
     }
     //Holt Erstell Datum/Zeit
     public function getCreateOn() {

@@ -17,7 +17,6 @@ class Card {
     
     /* Konstruktor mit Übergabeparameter */
     function __construct($id, $cardnr, $line1, $line2, $line3, $player) {
-         
         if (isset($id)) { $this->id = $id; }
         $this->cardnr = $cardnr;
         $this->line1 = $line1;

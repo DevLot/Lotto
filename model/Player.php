@@ -19,7 +19,6 @@ class Player {
     
     /* Konstruktor mit Übergabeparameter */
     function __construct($id, $firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail, $status) {
-        
         if (isset($id)) { $this->id = $id; }
         $this->firstname = $firstname;
         $this->surname = $surname;

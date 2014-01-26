@@ -30,44 +30,21 @@ class GameController extends Controller{
 
     public function show() {
         
-        $game = new Game(2);
-        echo $game->createDate()," ";
-        $playerList = $game->createPlayerList();
-        echo $game->addNumber(26);
-        echo $game->addNumber(33);
-        echo $game->addNumber(44);
-        if(!empty($playerList)) {
-            foreach($playerList as $player) {
-                echo "Spieler:{$player->getFirstname()} {$player->getSurname()}, Geb: {$player->getBirthdate()}, Erstellt am: {$player->getCreateOn()}";
-            }
-        } else {
-            return null;
-        }
-        $lotteryNr = $game->getLotteryNr();
-        foreach($lotteryNr as $nr) {
-            echo "Nummer:{$nr};";
-        }
+        $game = new Game(3);
+        $playerList = $game->getPlayerList();
         $cardList = $game->getCardList();
-        
-        if(!empty($cardList) && is_array($cardList)) {
-            echo "True";
-            foreach($cardList as $card) {
-                if(!empty($card) && is_object($card)) {
-                    echo "Super1";
-                    echo "KarteNr: {$card->getCardnr()}";
-                }
-                if(is_array($card)) {
-                    echo "Bad";
-                }
-                else {
-                    echo "Damn!";
-                }
-            }
-        } else {
-            return null;
-        }
-     
-        
+        echo $game->addNumber(1);
+        echo $game->addNumber(2);
+        echo $game->addNumber(3);
+        echo $game->addNumber(4);
+        echo $game->addNumber(5);
+        $game->endRound();
+        $game->addNumber(6);
+        $game->addNumber(7);
+        $game->addNumber(8);
+        $game->addNumber(9);
+        $game->addNumber(10);
+        $game->endRound(); 
     }
 
     protected function init() {

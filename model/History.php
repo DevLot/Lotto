@@ -12,7 +12,7 @@ class History {
     
     /* Konstruktor mit Übergabeparameter */
     function __construct($id, $event, $round, $numbers, $create_on, $update_on) {
-        $this->id = $id;
+        if (isset($id)) { $this->id = $id; }
         $this->event = $event;
         $this->round = $round;
         $this->numbers = $numbers;
