@@ -15,9 +15,9 @@ include_once 'config/config.php';
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,500' rel='stylesheet' type='text/css'>
 
-         <script src="/js/vendor/jquery-1.8.3.min.js"></script>
+        <script src="/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="/js/application.js"></script>
-        
+
     </head>
     <body>
         <div id="header">
@@ -33,7 +33,8 @@ include_once 'config/config.php';
 
             <div id="navtree">
                 Home > <?php $currentUri = getCurrentURI();
-echo $currentUri; ?>
+echo $currentUri;
+?>
             </div>
 
 
@@ -65,6 +66,10 @@ echo $currentUri; ?>
                         include_once 'controller/AccountController.php';
                         $controller = new AccountController();
                         break;
+                    case URI_GAME:
+                        include_once 'controller/GameController.php';
+                        $controller = new GameController();
+                        break;
                     default :
                         include_once 'controller/HomeController.php';
                         $controller = new HomeController();
@@ -82,17 +87,17 @@ echo $currentUri; ?>
             </div>
         </div>
 
-            
+
     </body>
-    
-           <script type="text/javascript">
-            jQuery(document).ready(function($) {
-      $(".clickableRow").click(function() {
-            window.document.location = $(this).attr("href");
-      });
-});</script>
-    
-    
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".clickableRow").click(function() {
+                window.document.location = $(this).attr("href");
+            });
+        });</script>
+
+
 </html>
 
 
@@ -108,7 +113,8 @@ function getMenu() {
         URI_EVENT => 'Veranstaltung',
         URI_PLAYER => 'Spieler',
         URI_CARD => 'Spielkarten',
-        URI_ACCOUNT => 'Account'
+        URI_ACCOUNT => 'Account',
+        URI_GAME => 'Spiel'
     );
 }
 

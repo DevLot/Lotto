@@ -206,7 +206,7 @@ a {
 /* Centre the form within the page */
 #form {
     margin:0 auto;
-/*    width:20em;*/
+    width:20em;
 }
 
 /* Style the text boxes */
@@ -263,4 +263,53 @@ a {
 
 .card .number {
     margin-top: 8px;
+}
+
+.game {
+    display: inline-block;
+}
+
+.game .number-input .number {
+    display: inline-block;
+    list-style-type: none;
+    font-size: 1em;
+    background-color: #FFD801;
+    margin: 0.1em;
+    height: 2.5em;
+    width: 2.5em;
+}
+
+
+.game .set-number {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.game .name {
+    font-size: 1.5em;
+    padding-bottom: 1em;
+}
+
+.game .set {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.game .time {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.game .number-input {
+
+}
+
+.game .title {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    border-top: #143352 solid 1px;
+    padding-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 5px;
+    margin-right: 15px;
 }

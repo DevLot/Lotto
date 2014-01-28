@@ -7,6 +7,7 @@ define('URI_EVENT', '/event');
 define('URI_PLAYER', '/player');
 define('URI_CARD', '/card');
 define('URI_ACCOUNT', '/account');
+define('URI_GAME', '/game');
 
 
 # DB configs
