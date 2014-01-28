@@ -1,34 +1,24 @@
 <?php
 
-class Price {
+class Registration {
+    
     /* Variabeln definieren */
     private $id;
-    private $name;
     private $player;
     private $event;
-    private $round;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $name, $player, $event, $round) {
-        if (isset($id)) { $this->id = $id; }
-        $this->name = $name;
+    function __construct($id, $player, $event) {
+        $this->id = $id;
         $this->player = $player;
         $this->event = $event;
-        $this->round = $round;
+        
     }
-    //Holt Preis ID
+    //Holt Registrations ID
     public function getId() {
         return $this->id;
-    } 
-    //Holt Preisname
-    public function getName() {
-        return $this->name;
-    }
-    //Setzt Preisname
-    public function setName($name) {
-        $this->name = $name;
     }
     //Holt Player
     public function getPlayer() {
@@ -45,14 +35,6 @@ class Price {
     //Setzt Event
     public function setEvent($event) {
         $this->event = $event;
-    }
-    //Holt Serie
-    public function getRound() {
-        return $this->round;
-    }
-    //Setzt Serie
-    public function setSet($round) {
-        $this->round = $round;
     }
     //Holt Erstell Datum/Zeit
     public function getCreateOn() {

@@ -1,42 +1,28 @@
 <?php
 
-class Price {
+class History {
+    
     /* Variabeln definieren */
     private $id;
-    private $name;
-    private $player;
     private $event;
     private $round;
+    private $numbers;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $name, $player, $event, $round) {
+    function __construct($id, $event, $round, $numbers, $create_on, $update_on) {
         if (isset($id)) { $this->id = $id; }
-        $this->name = $name;
-        $this->player = $player;
         $this->event = $event;
         $this->round = $round;
+        $this->numbers = $numbers;
+        $this->create_on = $create_on;
+        $this->update_on = $update_on;
+        
     }
-    //Holt Preis ID
+    //Holt Karten ID
     public function getId() {
         return $this->id;
-    } 
-    //Holt Preisname
-    public function getName() {
-        return $this->name;
-    }
-    //Setzt Preisname
-    public function setName($name) {
-        $this->name = $name;
-    }
-    //Holt Player
-    public function getPlayer() {
-        return $this->player;
-    }
-    //Setzt Player
-    public function setPlayer($player) {
-        $this->player = $player;
     }
     //Holt Event
     public function getEvent() {
@@ -46,13 +32,21 @@ class Price {
     public function setEvent($event) {
         $this->event = $event;
     }
-    //Holt Serie
+    //Holt Set(Serie)
     public function getRound() {
         return $this->round;
     }
-    //Setzt Serie
-    public function setSet($round) {
-        $this->round = $round;
+    //Setzt Set(Serie)
+    public function setRound($round) {
+        $this->set = $round;
+    }
+    //Holt Nummern
+    public function getNumbers() {
+        return $this->numbers;
+    }
+    //Setzt Nummern
+    public function setNumbers($numbers) {
+        $this->numbers = $numbers;
     }
     //Holt Erstell Datum/Zeit
     public function getCreateOn() {

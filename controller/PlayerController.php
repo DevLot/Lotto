@@ -27,12 +27,16 @@ class PlayerController extends Controller {
     }
 
     protected function show() {
+
         $player = $this->mysqlAdapter->getPlayer($this->resourceId);
         if (!empty($player)) { // Player with transmitted ID was found
             $view = new PlayerDetailView();
             $view->assign('player', $player);
             $view->display();
         }
+
+//        $this->mysqlAdapter->getPlayers();
+//        $this->mysqlAdapter->getPlayer($id);
     }
 
     protected function init() {
@@ -72,8 +76,10 @@ class PlayerController extends Controller {
 
     protected function update() {
 
-        $player = new Player($_POST['id'], $_POST['firstname'], $_POST['surname'], $_POST['birthdate'], $_POST['address'], $_POST['zipcode'], $_POST['city'], $_POST['phone'], $_POST['mobile'], $_POST['mail']);
-
+        $player = new Player(null,$_POST['firstname'],$_POST['surname'],
+                $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
+                $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail'],$_POST['status']);
+                       
         $this->mysqlAdapter->updatePlayer($player);
         
   
