@@ -8,10 +8,52 @@ class GamePlayView extends View {
         $game = $this->vars['game'];
         $playerlist = $this->vars['playerlist'];
         $cardlist = $this->vars['cardlist'];
+        
+        
+           echo "<script>
+ 
+               function setnr(val) {                    
+                    $.ajax({
+                        url: 'update',
+                        type: 'POST',
+                        data: {number:val}, 
+                        success: function (result) {
+                          alert(val);
+                        }
+                    });  
+
+                     }
+                     
+
+                function endround() {                    
+                                    $.ajax({
+                                        url: 'update',
+                                        type: 'POST',
+                                        data: {endround:'true'}, 
+                                        success: function (result) {
+                                          alert('Neue Runde wurde gestartet');
+                                        }
+                                    });  
+
+                                     }
+                                     
+                   function stop() {                    
+                                    $.ajax({
+                                        url: 'update',
+                                        type: 'POST',
+                                        data: {endgame:'true'}, 
+                                        success: function (result) {
+                                          alert('Spiel wurde beendet');
+                                        }
+                                    });  
+
+                                     }
+            </script>";
 
 
+     
         echo '<div class="subcontrol">
-                    <div class="button"><a href="/game/stop">Spiel stoppen</a></div><div class="button"><a href="/game/nextset">Nächste Serie</a></div>             
+                    <div class="button"><a href="#" onclick="stop()">Spiel stoppen</a></div><div class="button"><a href="#" onclick="endround()">Nächste Serie</a></div>             
                 </div>
 
                 <div class="game">
@@ -25,9 +67,10 @@ class GamePlayView extends View {
         echo $game->getRound();
         echo '</div><div class="title">Bitte Zahl eingeben:</div>
                     <div class="number-input">';
+        
 
         for ($i = 1; $i <= 100; $i++) {
-            echo "<a href='" . $i . "'><div class='number'>";
+            echo "<a href ='#' onclick='setnr(" . $i . ")'><div class='number'>";
             echo $i;
             echo "</div></a>";
         }
@@ -37,8 +80,8 @@ class GamePlayView extends View {
 
                     <div class="title">Gezogene Zahlen</div>
                      <div class="set-number">';
-                     echo $game->getLotteryNr();
-                  echo   '</div>
+        echo $game->getLotteryNr();
+        echo '</div>
 
                     <div class="title">Angemeldete Spieler</div>';
         foreach ($playerlist as $player) {

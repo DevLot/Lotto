@@ -24,6 +24,7 @@ include_once 'view/card/CardView.php';
 class GameController extends Controller {
 
     private $mysqlAdapter;
+    private $game;
 
     function __construct() {
 
@@ -43,36 +44,49 @@ class GameController extends Controller {
             $view = new GamePlayView();
 
             //Beginn neues Game
-           $game = new Game($this->resourceId);
-           $playerList = $game->getPlayerList();
-            $cardList = $game->getCardList();
+            $this->game = new Game($this->resourceId);
+            $this->game->addNumber(3);
+
+            $playerList = $this->game->getPlayerList();
+            $cardList = $this->game->getCardList();
 
             $view->assign('event', $event);
-           $view->assign('game', $game);
-          $view->assign('playerlist', $playerList);
-           $view->assign('cardlist', $cardList);
-            
+            $view->assign('game', $this->game);
+            $view->assign('playerlist', $playerList);
+            $view->assign('cardlist', $cardList);
+
             $view->display();
         }
     }
 
-    public function play() {
+    public function stop() {
 
-        $game = new Game(3);
-        $playerList = $game->getPlayerList();
-        $cardList = $game->getCardList();
-//        echo $game->addNumber(1);
-//        echo $game->addNumber(2);
-//        echo $game->addNumber(3);
-//        echo $game->addNumber(4);
-////        echo $game->addNumber(5);
-//        $game->endRound();
-//        $game->addNumber(6);
-//        $game->addNumber(7);
-//        $game->addNumber(8);
-//        $game->addNumber(9);
-//        $game->addNumber(10);
-//        $game->endRound();
+//        if (!empty($this->game)) {
+//            $this->game->endRound();
+//            $this->game->endGame();
+//            echo "Das Spiel wurde beendet";
+//        } else {
+//            echo "Zu diesem Event läuft gerade kein Spiel";
+//        }
+    }
+
+    public function update() {
+
+        //Nummer setzen und auf Gewinne prüfen
+        if (!empty($_POST['number'])) {
+            $number = $_POST['number'];
+            $this->game->addNumber(3);
+            $this->game->checkWin();
+        }
+        
+        if (!empty($_POST['endround'])){
+            $this->game->endRound();
+        }
+        
+        if (!empty($_POST['stop'])){
+            $this->game->endRound();
+            $this->game->endGame();
+        }
     }
 
     protected function create() {

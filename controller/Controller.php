@@ -46,12 +46,15 @@ abstract class Controller {
                 } elseif (preg_match("@^.*/([0-9]+)/delete$@", $_SERVER['REQUEST_URI'], $matches)) {
                     $this->resourceId = $matches[1];
                     $this->delete();
+                } elseif (preg_match("@^.*/([0-9]+)/stop$@", $_SERVER['REQUEST_URI'], $matches)) {
+                    $this->resourceId = $matches[1];
+                    $this->stop();
                 } else {
                     $this->index();
                 }
                 break;
             case 'POST':
-                
+
                 if (preg_match("@^.*/([0-9]+)/update$@", $_SERVER['REQUEST_URI'], $matches)) {
                     $this->update();
                 } else {
@@ -61,10 +64,8 @@ abstract class Controller {
             default:
                 break;
         }
-        
-     
     }
-     
+
 //    /**
 //     * edit a instance of the resource
 //     */
@@ -74,10 +75,10 @@ abstract class Controller {
 //     * delete a instance of the resource
 //     */
 //    abstract protected function delete(); 
-     
- 
+
+
     public static function encodeUrl($url) {
-        $specialChars = array( 
+        $specialChars = array(
             "ä" => "ae",
             "ö" => "oe",
             "ü" => "ue",
@@ -98,4 +99,3 @@ abstract class Controller {
     }
 
 }
-
