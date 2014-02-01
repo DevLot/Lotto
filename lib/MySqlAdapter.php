@@ -89,13 +89,13 @@ final class MySqlAdapter {
     public function getHistory($event, $round) {
 
         $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND round='$round'");
-        while($row = $res->fetch_assoc()) {
+        while ($row = $res->fetch_assoc()) {
             $history = new History($row['id'], $row['event'], $row['round'], $row['numbers'], $row['create_on'], $row['update_on']);
             $res->free();
             return $history;
         }
-        
-        if(empty($row) || !is_object($row)) {
+
+        if (empty($row) || !is_object($row)) {
             return null;
         }
     }
@@ -110,16 +110,13 @@ final class MySqlAdapter {
         $update_on = $history->getUpdateOn();
 
         $sql = "INSERT INTO fabingo.history
-                (
-                    event,round,numbers,create_on,update_on
-                )
-                VALUES
-                (
-                    '$event','$round','$numbers','$create_on','$update_on'                   
-                );
-         ";
+                (event,round,numbers,create_on,update_on) 
+                    VALUES 
+                ('$event','$round','$numbers','$create_on','$update_on');";
 
         $this->con->query($sql);
+
+        echo "History Import efoglreich";
     }
 
     //Aktuallisiert History
@@ -159,8 +156,8 @@ final class MySqlAdapter {
             $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
             $res->free();
             return $card;
-        } 
-        if(empty($row) || !is_object($row)) {
+        }
+        if (empty($row) || !is_object($row)) {
             return NULL;
         }
     }
@@ -242,9 +239,9 @@ final class MySqlAdapter {
      */
     public function getPlayer($id) {
         $res = $this->con->query("SELECT * FROM fabingo.players WHERE id='$id'");
-        
+
         while ($row = $res->fetch_assoc()) {
-            $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['status'], $row['create_on'], $row['update_on']);     
+            $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['status'], $row['create_on'], $row['update_on']);
         }
         $res->free();
         return $player;
@@ -257,7 +254,7 @@ final class MySqlAdapter {
         $surname = $player->getSurname();
         $birthdate = $player->getBirthdate();
         $address = $player->getAddress();
-        $zipcode = $player->getZipcode();
+        $zipcode = $player->getZicode();
         $city = $player->getCity();
         $phone = $player->getPhone();
         $mobile = $player->getMobile();
@@ -350,8 +347,6 @@ final class MySqlAdapter {
         ;
 
         $this->con->query($sql);
-
-       
     }
 
     //Aktuallisiert Event
@@ -452,7 +447,7 @@ final class MySqlAdapter {
         $registrationlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.registration WHERE event='$event' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $registration = new Registration($row['id'], $row['player'], $row['event'], $row['create_on'], $row['update_on']);
+            $registration = new Registration($row['id'], $row['player'], $row['event'], $row['created_on'], $row['updated_on']);
             $registrationlist[] = $registration;
         }
         $res->free();
@@ -467,7 +462,7 @@ final class MySqlAdapter {
 
         $sql = "INSERT INTO fabingo.registration
                 (
-                    player,event,create_on,update_on
+                    player,event,created_on,updated_on
                 )
                 VALUES
                 (

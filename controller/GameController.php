@@ -41,7 +41,17 @@ class GameController extends Controller {
         $event = $this->mysqlAdapter->getEvent($this->resourceId);
         if (!empty($event)) { // Event with transmitted ID was found
             $view = new GamePlayView();
+
+            //Beginn neues Game
+           $game = new Game($this->resourceId);
+           $playerList = $game->getPlayerList();
+            $cardList = $game->getCardList();
+
             $view->assign('event', $event);
+           $view->assign('game', $game);
+          $view->assign('playerlist', $playerList);
+           $view->assign('cardlist', $cardList);
+            
             $view->display();
         }
     }
@@ -51,18 +61,18 @@ class GameController extends Controller {
         $game = new Game(3);
         $playerList = $game->getPlayerList();
         $cardList = $game->getCardList();
-        echo $game->addNumber(1);
-        echo $game->addNumber(2);
-        echo $game->addNumber(3);
-        echo $game->addNumber(4);
-        echo $game->addNumber(5);
-        $game->endRound();
-        $game->addNumber(6);
-        $game->addNumber(7);
-        $game->addNumber(8);
-        $game->addNumber(9);
-        $game->addNumber(10);
-        $game->endRound();
+//        echo $game->addNumber(1);
+//        echo $game->addNumber(2);
+//        echo $game->addNumber(3);
+//        echo $game->addNumber(4);
+////        echo $game->addNumber(5);
+//        $game->endRound();
+//        $game->addNumber(6);
+//        $game->addNumber(7);
+//        $game->addNumber(8);
+//        $game->addNumber(9);
+//        $game->addNumber(10);
+//        $game->endRound();
     }
 
     protected function create() {

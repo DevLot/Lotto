@@ -58,7 +58,7 @@ class Game {
     private function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
-        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+//        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
     /**
      * Returns the History object of the actuall round
