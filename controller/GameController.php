@@ -59,37 +59,31 @@ class GameController extends Controller {
         }
     }
 
-    public function stop() {
-
-//        if (!empty($this->game)) {
-//            $this->game->endRound();
-//            $this->game->endGame();
-//            echo "Das Spiel wurde beendet";
-//        } else {
-//            echo "Zu diesem Event läuft gerade kein Spiel";
-//        }
-    }
 
     public function update() {
          
-        echo "update funzt";
-         echo $_POST['event'];
-         echo $_POST['endround'];
+        echo "Update wurde ausgeführt";
+//         echo $_POST['event'];
+//         echo $_POST['endround'];
          
         $game = new Game($_POST['event']);
         
-         print_r($game);
+//         print_r($game);
         
         //Nummer setzen und auf Gewinne prüfen
         if (!empty($_POST['number'])) {
             $number = $_POST['number'];
+            $lotterynr = $game->getLotteryNr($_POST['event'], $_POST['round']);
+//            echo "loggernummer";
+//            print_r($lotterynr);
+            //print_r($number);
             $game->addNumber($number);
             $game->checkWin();
         } elseif (!empty($_POST['endround'])){
             $game->endRound($_POST['event'], $_POST['round']);
-        } elseif (!empty($_POST['stop'])){
+        } elseif (!empty($_POST['endgame'])){
             $game->endRound($_POST['event'], $_POST['round']);
-            $this->game->endGame();
+            $game->endGame();
         }
     }
 

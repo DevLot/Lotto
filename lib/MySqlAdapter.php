@@ -116,7 +116,7 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
 
-        echo "History Import efoglreich";
+        //echo "History Import efoglreich";
     }
 
     //Aktuallisiert History
@@ -506,10 +506,10 @@ final class MySqlAdapter {
         $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$id'");
         if ($row = $res->fetch_assoc()) {
             
-            echo "game bereits vorhanden";
+            echo "<div class='infobox'>Dieses Spiel läuft gerade</div>";
             return 1;
         }else {
-            echo "neues game wird erstellt";
+            echo "<div class='infobox ok'>Herzlich willkommen!</div>";
             return null;
             
         }

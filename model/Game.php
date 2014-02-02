@@ -34,6 +34,7 @@ class Game {
         $this->createPlayerList();
         $this->createCardList();
         $this->createDate();
+       
         
         //Überprüft ob das Game bereits vorhanden ist
         if ($this->mysqlAdapter->checkActiveGame($event) == 0) {
@@ -41,8 +42,10 @@ class Game {
             $this->newHistory();
         } else {
             $this->round = $this->mysqlAdapter->getLastRound($event);
-            echo "rundez ist" . $this->round;
+//            echo "rundez ist" . $this->round;
         }
+        
+         $this->lotterynr = $this->getLotteryNr($event, $this->round);
     }
 
     //Holt Event
@@ -65,7 +68,7 @@ class Game {
     private function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
-       // $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+       $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
 
     /**
@@ -143,7 +146,7 @@ class Game {
             }
             return $this->playerList;                                                                         //Array() mit Spielern zurückgeben
         } else {                                                                                        //Sonst Fehlermeldung
-            echo "Keine Spieler dem Spiel:\"{$this->event}\" zugeteilt!";
+            echo "<div class='infobox warning'>Keine Spieler im Spiel {$this->event} zugeteilt!</div>";
             return null;
         }
     }
@@ -188,8 +191,8 @@ class Game {
     }
 
     //Holt Lottozahlen einer Runde
-    public function getLotteryNr() {
-        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+    public function getLotteryNr($event, $round) {
+        $this->history = $this->mysqlAdapter->getHistory($event, $round);
         if (!empty($this->history)) {
             $this->lotteryNr = preg_split("/,/", ($this->history->getNumbers()), -1, PREG_SPLIT_NO_EMPTY);
             if (!empty($this->lotteryNr) && is_array($this->lotteryNr)) {
@@ -197,7 +200,7 @@ class Game {
             } else {
                 return null;
             }
-        }
+        } 
     }
 
     //Setzt Player

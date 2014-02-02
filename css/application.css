@@ -273,10 +273,16 @@ a {
     display: inline-block;
     list-style-type: none;
     font-size: 1em;
-    background-color: #FFD801;
+    background-color: #F0F8FF;
     margin: 0.1em;
     height: 2.5em;
     width: 2.5em;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.checked {
+    color: #c0c0c0;
+    
 }
 
 
@@ -307,9 +313,34 @@ a {
 .game .title {
     font-size: 1.2em;
     margin-bottom: 15px;
-    border-top: #143352 solid 1px;
+    border-top: #79c3d2 solid 15px;
     padding-bottom: 15px;
     margin-top: 15px;
-    padding-top: 5px;
-    margin-right: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-left: -15px;
 }
+
+.infobox {
+    background: #FFE87C;
+    font-family: arial;
+    border: solid 1px gray;
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    list-style: none; 
+    font-size: 0.8em;
+}
+
+.warning {
+        background: #F62217;
+        color: white;
+    }
+    
+.ok {
+        background: green;
+        color: white;
+    }

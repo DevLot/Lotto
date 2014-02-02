@@ -8,18 +8,22 @@ class GamePlayView extends View {
         $game = $this->vars['game'];
         $playerlist = $this->vars['playerlist'];
         $cardlist = $this->vars['cardlist'];
-        
-        
-           echo "<script>
+
+        $lotterynrs = $game->getLotteryNr($event->getId(), $game->getRound());
+
+
+        echo "<script>
  
                function setnr(val) {                    
                     $.ajax({
-                        url: '".$event->getId()."/update',
+                        url: '" . $event->getId() . "/update',
                         type: 'POST',
                         data: {number:val,
-                                event:".$event->getId()."}, 
+                                event:" . $event->getId() . ",
+                                    round:" . $game->getRound() . "}, 
                         success: function (result) {
-                          alert(val);
+                          
+                           location.reload();
                         }
                     });  
 
@@ -28,34 +32,44 @@ class GamePlayView extends View {
 
                 function endround() {                    
                                     $.ajax({
-                                        url: '".$event->getId()."/update',
+                                        url: '" . $event->getId() . "/update',
                                         type: 'POST',
                                         data: {endround:'true',
-                                         event:".$event->getId().",
-                                             round:".$game->getRound()."}, 
+                                         event:" . $event->getId() . ",
+                                             round:" . $game->getRound() . "}, 
                                         success: function (result) {
-                                          alert('Neue Runde wurde gestartet');
+                                         
+                                          location.reload();
                                         }
                                     });  
 
                                      }
                                      
-                   function stop() {                    
+                   function endgame() {                    
                                     $.ajax({
-                                        url: '".$event->getId()."/update',
+                                        url: '" . $event->getId() . "/update',
                                         type: 'POST',
                                         data: {endgame:'true',
-                                         event:".$event->getId()."}, 
+                                         event:" . $event->getId() . ",
+                                             round:" . $game->getRound() . "}, 
                                         success: function (result) {
                                           alert('Spiel wurde beendet');
+                                          window.location.replace('../home');
                                         }
                                     });  
+                                    }
+                                    
+                   function stop(){
+                        Check = confirm('Spiel beenden?');
+                        if(Check == true){
+                            endgame();
+                        };
 
-                                     }
+                                     } 
             </script>";
 
 
-     
+
         echo '<div class="subcontrol">
                     <div class="button"><a href="#" onclick="stop()">Spiel stoppen</a></div><div class="button"><a href="#" onclick="endround()">Nächste Serie</a></div>             
                 </div>
@@ -64,27 +78,43 @@ class GamePlayView extends View {
                         <div class="name">';
         echo $event->getName();
         echo '</div>
-                    <div class="time">Seit Spielbeginn: ';
-        echo $game->getDuration();
-        echo '</div>
+                    <!--<div class="time">Seit Spielbeginn: ';
+        echo $game->getStarttime();
+        echo '</div>-->
                     <div class="set">Aktuelles Set: ';
         echo $game->getRound();
         echo '</div><div class="title">Bitte Zahl eingeben:</div>
                     <div class="number-input">';
-        
+
+
 
         for ($i = 1; $i <= 100; $i++) {
-            echo "<a href ='#' onclick='setnr(" . $i . ")'><div class='number'>";
-            echo $i;
-            echo "</div></a>";
+            //Überpüft ob gleiche Nummer bereits gezogen ist
+            if (isset($lotterynrs)) {
+                if (in_array($i, $lotterynrs)) {
+                    echo "<div class='number checked'>";
+                    echo $i;
+                    echo "</div>";
+                } else {
+                    echo "<a href ='#' onclick='setnr(" . $i . ")'><div class='number'>";
+                    echo $i;
+                    echo "</div></a>";
+                }
+            } else {
+                echo "<a href ='#' onclick='setnr(" . $i . ")'><div class='number'>";
+                echo $i;
+                echo "</div></a>";
+            }
         }
+
+
 
         echo ' </li>
                     </div>
 
                     <div class="title">Gezogene Zahlen</div>
                      <div class="set-number">';
-        print_r($game->getLotteryNr());
+        print_r($game->getLotteryNr($event->getId(), $game->getRound()));
         echo '</div>
 
                     <div class="title">Angemeldete Spieler</div>';
