@@ -34,7 +34,7 @@ class GameController extends Controller {
     protected function index() {
 //        $eventList = $this->csvAdapter->getEventList();
         $view = new GameView();
-        $view->assign('eventlist', $this->mysqlAdapter->getEvents());
+        $view->assign('eventlist', $this->mysqlAdapter->getOpenEvents());
         $view->display();
     }
 

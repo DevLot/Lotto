@@ -34,8 +34,8 @@ class Game {
         $this->createPlayerList();
         $this->createCardList();
         $this->createDate();
-       
-        
+
+
         //Überprüft ob das Game bereits vorhanden ist
         if ($this->mysqlAdapter->checkActiveGame($event) == 0) {
             $this->round = 1;
@@ -44,8 +44,8 @@ class Game {
             $this->round = $this->mysqlAdapter->getLastRound($event);
 //            echo "rundez ist" . $this->round;
         }
-        
-         $this->lotterynr = $this->getLotteryNr($event, $this->round);
+
+        $this->lotterynr = $this->getLotteryNr($event, $this->round);
     }
 
     //Holt Event
@@ -65,10 +65,10 @@ class Game {
     }
 
     //creates actuall History object
-    private function newHistory() {
+    public function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
-       $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
 
     /**
@@ -200,7 +200,7 @@ class Game {
             } else {
                 return null;
             }
-        } 
+        }
     }
 
     //Setzt Player
@@ -224,8 +224,11 @@ class Game {
     public function getUpdateOn() {
         return $this->update_on;
     }
-
-    function checkWin() {//Prüft ob die gezogenen Nummern mit einer mit einer Karte übereinstimmt.
+    /**
+     * Checks if someone has won
+     * @return winnerList[]
+     */
+    function checkWin() {
         foreach ($this->cardList as $card) {
             $line1 = preg_split("/,/", ($card->getLine1()), -1, PREG_SPLIT_NO_EMPTY);
             $line2 = preg_split("/,/", ($card->getLine2()), -1, PREG_SPLIT_NO_EMPTY);
