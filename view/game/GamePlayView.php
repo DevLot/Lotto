@@ -14,9 +14,10 @@ class GamePlayView extends View {
  
                function setnr(val) {                    
                     $.ajax({
-                        url: 'update',
+                        url: '".$event->getId()."/update',
                         type: 'POST',
-                        data: {number:val}, 
+                        data: {number:val,
+                                event:".$event->getId()."}, 
                         success: function (result) {
                           alert(val);
                         }
@@ -27,9 +28,11 @@ class GamePlayView extends View {
 
                 function endround() {                    
                                     $.ajax({
-                                        url: 'update',
+                                        url: '".$event->getId()."/update',
                                         type: 'POST',
-                                        data: {endround:'true'}, 
+                                        data: {endround:'true',
+                                         event:".$event->getId().",
+                                             round:".$game->getRound()."}, 
                                         success: function (result) {
                                           alert('Neue Runde wurde gestartet');
                                         }
@@ -39,9 +42,10 @@ class GamePlayView extends View {
                                      
                    function stop() {                    
                                     $.ajax({
-                                        url: 'update',
+                                        url: '".$event->getId()."/update',
                                         type: 'POST',
-                                        data: {endgame:'true'}, 
+                                        data: {endgame:'true',
+                                         event:".$event->getId()."}, 
                                         success: function (result) {
                                           alert('Spiel wurde beendet');
                                         }
@@ -80,7 +84,7 @@ class GamePlayView extends View {
 
                     <div class="title">Gezogene Zahlen</div>
                      <div class="set-number">';
-        echo $game->getLotteryNr();
+        print_r($game->getLotteryNr());
         echo '</div>
 
                     <div class="title">Angemeldete Spieler</div>';

@@ -30,12 +30,19 @@ class Game {
 
         $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         $this->event = $event;
-        $this->round = 1;
-        $this->createDate();
         $this->getEventInfo();
-        $this->newHistory();
         $this->createPlayerList();
         $this->createCardList();
+        $this->createDate();
+        
+        //Überprüft ob das Game bereits vorhanden ist
+        if ($this->mysqlAdapter->checkActiveGame($event) == 0) {
+            $this->round = 1;
+            $this->newHistory();
+        } else {
+            $this->round = $this->mysqlAdapter->getLastRound($event);
+            echo "rundez ist" . $this->round;
+        }
     }
 
     //Holt Event
@@ -58,8 +65,9 @@ class Game {
     private function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
-//        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+       // $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
+
     /**
      * Returns the History object of the actuall round
      * @return object $this->history
@@ -67,22 +75,24 @@ class Game {
     public function getHistory() {
         return $this->history;
     }
+
     //Holt Durchgang
     public function getRound() {
         return $this->round;
     }
 
     //Beenden der Runde
-    public function endRound() {
-        ++$this->round;
-        $this->lotteryNr = null;
-        $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
-        $this->mysqlAdapter->setHistory($this->history);
-        $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
+    public function endRound($event, $round) {
+        $this->round = ++$round;
+        $this->event = $event;
+        $this->history = $this->newHistory();
+        //$this->mysqlAdapter->setHistory($this->history);
+        //$this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
     }
+
     //Beenden des Spiels
     public function endGame() {
-
+        
     }
 
     //Holt Durchgang
@@ -199,7 +209,8 @@ class Game {
     public function getPriceList() {
         return $this->priceList;
     }
-        //Holt Erstell Datum/Zeit
+
+    //Holt Erstell Datum/Zeit
     public function setPrice($name, $player) {
         $price = new Price(null, $name, $player, $this->event, $this->round);
         $this->mysqlAdapter->createPrices($price);
@@ -216,16 +227,16 @@ class Game {
             $line1 = preg_split("/,/", ($card->getLine1()), -1, PREG_SPLIT_NO_EMPTY);
             $line2 = preg_split("/,/", ($card->getLine2()), -1, PREG_SPLIT_NO_EMPTY);
             $line3 = preg_split("/,/", ($card->getLine3()), -1, PREG_SPLIT_NO_EMPTY);
-            $countL1=0;
-            $countL2=0;
-            $countL3=0;
+            $countL1 = 0;
+            $countL2 = 0;
+            $countL3 = 0;
             $name = "TestPreis";
             foreach ($this->lotteryNr as $winNr) {
                 foreach ($line1 as $nr) {
                     if ($nr == $winNr) {
                         ++$countL1;
                     }
-                    if($countL1 == 5) {
+                    if ($countL1 == 5) {
                         $winnerId = $card->getPlayer();
                         foreach ($this->playerList as $player) {
                             if ($winnerId == $player->getId()) {
@@ -240,7 +251,7 @@ class Game {
                     if ($nr == $winNr) {
                         ++$countL2;
                     }
-                    if($countL2 == 5) {
+                    if ($countL2 == 5) {
                         $winnerId = $card->getPlayer();
                         foreach ($this->playerList as $player) {
                             if ($winnerId == $player->getId()) {
@@ -255,7 +266,7 @@ class Game {
                     if ($nr == $winNr) {
                         ++$countL3;
                     }
-                    if($countL3 == 5) {
+                    if ($countL3 == 5) {
                         $winnerId = $card->getPlayer();
                         foreach ($this->playerList as $player) {
                             if ($winnerId == $player->getId()) {
@@ -265,10 +276,10 @@ class Game {
                         }
                         break;
                     }
-               }
+                }
             }
         }
         return $this->winnerList;
     }
-    
+
 }

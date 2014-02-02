@@ -44,8 +44,8 @@ class GameController extends Controller {
             $view = new GamePlayView();
 
             //Beginn neues Game
-            $this->game = new Game($this->resourceId);
-            $this->game->addNumber(3);
+             $this->game = new Game($this->resourceId);
+            // $this->game->addNumber(56);
 
             $playerList = $this->game->getPlayerList();
             $cardList = $this->game->getCardList();
@@ -71,20 +71,24 @@ class GameController extends Controller {
     }
 
     public function update() {
-
+         
+        echo "update funzt";
+         echo $_POST['event'];
+         echo $_POST['endround'];
+         
+        $game = new Game($_POST['event']);
+        
+         print_r($game);
+        
         //Nummer setzen und auf Gewinne prüfen
         if (!empty($_POST['number'])) {
             $number = $_POST['number'];
-            $this->game->addNumber(3);
-            $this->game->checkWin();
-        }
-        
-        if (!empty($_POST['endround'])){
-            $this->game->endRound();
-        }
-        
-        if (!empty($_POST['stop'])){
-            $this->game->endRound();
+            $game->addNumber($number);
+            $game->checkWin();
+        } elseif (!empty($_POST['endround'])){
+            $game->endRound($_POST['event'], $_POST['round']);
+        } elseif (!empty($_POST['stop'])){
+            $game->endRound($_POST['event'], $_POST['round']);
             $this->game->endGame();
         }
     }

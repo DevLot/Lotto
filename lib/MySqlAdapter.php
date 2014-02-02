@@ -122,14 +122,25 @@ final class MySqlAdapter {
     //Aktuallisiert History
     public function updateHistory($history) {
 
-        $id = $history->getId();
+        //$id = $history->getId();
         $event = $history->getEvent();
         $round = $history->getRound();
         $numbers = $history->getNumbers();
 
-        $sql = "UPDATE fabingo.history SET numbers='$numbers', update_on=CURRENT_TIMESTAMP() WHERE id='$id' AND event='$event' AND round='$round'";
+        $sql = "UPDATE fabingo.history 
+            SET numbers='$numbers', update_on=CURRENT_TIMESTAMP() 
+                WHERE event='$event' AND round='$round'";
+             
 
         $this->con->query($sql);
+        
+        echo $event;
+        echo $round;
+        echo $numbers;
+        echo $sql;
+        
+        echo "update erfolgreich";
+        
     }
 
     //Holt Spielkarten
@@ -483,6 +494,40 @@ final class MySqlAdapter {
         $sql = "UPDATE fabingo.registration SET player = '$player', event = '$event', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
 
         $this->con->query($sql);
+    }
+    
+        /**
+     * Returns the Event by given id if present, null otherwiset
+     * @param int $id
+     * @return 1 / null 
+     * 
+     */
+    public function checkActiveGame($id) {
+        $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$id'");
+        if ($row = $res->fetch_assoc()) {
+            
+            echo "game bereits vorhanden";
+            return 1;
+        }else {
+            echo "neues game wird erstellt";
+            return null;
+            
+        }
+         $res->free();
+    }
+    
+            /**
+     * Returns the Event by given id if present, null otherwiset
+     * @param int $id
+     * @return 1 / null 
+     * 
+     */
+    public function getLastRound($event) {
+        $res = $this->con->query("SELECT max(round) FROM fabingo.history WHERE event='$event'");
+        while ($row = $res->fetch_assoc()) {
+           return $row['max(round)'];
+        }
+         $res->free();
     }
 
 }
