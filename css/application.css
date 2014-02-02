@@ -321,6 +321,10 @@ a {
     margin-left: -15px;
 }
 
+.price-input {
+    margin-bottom: 10px;
+}
+
 .infobox {
     background: #FFE87C;
     font-family: arial;

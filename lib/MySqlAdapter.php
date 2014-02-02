@@ -413,7 +413,7 @@ final class MySqlAdapter {
         $round = $price->getRound();
         $line = $price->getLine();
 
-        $sql = "INSERT INTO fabingo.prices
+        $sql = "UPDATE INTO fabingo.prices
                 (
                     name,player,event,round,line,create_on,update_on
                 )
@@ -434,11 +434,13 @@ final class MySqlAdapter {
         $player = $price->getPlayer();
         $event = $price->getEvent();
         $round = $price->getRound();
+        $line = $price->getLine();
 
-        $sql = "UPDATE fabingo.prices SET name = '$name', player = '$player', event = '$event', round = '$round', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
+        $sql = "UPDATE fabingo.prices SET name = '$name', update_on = CURRENT_TIMESTAMP() WHERE player = '$player' AND event = '$event' AND round = '$round' AND name=''";
 
         $this->con->query($sql);
     }
+    
     
     
     //Überprüft ob Treffer bereits in DB
@@ -459,7 +461,7 @@ final class MySqlAdapter {
     public function getPricesOpen($event) {
 
         $pricelist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.prices WHERE event='$event' ORDER BY id");
+        $res = $this->con->query("SELECT * FROM fabingo.prices WHERE event='$event' AND name='' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
             $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['round'],$row['line'], $row['create_on'], $row['update_on']);
             $pricelist[] = $price;

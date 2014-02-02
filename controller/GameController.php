@@ -44,7 +44,7 @@ class GameController extends Controller {
             $view = new GamePlayView();
 
             //Beginn neues Game
-             $this->game = new Game($this->resourceId);
+            $this->game = new Game($this->resourceId);
             // $this->game->addNumber(56);
 
             $playerList = $this->game->getPlayerList();
@@ -55,21 +55,21 @@ class GameController extends Controller {
             $view->assign('playerlist', $playerList);
             $view->assign('cardlist', $cardList);
 
+            $view->assign('pricesopenlist', $this->mysqlAdapter->getPricesOpen($this->resourceId));
+
             $view->display();
         }
     }
 
-
     public function update() {
-         
+
         echo "Update wurde ausgeführt";
 //         echo $_POST['event'];
 //         echo $_POST['endround'];
-         
+
         $game = new Game($_POST['event']);
-        
+
 //         print_r($game);
-        
         //Nummer setzen und auf Gewinne prüfen
         if (!empty($_POST['number'])) {
             $number = $_POST['number'];
@@ -78,18 +78,17 @@ class GameController extends Controller {
 //            print_r($lotterynr);
             //print_r($number);
             $winnernames = $game->addNumber($number);
-               
-            print_r($winnernames);
-            
-           // print_r($game->addNumber($number));         
-    
-                 
 
-        } elseif (!empty($_POST['endround'])){
+            print_r($winnernames);
+
+            // print_r($game->addNumber($number));         
+        } elseif (!empty($_POST['endround'])) {
             $game->endRound($_POST['event'], $_POST['round']);
-        } elseif (!empty($_POST['endgame'])){
+        } elseif (!empty($_POST['endgame'])) {
             $game->endRound($_POST['event'], $_POST['round']);
             $game->endGame();
+        } elseif (!empty($_POST['setprice'])) {
+            $game->setPriceWin($_POST['price'], $_POST['player'], $_POST['event'], $_POST['round'], null);
         }
     }
 

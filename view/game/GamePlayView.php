@@ -8,6 +8,8 @@ class GamePlayView extends View {
         $game = $this->vars['game'];
         $playerlist = $this->vars['playerlist'];
         $cardlist = $this->vars['cardlist'];
+       
+        $pricesopenlist = $this->vars['pricesopenlist'];
 
         $lotterynrs = $game->getLotteryNr($event->getId(), $game->getRound());
 
@@ -22,7 +24,7 @@ class GamePlayView extends View {
                                 event:" . $event->getId() . ",
                                     round:" . $game->getRound() . "}, 
                         success: function (result) {
-                          
+                           
                            
                         }
                     });  
@@ -64,8 +66,31 @@ class GamePlayView extends View {
                         if(Check == true){
                             endgame();
                         };
+                        }
 
-                                     } 
+                       function ackwin(playerid) {  
+                       
+                   
+                       
+                                    var str1 = '#player';
+                                    var str2 = playerid;
+                                    var res = str1.concat(str2);
+                                   
+                                   var val = $(res).val();
+                                        $.ajax({
+                                        url: '" . $event->getId() . "/update',
+                                        type: 'POST',
+                                        data: {setprice:'true',
+                                                event:" . $event->getId() . ",
+                                                round:" . $game->getRound() . ",
+                                                player:playerid,
+                                                price:val}, 
+                                        success: function (result) {
+                                           location.reload(); 
+                                          
+                                        }
+                                    });  
+                                    } 
             </script>";
 
 
@@ -110,9 +135,28 @@ class GamePlayView extends View {
 
 
         echo ' </li>
-                    </div>
+                    </div>';
+        
+        echo '<div class="title">Gewinner</div>';
+            foreach ($pricesopenlist as $winnerid) {
+            echo '<div class="infobox warning">Bitte Gewinner bestätigen!</div>';
+            echo '<div class="price-input">';
+                foreach ($playerlist as $player) {
+                    if ($winnerid->getPlayer() == $player->getId()) {
+                        echo $player->getFirstname();
+                        echo " ";
+                        echo $player->getSurname();
+                        echo "<br />";
+                    }
+                    
+                }
+            echo ' ';
+            //echo $winner->getSurname();
+            echo '<input type="text" id="player'.$winnerid->getPlayer().'"></input>
+                <a href="#" onclick="ackwin('.$winnerid->getPlayer().')">Preis/Gewinn bestätigen</a></div>';
+        }
 
-                    <div class="title">Gezogene Zahlen</div>
+             echo'       <div class="title">Gezogene Zahlen</div>
                      <div class="set-number">';
         print_r($game->getLotteryNr($event->getId(), $game->getRound()));
         echo '</div>
