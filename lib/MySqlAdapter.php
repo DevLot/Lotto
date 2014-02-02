@@ -391,7 +391,7 @@ final class MySqlAdapter {
      * 
      */
     public function deletPlayer($id) {
-        $this->con->query("DELET FROM fabingo.players WHERE id='$id'");
+        $this->con->query("UPDATE fabingo.players SET status=0 WHERE id='$id'");
     }
 
     /**
