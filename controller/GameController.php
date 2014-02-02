@@ -77,8 +77,14 @@ class GameController extends Controller {
 //            echo "loggernummer";
 //            print_r($lotterynr);
             //print_r($number);
-            $game->addNumber($number);
-            $game->checkWin();
+            $winnernames = $game->addNumber($number);
+               
+            print_r($winnernames);
+            
+           // print_r($game->addNumber($number));         
+    
+                 
+
         } elseif (!empty($_POST['endround'])){
             $game->endRound($_POST['event'], $_POST['round']);
         } elseif (!empty($_POST['endgame'])){

@@ -411,14 +411,15 @@ final class MySqlAdapter {
         $player = $price->getPlayer();
         $event = $price->getEvent();
         $round = $price->getRound();
+        $line = $price->getLine();
 
         $sql = "INSERT INTO fabingo.prices
                 (
-                    name,player,event,round,create_on,update_on
+                    name,player,event,round,line,create_on,update_on
                 )
                 VALUES
                 (
-                    '$name','$player','$event','$round',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                    '$name','$player','$event','$round','$line',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
                 );
          ";
 
@@ -438,18 +439,33 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
     }
+    
+    
+    //Überprüft ob Treffer bereits in DB
+    public function checkPrice($player, $event, $round, $line) {
 
-    //Holt Registration
-    public function getRegistrations() {
+        $res = $this->con->query("SELECT * FROM fabingo.prices WHERE player='$player' AND event='$event' AND round='$round' AND line='$line'");
+       // $res = $this->con->query("SELECT * FROM fabingo.prices WHERE player='3' AND event='3' AND round='3' AND line='3'");
+            $row = $res->fetch_assoc();
+            if (!$row) {
+               return false;  
+            }
+            return true;
+   
+         
+    }
 
-        $registrationlist = array();
-        $res = $this->con->query("SELECT * FROM fabingo.registration ORDER BY id");
+    //Zeit alle Gewinne an ohne Preise
+    public function getPricesOpen($event) {
+
+        $pricelist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.prices WHERE event='$event' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $registration = new Registration($row['id'], $row['player'], $row['event'], $row['create_on'], $row['update_on']);
-            $registrationlist[] = $registration;
+            $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['round'],$row['line'], $row['create_on'], $row['update_on']);
+            $pricelist[] = $price;
         }
         $res->free();
-        return $registrationlist;
+        return $pricelist;
     }
 
     //Holte Registration von einem Event
@@ -504,7 +520,7 @@ final class MySqlAdapter {
      */
     public function checkActiveGame($id) {
         $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$id'");
-        if ($row = $res->fetch_assoc()) {
+        if ($res->fetch_assoc()) {
             
             echo "<div class='infobox'>Dieses Spiel läuft gerade</div>";
             return 1;

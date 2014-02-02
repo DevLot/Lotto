@@ -23,7 +23,7 @@ class GamePlayView extends View {
                                     round:" . $game->getRound() . "}, 
                         success: function (result) {
                           
-                           location.reload();
+                           
                         }
                     });  
 
