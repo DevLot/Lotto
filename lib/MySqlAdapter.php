@@ -405,7 +405,7 @@ final class MySqlAdapter {
     }
 
     //Erstellt Preis
-    public function createPrices($price) {
+    public function createPrice($price) {
 
         $name = $price->getName();
         $player = $price->getPlayer();
@@ -413,7 +413,7 @@ final class MySqlAdapter {
         $round = $price->getRound();
         $line = $price->getLine();
 
-        $sql = "UPDATE INTO fabingo.prices
+        $sql = "INSERT INTO fabingo.prices
                 (
                     name,player,event,round,line,create_on,update_on
                 )
@@ -429,14 +429,14 @@ final class MySqlAdapter {
     //Aktuallisiert Preis
     public function updatePrice($price) {
 
-        $id = $price->getId();
+        //$id = $price->getId();
         $name = $price->getName();
         $player = $price->getPlayer();
         $event = $price->getEvent();
         $round = $price->getRound();
         $line = $price->getLine();
 
-        $sql = "UPDATE fabingo.prices SET name = '$name', update_on = CURRENT_TIMESTAMP() WHERE player = '$player' AND event = '$event' AND round = '$round' AND name=''";
+        $sql = "UPDATE fabingo.prices SET name = '$name' WHERE player = '$player' AND event = '$event' AND name=''";
 
         $this->con->query($sql);
     }

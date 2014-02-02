@@ -214,16 +214,17 @@ class Game {
     }
 
     //Holt Erstell Datum/Zeit
-    public function setPrice($price, $player, $line) {
-        $price = new Price(null, $price, $player, $this->event, $this->round, $line);
-        $this->mysqlAdapter->updatePrice($price);
-        //$this->priceList[] = $price;
+    public function setPrice($name, $player, $line) {
+        $price = new Price(null, $name, $player, $this->event, $this->round, $line);
+        $this->mysqlAdapter->createPrice($price);
+        $this->priceList[] = $price;
     }
     
     //ergänzt gewinn mit preis
     public function setPriceWin($name, $player, $event, $round, $line) {
         $price = new Price(null, $name, $player, $event, $round, $line);
         $this->mysqlAdapter->updatePrice($price);
+        print_r($price);
         //$this->priceList[] = $price;
     }
 

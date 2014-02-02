@@ -24,7 +24,7 @@ class GamePlayView extends View {
                                 event:" . $event->getId() . ",
                                     round:" . $game->getRound() . "}, 
                         success: function (result) {
-                           
+                           location.reload();
                            
                         }
                     });  
@@ -86,7 +86,7 @@ class GamePlayView extends View {
                                                 player:playerid,
                                                 price:val}, 
                                         success: function (result) {
-                                           location.reload(); 
+                                          location.reload();
                                           
                                         }
                                     });  
