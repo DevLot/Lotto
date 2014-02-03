@@ -30,7 +30,7 @@ include_once 'config/config.php';
                 <a href="/home"><div class="logo">FaBingo</div></a>
             </div>
 
-            <div class="button"><a href="/">Logout</a></div>
+            <div class="button"><a href="/logout">Logout</a></div>
 
         </div>
 
@@ -79,8 +79,12 @@ include_once 'config/config.php';
                             include_once 'controller/GameController.php';
                             $controller = new GameController();
                             break;
+                        case URI_LOGOUT:
+                            session_destroy();
+                            header('Location: http://lotto.local');
+                            break;
 
-                        default :
+                        default:
                             include_once 'controller/HomeController.php';
                             $controller = new HomeController();
                             break;
@@ -133,7 +137,8 @@ function getMenu() {
         URI_PLAYER => 'Spieler',
         URI_CARD => 'Spielkarten',
         URI_ACCOUNT => 'Account',
-        URI_GAME => 'Spiel'
+        URI_GAME => 'Spiel',
+        URI_LOGOUT => 'Logout'
     );
 }
 
