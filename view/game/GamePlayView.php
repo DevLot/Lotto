@@ -102,7 +102,28 @@ class GamePlayView extends View {
                 <div class="game">
                         <div class="name">';
         echo $event->getName();
-        echo '</div>
+        echo '</div>';
+        
+        //Hier werden allfällige Gewinner angezeigt
+        foreach ($pricesopenlist as $winnerid) {
+            echo '<div class="infobox warning">Bitte Gewinner bestätigen!</div>';
+            echo '<div class="price-input">';
+                foreach ($playerlist as $player) {
+                    if ($winnerid->getPlayer() == $player->getId()) {
+                        echo $player->getFirstname();
+                        echo " ";
+                        echo $player->getSurname();
+                        echo "<br />";
+                    }
+                    
+                }
+            echo ' ';
+            //echo $winner->getSurname();
+            echo '<input type="text" id="player'.$winnerid->getPlayer().'"></input>
+                <a href="#" onclick="ackwin('.$winnerid->getPlayer().')">Preis/Gewinn bestätigen</a></div>';
+        }
+        
+        echo '
                     <!--<div class="time">Seit Spielbeginn: ';
         echo $game->getStarttime();
         echo '</div>-->
@@ -137,24 +158,8 @@ class GamePlayView extends View {
         echo ' </li>
                     </div>';
         
-        echo '<div class="title">Gewinner</div>';
-            foreach ($pricesopenlist as $winnerid) {
-            echo '<div class="infobox warning">Bitte Gewinner bestätigen!</div>';
-            echo '<div class="price-input">';
-                foreach ($playerlist as $player) {
-                    if ($winnerid->getPlayer() == $player->getId()) {
-                        echo $player->getFirstname();
-                        echo " ";
-                        echo $player->getSurname();
-                        echo "<br />";
-                    }
-                    
-                }
-            echo ' ';
-            //echo $winner->getSurname();
-            echo '<input type="text" id="player'.$winnerid->getPlayer().'"></input>
-                <a href="#" onclick="ackwin('.$winnerid->getPlayer().')">Preis/Gewinn bestätigen</a></div>';
-        }
+        
+            
 
              echo'       <div class="title">Gezogene Zahlen</div>
                      <div class="set-number">';

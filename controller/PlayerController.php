@@ -78,7 +78,7 @@ class PlayerController extends Controller {
 
         $player = new Player(null,$_POST['firstname'],$_POST['surname'],
                 $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
-                $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail'],$_POST['status']);
+                $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail'],null);
                        
         $this->mysqlAdapter->updatePlayer($player);
         

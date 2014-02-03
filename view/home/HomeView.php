@@ -23,7 +23,7 @@ class HomeView extends View {
                             
                             <li><a href="/event">Veranstaltungen anzeigen</a></li>
                             <li><a href="/event/new">Veranstaltung hinzufügen</a></li>
-                            <li><a href="/event">Veranstaltung bearbeiten</a></li>
+                            
                          </ul>
                     </div>
 

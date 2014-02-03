@@ -337,6 +337,23 @@ final class MySqlAdapter {
             return NULL;
         }
     }
+    
+        /**
+     * Returns all open Events
+     * @return $eventlist[] 
+     * 
+     */
+    public function getOpenEvents() {
+        $eventlist = array();
+        $res = $this->con->query("SELECT * FROM fabingo.events WHERE date >= CURDATE();");
+        while ($row = $res->fetch_assoc()) {
+            $event = new Event($row['id'], $row['name'], $row['date'], $row['location'], $row['organizer'], $row['duration'], $row['create_on'], $row['update_on']);
+            $eventlist[] = $event;
+        }
+        $res->free();
+        return $eventlist;
+    }
+
 
     //Erstellt Event
     public function createEvent($event) {
