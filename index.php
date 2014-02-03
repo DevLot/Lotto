@@ -37,10 +37,9 @@ include_once 'config/config.php';
         <div id="wrap">
 
             <div id="navtree">
-                Home > <?php
-                $currentUri = getCurrentURI();
-                echo $currentUri;
-                ?>
+                <a href="/home">Start</a> > 
+                <a href="<?php echo getCurrentURI(); ?>"><?php echo getCurrentMenu(); ?></a>
+                
             </div>
 
 
@@ -158,4 +157,16 @@ function getCurrentURI() {
     }
     return key($menu);
 }
+
+/**
+ * @return string the requested name
+ */
+function getCurrentMenu() {
+    
+    
+    $uri = getCurrentURI() ;
+    $str= ltrim ($uri,'/');
+    return ucfirst($str);
+}
 ?>
+

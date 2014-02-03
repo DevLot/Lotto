@@ -10,11 +10,7 @@ class LoginView extends View {
                         
                         
                         
-                        <ul class="nav">
-                        
-                                                       
-                         
-                             <li>
+<div class="inputform">
                             <form action="login/update" Method="post"> 
                             Benutzername<br/>
                             <input type="text" name="username" size="25">
@@ -22,9 +18,8 @@ class LoginView extends View {
                             <input type="password" name="password" size="25"><br> <br> 
                             <input type="submit" value="Absenden"> 
 
-                            </form></li>
-                              
-</ul></li></div>';
+                            </form>
+</div></div>';
 
     }
 

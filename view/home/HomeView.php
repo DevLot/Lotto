@@ -36,7 +36,7 @@ class HomeView extends View {
                             <li><a href="/account">Eigene Einstellungen</a></li>
                         </ul>
                             
-                    </div> Gaga';
+                    </div>';
     }
 
 }
