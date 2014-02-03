@@ -65,7 +65,7 @@ class Game {
     }
 
     //creates actuall History object
-    private function newHistory() {
+    public function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
         $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
@@ -232,8 +232,11 @@ class Game {
     public function getUpdateOn() {
         return $this->update_on;
     }
-
-    function checkWin() {//Prüft ob die gezogenen Nummern mit einer mit einer Karte übereinstimmt.
+    /**
+     * Checks if someone has won
+     * @return winnerList[]
+     */
+    function checkWin() {
         foreach ($this->cardList as $card) {
             $line1 = preg_split("/,/", ($card->getLine1()), -1, PREG_SPLIT_NO_EMPTY);
             $line2 = preg_split("/,/", ($card->getLine2()), -1, PREG_SPLIT_NO_EMPTY);
