@@ -18,6 +18,8 @@ class LoginController extends Controller {
 
     protected function index() {
 //        $eventList = $this->csvAdapter->getEventList();
+  
+        
         $view = new LoginView();
 //        $view->assign('list', $eventList);
         $view->display();
@@ -28,11 +30,36 @@ class LoginController extends Controller {
     }
 
     protected function init() {
-        echo "not implemented";
+           
+    echo "not implemented";
+   
+   
     }
 
     protected function create() {
-        echo "not implemented";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      session_start();
+
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+
+ 
+
+      // Benutzername und Passwort werden überprüft
+      if ($username == 'fabingo' && $password == '123') {
+       $_SESSION['login'] = true;
+
+       // Weiterleitung zur geschützten Startseite
+       
+
+       header('Location: http://lotto.local/home');
+       exit;
+       } else {
+           header('Location: http://lotto.local');
+            
+       exit;
+       }
+      }
     }
 
 }

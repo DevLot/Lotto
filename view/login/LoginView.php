@@ -13,9 +13,18 @@ class LoginView extends View {
                         <ul class="nav">
                         
                                                        
-                            <li><a href="/home">Login</a></li>
-                             <li><a href="/home">Passwort vergessen</a></li>
-</ul></div>';
+                         
+                             <li>
+                            <form action="login/update" Method="post"> 
+                            Benutzername<br/>
+                            <input type="text" name="username" size="25">
+                                <br>Passwort<br />
+                            <input type="password" name="password" size="25"><br> <br> 
+                            <input type="submit" value="Absenden"> 
+
+                            </form></li>
+                              
+</ul></li></div>';
 
     }
 

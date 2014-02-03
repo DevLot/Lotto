@@ -1,4 +1,9 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
+
 <?php
 include_once 'config/config.php';
 ?>
@@ -32,51 +37,65 @@ include_once 'config/config.php';
         <div id="wrap">
 
             <div id="navtree">
-                Home > <?php $currentUri = getCurrentURI();
-echo $currentUri;
-?>
+                Home > <?php
+                $currentUri = getCurrentURI();
+                echo $currentUri;
+                ?>
             </div>
 
 
             <div id="content">
                 <?php
                 $controller = null;
-                switch (getCurrentURI()) {
-                    case URI_LOGIN:
-                        include_once 'controller/LoginController.php';
-                        $controller = new LoginController();
-                        break;
-                    case URI_HOME:
-                        include_once 'controller/HomeController.php';
-                        $controller = new HomeController();
-                        break;
-                    case URI_EVENT:
-                        include_once 'controller/EventController.php';
-                        $controller = new EventController();
-                        break;
-                    case URI_PLAYER:
-                        include_once 'controller/PlayerController.php';
-                        $controller = new PlayerController();
-                        break;
-                    case URI_CARD:
-                        include_once 'controller/CardController.php';
-                        $controller = new CardController();
-                        break;
-                    case URI_ACCOUNT:
-                        include_once 'controller/AccountController.php';
-                        $controller = new AccountController();
-                        break;
-                    case URI_GAME:
-                        include_once 'controller/GameController.php';
-                        $controller = new GameController();
-                        break;
-                    default :
-                        include_once 'controller/HomeController.php';
-                        $controller = new HomeController();
-                        break;
-                }
-                if ($controller != null) {
-                    $controller->route();
+                if (isset($_SESSION['login'])) {
+
+
+                    switch (getCurrentURI()) {
+                        case URI_LOGIN:
+                            include_once 'controller/LoginController.php';
+                            $controller = new LoginController();
+                            break;
+                        case URI_HOME:
+                            include_once 'controller/HomeController.php';
+                            $controller = new HomeController();
+                            break;
+                        case URI_EVENT:
+                            include_once 'controller/EventController.php';
+                            $controller = new EventController();
+                            break;
+                        case URI_PLAYER:
+                            include_once 'controller/PlayerController.php';
+                            $controller = new PlayerController();
+                            break;
+                        case URI_CARD:
+                            include_once 'controller/CardController.php';
+                            $controller = new CardController();
+                            break;
+                        case URI_ACCOUNT:
+                            include_once 'controller/AccountController.php';
+                            $controller = new AccountController();
+                            break;
+                        case URI_GAME:
+                            include_once 'controller/GameController.php';
+                            $controller = new GameController();
+                            break;
+
+                        default :
+                            include_once 'controller/HomeController.php';
+                            $controller = new HomeController();
+                            break;
+                    }
+                    if ($controller != null) {
+                        $controller->route();
+                    }
+                } else {
+
+                    include_once 'controller/LoginController.php';
+                    $controller = new LoginController();
+                    
+                    if ($controller != null) {
+                        $controller->route();
+                    }
                 }
                 ?>
 
