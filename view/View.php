@@ -3,7 +3,7 @@
 /**
  * abstract class for all views 
  *
- * @author Marc Jenzer
+ * @author Fabingo Team
  */
 abstract class View {
 

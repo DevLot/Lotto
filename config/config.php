@@ -8,6 +8,7 @@ define('URI_PLAYER', '/player');
 define('URI_CARD', '/card');
 define('URI_ACCOUNT', '/account');
 define('URI_GAME', '/game');
+define('URI_REG', '/registration');
 define('URI_LOGOUT', '/logout');
 
 

@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 include_once 'config/config.php';
@@ -8,31 +7,38 @@ include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 
 include_once 'model/Registration.php';
+include_once 'model/Event.php';
+include_once 'model/Player.php';
 include_once 'view/View.php';
 //include_once 'view/card/CardView.php';
-//include_once 'view/card/CardDetailView.php';
+include_once 'view/registration/RegistrationView.php';
+include_once 'view/registration/RegistrationDetailView.php';
+
 //include_once 'view/card/CardFormView.php';
 
 class RegistrationController extends Controller {
-    
+
     private $mysqlAdapter;
-    
+
     function __construct() {
         $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
-    
-     protected function index() {
-     $view = new RegistrationView();
-     $view->assign('registrationlist', $this->mysqlAdapter->getRegistrations());
-     $view->display();
 
+    protected function index() {
+        $view = new RegistrationView();
+        $view->assign('eventlist', $this->mysqlAdapter->getOpenEvents());
+        $view->display();
     }
-      
+
     protected function show() {
-        $registration = $this->mysqlAdapter->getRegistration($eventId);
-        if (!empty($registration)) { // Registration with transmitted ID was found
+        $event = $this->mysqlAdapter->getEvent($this->resourceId);
+        if (!empty($event)) { // Event with transmitted ID was found
             $view = new RegistrationDetailView();
-            $view->assign('registration', $registration);
+
+            $view->assign('playerlist', $this->mysqlAdapter->getPlayers());
+            $view->assign('regplayerlist', $this->mysqlAdapter->getRegistrationPlayers($event->getId()));
+            $view->assign('event', $event);
+
             $view->display();
         }
     }
@@ -44,14 +50,12 @@ class RegistrationController extends Controller {
     }
 
     protected function create() {
-        
-        $registration = new Registration(null,$_POST['player'],$_POST['event']);
-                       
-        $this->mysqlAdapter->createRegistration($registration);
- 
 
+        $registration = new Registration(null, $_POST['player'], $_POST['event']);
+
+        $this->mysqlAdapter->createRegistration($registration);
     }
-    
+
     protected function edit() {
         $registration = $this->mysqlAdapter->getRegistration($eventId);
         if (!empty($registration)) { // Card with transmitted ID was found
@@ -60,10 +64,27 @@ class RegistrationController extends Controller {
             $view->display();
         }
     }
-    
+
     protected function delete() {
-        $this->mysqlAdapter->deletRegistration($_POST['id']);
+       echo "not implemented";
+    }
+
+    protected function update() {
+
+        echo "Update wurde ausgeführt";
+
+        //AJAX Spieler hinzufügen / entfernen von der Registration
+        if (!empty($_POST['function']) && !empty($_POST['player']) && !empty($_POST['event'])) {
+            //Setze Objekt
+            $registration = new Registration(null, $_POST['player'], $_POST['event']);
+            if ($_POST['function'] == "add") { //Hinzufügen
+                echo "hinzufügen ";
+                $this->mysqlAdapter->setRegistration($registration);
+            } elseif ($_POST['function'] == "del") {//Entfernen
+                echo "deleted ";
+                 $this->mysqlAdapter->deleteRegistration($registration);
+               }
+        }
     }
 
 }
-

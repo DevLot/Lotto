@@ -78,6 +78,10 @@ include_once 'config/config.php';
                             include_once 'controller/GameController.php';
                             $controller = new GameController();
                             break;
+                        case URI_REG:
+                            include_once 'controller/RegistrationController.php';
+                            $controller = new RegistrationController();
+                            break;
                         case URI_LOGOUT:
                             session_destroy();
                             header('Location: http://lotto.local');
@@ -137,6 +141,7 @@ function getMenu() {
         URI_CARD => 'Spielkarten',
         URI_ACCOUNT => 'Account',
         URI_GAME => 'Spiel',
+        URI_REG => 'Registration',
         URI_LOGOUT => 'Logout'
     );
 }

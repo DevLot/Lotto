@@ -9,7 +9,7 @@ class HomeView extends View {
                         <ul>
                             
                             <li><a href="/game/">Spiel starten</a></li>
-                            <li><a href="/event/">Spieler hinzufügen</a></li>
+                            <li><a href="/registration/">Spieler registrieren</a></li>
                             
                         </ul>
                        

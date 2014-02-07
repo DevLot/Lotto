@@ -242,6 +242,20 @@ final class MySqlAdapter {
         $res->free();
         return $playerlist;
     }
+    
+    //Holt Spieler, die in einem Event registriert sind
+    public function getRegistrationPlayers($event) {
+
+        $playerlist = array();
+        $res = $this->con->query("SELECT players.id,players.firstname,players.surname,players.birthdate,players.address,players.zipcode,players.city,players.phone,players.mobile,players.mail,players.status,players.create_on,players.update_on FROM fabingo.players LEFT JOIN fabingo.registration ON registration.player=players.id WHERE event='$event' ORDER BY players.id;");
+        while ($row = $res->fetch_assoc()) {
+            $player = new Player($row['id'], $row['firstname'], $row['surname'], $row['birthdate'], $row['address'], $row['zipcode'], $row['city'], $row['phone'], $row['mobile'], $row['mail'], $row['status'], $row['create_on'], $row['update_on']);
+            $playerlist[] = $player;
+        }
+        $res->free();
+        return $playerlist;
+    }
+
 
     /**
      * Returns the Card by given id if present, null otherwiset
@@ -257,6 +271,8 @@ final class MySqlAdapter {
         $res->free();
         return $player;
     }
+    
+    
 
     //Erstellt Spieler
     public function createPlayer($player) {
@@ -501,7 +517,7 @@ final class MySqlAdapter {
     }
 
     //Setzt Registration
-    public function setRegistrations($registration) {
+    public function setRegistration($registration) {
 
         $player = $registration->getPlayer();
         $event = $registration->getEvent();
@@ -519,17 +535,18 @@ final class MySqlAdapter {
         $this->con->query($sql);
     }
 
-    //Aktuallisiert Registration
-    public function updateRegistration($registration) {
+    //Löscht Registration
+    public function deleteRegistration($registration) {
 
-        $id = $registration->getId();
         $player = $registration->getPlayer();
         $event = $registration->getEvent();
 
-        $sql = "UPDATE fabingo.registration SET player = '$player', event = '$event', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
+        $sql = "DELETE FROM fabingo.registration WHERE player = '$player' AND event = '$event'";
 
         $this->con->query($sql);
     }
+    
+    
     
         /**
      * Returns the Event by given id if present, null otherwiset
