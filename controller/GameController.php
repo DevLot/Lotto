@@ -88,7 +88,7 @@ class GameController extends Controller {
             $game->endRound($_POST['event'], $_POST['round']);
             $game->endGame();
         } elseif (!empty($_POST['setprice'])) {
-            $game->setPriceWin($_POST['price'], $_POST['player'], $_POST['event'], $_POST['round'], null);
+            $game->setPriceWin($_POST['price'], $_POST['player'], $_POST['event'], $_POST['round']);
         }
     }
 

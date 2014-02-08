@@ -65,7 +65,7 @@ class Game {
     }
 
     //creates actuall History object
-    public function newHistory() {
+    private function newHistory() {
         $this->history = new History(null, $this->event, $this->round, null, $this->startTime, $this->startTime);
         $this->mysqlAdapter->setHistory($this->history);
         $this->history = $this->mysqlAdapter->getHistory($this->event, $this->round);
@@ -213,9 +213,9 @@ class Game {
         return $this->priceList;
     }
 
-    //Holt Erstell Datum/Zeit
-    public function setPrice($name, $player, $line) {
-        $price = new Price(null, $name, $player, $this->event, $this->round, $line);
+    //Erstellt einen Gewinn
+    public function setPrice($name, $player, $line, $card) {
+        $price = new Price(null, $name, $player, $this->event, $this->round, $line, $card);
         $this->mysqlAdapter->createPrice($price);
         $this->priceList[] = $price;
     }
@@ -232,11 +232,8 @@ class Game {
     public function getUpdateOn() {
         return $this->update_on;
     }
-    /**
-     * Checks if someone has won
-     * @return winnerList[]
-     */
-    function checkWin() {
+
+    function checkWin() {//Prüft ob die gezogenen Nummern mit einer mit einer Karte übereinstimmt.
         foreach ($this->cardList as $card) {
             $line1 = preg_split("/,/", ($card->getLine1()), -1, PREG_SPLIT_NO_EMPTY);
             $line2 = preg_split("/,/", ($card->getLine2()), -1, PREG_SPLIT_NO_EMPTY);
@@ -257,7 +254,7 @@ class Game {
                                 $this->winnerList[] = $player->getFirstname();
                                 //Überprüfen ob er bereits gewonnen hat in dieser Runde
                                 if ($this->mysqlAdapter->checkPrice($winnerId, $this->event, $this->round, 1) == false) {
-                                    $this->setPrice(null, $winnerId, 1);
+                                    $this->setPrice(null, $winnerId, 1, $card->getCardnr());
                                 }
                             }
                         }
@@ -274,9 +271,9 @@ class Game {
                             if ($winnerId == $player->getId()) {
                                 $this->winnerList[] = $player->getFirstname();
                                 //Überprüfen ob er bereits gewonnen hat in dieser Runde
-                                echo "scheisse is das";
+                                
                                 if ($this->mysqlAdapter->checkPrice($winnerId, $this->event, $this->round, 2) == false) {
-                                    $this->setPrice(null, $winnerId, 2);
+                                    $this->setPrice(null, $winnerId, 2, $card->getCardnr());
                                 }
                             }
                         }
@@ -294,7 +291,7 @@ class Game {
                                 $this->winnerList[] = $player->getFirstname();
                                 //Überprüfen ob er bereits gewonnen hat in dieser Runde
                                 if ($this->mysqlAdapter->checkPrice($winnerId, $this->event, $this->round, 3) == false) {
-                                    $this->setPrice(null, $winnerId, 3);
+                                    $this->setPrice(null, $winnerId, 3, $card->getCardnr());
                                 }
                             }
                         }

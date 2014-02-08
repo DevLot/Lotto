@@ -7,7 +7,7 @@ class PlayerFormView extends View {
         if (isset($this->vars['player'])) {
             $player = $this->vars['player'];
              
-             echo '<form id="form" action="update"  method="post">
+             echo '<div class="title">Spieler bearbeiten</div><form id="form" action="update"  method="post">
                  
 <input type="hidden" id="id" name="id" value="'.$player->getId().'">
 
@@ -42,7 +42,7 @@ class PlayerFormView extends View {
       </form>';
         } else {
   
-        echo '<form id="form" action="create"  method="post">
+        echo '<div class="title">Spieler erfassen</div><form id="form" action="create"  method="post">
 
        <label>Vorname</label>
   <input type="text" id="firstname" name="firstname">

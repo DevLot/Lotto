@@ -164,7 +164,7 @@ final class MySqlAdapter {
     public function getCard($id) {
         $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id='$id'");
         while ($row = $res->fetch_object()) {
-            $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['create_on'], $row['update_on']);
+            $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['status'], $row['create_on'], $row['update_on']);
             $res->free();
             return $card;
         }
@@ -414,7 +414,7 @@ final class MySqlAdapter {
         $pricelist = array();
         $res = $this->con->query("SELECT * FROM fabingo.prices ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['set'], $row['create_on'], $row['update_on']);
+            $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['round'], $row['line'],  $row['card'], $row['create_on'], $row['update_on']);
             $pricelist[] = $price;
         }
         $res->free();
@@ -445,14 +445,15 @@ final class MySqlAdapter {
         $event = $price->getEvent();
         $round = $price->getRound();
         $line = $price->getLine();
+        $card = $price->getCard();
 
         $sql = "INSERT INTO fabingo.prices
                 (
-                    name,player,event,round,line,create_on,update_on
+                    name,player,event,round,line,card,create_on,update_on
                 )
                 VALUES
                 (
-                    '$name','$player','$event','$round','$line',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
+                    '$name','$player','$event','$round','$line','$card',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()      
                 );
          ";
 
@@ -496,7 +497,7 @@ final class MySqlAdapter {
         $pricelist = array();
         $res = $this->con->query("SELECT * FROM fabingo.prices WHERE event='$event' AND name='' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['round'],$row['line'], $row['create_on'], $row['update_on']);
+            $price = new Price($row['id'], $row['name'], $row['player'], $row['event'], $row['round'], $row['line'], $row['card'], $row['create_on'], $row['update_on']);
             $pricelist[] = $price;
         }
         $res->free();

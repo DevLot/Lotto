@@ -7,7 +7,7 @@ class EventFormView extends View {
         if (isset($this->vars['event'])) {
             $event = $this->vars['event'];
              
-             echo '<form id="form" action="update"  method="post">
+             echo '<div class="title">Veranstaltung bearbeiten</div><form id="form" action="update"  method="post">
                  
 <input type="hidden" id="id" name="id" value="'.$event->getId().'">
 
@@ -29,8 +29,8 @@ class EventFormView extends View {
       </form>';
         } else {
   
-         echo '<form id="form" action="update"  method="post">
-                 >
+         echo '<div class="title">Veranstaltung erstellen</div><form id="form" action="update"  method="post">
+                 
 
        <label>Name</label>
   <input type="text" id="name" name="name">

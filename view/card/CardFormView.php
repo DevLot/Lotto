@@ -9,7 +9,7 @@ class CardFormView extends View {
         if (isset($this->vars['card'])) {
             $card = $this->vars['card'];
              
-             echo '<form id="form" action="update"  method="post">
+             echo '<div class="title">Karte bearbeiten</div><form id="form" action="update"  method="post">
                  
              <input type="hidden" id="id" name="id" value="'.$card->getId().'">';
 
@@ -45,7 +45,7 @@ class CardFormView extends View {
       <input type="submit" value="Änderungen speichern">   
         </form>'; } else {
             
-            echo '<form id="form" action="new"  method="post">
+            echo '<div class="title">Karte erfassen</div><form id="form" action="new"  method="post">
         
       <div class = "card">
         <table>

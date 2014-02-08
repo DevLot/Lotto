@@ -8,17 +8,19 @@ class Price {
     private $event;
     private $round;
     private $line;
+    private $card;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $name, $player, $event, $round, $line) {
+    function __construct($id, $name, $player, $event, $round, $line, $card) {
         if (isset($id)) { $this->id = $id; }
         $this->name = $name;
         $this->player = $player;
         $this->event = $event;
         $this->round = $round;
         $this->line = $line;
+         $this->card = $card;
     }
     //Holt Preis ID
     public function getId() {
@@ -59,6 +61,11 @@ class Price {
         //Holt Serie
     public function getLine() {
         return $this->line;
+    }
+    
+          //Holt Kartennummer
+    public function getCard() {
+        return $this->card;
     }
     //Setzt Serie
     public function setLine($line) {

@@ -6,9 +6,9 @@ class GamePlayView extends View {
 
         $event = $this->vars['event'];
         $game = $this->vars['game'];
-        $playerlist = $this->vars['playerlist'];
+        $players = $this->vars['playerlist'];
         $cardlist = $this->vars['cardlist'];
-       
+
         $pricesopenlist = $this->vars['pricesopenlist'];
 
         $lotterynrs = $game->getLotteryNr($event->getId(), $game->getRound());
@@ -103,26 +103,44 @@ class GamePlayView extends View {
                         <div class="name">';
         echo $event->getName();
         echo '</div>';
-        
+
+
         //Hier werden allfällige Gewinner angezeigt
-        foreach ($pricesopenlist as $winnerid) {
+        foreach ($pricesopenlist as $win) {
             echo '<div class="infobox warning">Bitte Gewinner bestätigen!</div>';
             echo '<div class="price-input">';
-                foreach ($playerlist as $player) {
-                    if ($winnerid->getPlayer() == $player->getId()) {
-                        echo $player->getFirstname();
-                        echo " ";
-                        echo $player->getSurname();
-                        echo "<br />";
-                    }
+
+            foreach ($players as $player) {
+                if ($win->getPlayer() == $player->getId()) {
                     
+                    echo "Karte <strong>";
+                    echo $win->getCard();
+                    echo "</strong> gewinnt (Zeile ";
+                    echo $win->getLine();
+                    echo ") von <strong>";
+                    echo $player->getFirstname();
+                    echo " ";
+                    echo $player->getSurname();
+                    echo "</strong>: <br />";
+   
+                    foreach ($cardlist as $card){
+                        if ($card->getCardnr() == $win->getCard()) {
+                            echo $card->getLine1();
+                            echo " / ";
+                            echo $card->getLine2();
+                            echo " / ";
+                            echo $card->getLine3();
+                        }
+                       
+                    }
                 }
-            echo ' ';
+            }
+            echo '<br />';
             //echo $winner->getSurname();
-            echo '<input type="text" id="player'.$winnerid->getPlayer().'"></input>
-                <a href="#" onclick="ackwin('.$winnerid->getPlayer().')">Preis/Gewinn bestätigen</a></div>';
+            echo '<input type="text" id="player' . $win->getPlayer() . '"></input>
+                <a href="#" onclick="ackwin(' . $win->getPlayer() . ')" class="button">Preis/Gewinn bestätigen</a></div>';
         }
-        
+
         echo '
                     <!--<div class="time">Seit Spielbeginn: ';
         echo $game->getStarttime();
@@ -157,17 +175,22 @@ class GamePlayView extends View {
 
         echo ' </li>
                     </div>';
-        
-        
-            
 
-             echo'       <div class="title">Gezogene Zahlen</div>
-                     <div class="set-number">';
-        print_r($game->getLotteryNr($event->getId(), $game->getRound()));
-        echo '</div>
 
-                    <div class="title">Angemeldete Spieler</div>';
-        foreach ($playerlist as $player) {
+
+
+        echo'       <div class="title">Gezogene Zahlen in dieser Runde</div>';
+
+
+        foreach ($game->getLotteryNr($event->getId(), $game->getRound()) as $nr) {
+            echo '<div class="set-number">';
+            echo $nr;
+            echo '</div>';
+        }
+
+
+        echo '<div class="title">Angemeldete Spieler</div>';
+        foreach ($players as $player) {
             echo '<div class="player">';
             echo $player->getFirstname();
             echo ' ';

@@ -285,7 +285,7 @@ a {
     display: inline-block;
     list-style-type: none;
     font-size: 1em;
-    background-color: #F0F8FF;
+    /*background-color: #F0F8FF;*/
     margin: 0.1em;
     height: 2.5em;
     width: 2.5em;
@@ -294,18 +294,25 @@ a {
 }
 .checked {
     color: #c0c0c0;
+    background-color: #143352;
     
 }
 
 
 .game .set-number {
-    text-align: right;
-    margin-right: 15px;
+    font-size: 1.2em;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+   
 }
 
 .game .name {
+    padding-top: 20px;
     font-size: 1.5em;
-    padding-bottom: 1em;
+    padding-bottom: 20px;
 }
 
 .game .set {
@@ -323,14 +330,17 @@ a {
 }
 
 .game .title {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin-bottom: 15px;
     border-top: #79c3d2 solid 15px;
-    padding-bottom: 15px;
+    padding-bottom: 14px;
     margin-top: 15px;
     padding-top: 15px;
     padding-left: 15px;
     margin-left: -15px;
+    color: #666666;
+    font-weight: 100;
+    border-bottom: #79c3d2 solid 1px;
 }
 
 .price-input {
@@ -366,3 +376,13 @@ a {
         color: white;
         
     }
+.title {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    padding-bottom: 14px;
+    padding-left: 15px;
+    margin-left: -15px;
+    color: #666666;
+    font-weight: 100;
+    border-bottom: #79c3d2 solid 1px;
+}
