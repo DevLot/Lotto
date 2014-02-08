@@ -33,8 +33,8 @@ class EventController extends Controller {
     }
 
     protected function init() {
-        $view = new EventView();
-        $view->newform();
+        $view = new EventFormView();
+        $view->display();
     }
 
     protected function create() {

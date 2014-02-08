@@ -14,6 +14,7 @@ include_once 'model/Player.php';
 include_once 'model/Price.php';
 include_once 'model/Registration.php';
 include_once 'model/Game.php';
+include_once 'model/MailPrice.php';
 
 include_once 'view/game/GameView.php';
 include_once 'view/game/GamePlayView.php';
@@ -98,6 +99,27 @@ class GameController extends Controller {
 
     protected function init() {
         
+    }
+
+    //Beendet das spiel und informiert die Spieler
+    protected function end() {
+        $winplayers = $this->mysqlAdapter->getWinPlayers($this->resourceId);
+        $event = $this->mysqlAdapter->getEvent($this->resourceId);
+
+        if (!empty($winplayers)) { // Player with transmitted ID was found
+            foreach ($winplayers as $winplayer) {
+                //Mailtext
+                $mailtext = "Herzlichen Glückwunsch " . $winplayer->getFirstname() . ", du hast am " . $event->getName() .
+                        " folgenden Preis gewonnen " . $winplayer->getName() . ". Beste Grüsse, das Lotto Team";
+
+                $to = $winplayer->getMail();
+                $from = "lottoteam@lotto.local";
+                $subject = "Lottogewinn im Event " + $event->getName();
+                $mailtext = "Moin Heinz!\nIch hoffe Deine eMailAdresse $empfaenger existiert noch.";
+                mail($to, $subject, $mailtext, "From: $from ");
+                
+            }
+        }
     }
 
 }

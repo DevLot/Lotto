@@ -35,11 +35,11 @@ class EventFormView extends View {
        <label>Name</label>
   <input type="text" id="name" name="name">
 
-  <label>Name</label>
+  <label>Ort</label>
   <input type="text" id="location" name="location">
 
   <label>Veranstalter</label>
-  <input type="date" id="organizer" name="organizer">
+  <input type="text" id="organizer" name="organizer">
   
 <label>Datum</label>
   <input type="date" id="date" name="date">

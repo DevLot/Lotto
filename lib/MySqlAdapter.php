@@ -255,6 +255,19 @@ final class MySqlAdapter {
         $res->free();
         return $playerlist;
     }
+    
+       //Holt Spielervorname, Mail und deren Preis von einem Event
+    public function getWinPlayers($event) {
+
+        $maillist = array();
+        $res = $this->con->query("SELECT prices.name,players.firstname,players.mail FROM fabingo.players LEFT JOIN fabingo.prices ON prices.player=players.id WHERE event='$event' ORDER BY prices.id");
+        while ($row = $res->fetch_assoc()) {
+            $pricemail = new PriceMail($row['price'], $row['firstname'], $row['mail']);
+            $maillist[] = $pricemail;
+        }
+        $res->free();
+        return $maillist;
+    }
 
 
     /**

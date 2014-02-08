@@ -46,25 +46,13 @@ class GamePlayView extends View {
                                     });  
 
                                      }
-                                     
-                   function endgame() {                    
-                                    $.ajax({
-                                        url: '" . $event->getId() . "/update',
-                                        type: 'POST',
-                                        data: {endgame:'true',
-                                         event:" . $event->getId() . ",
-                                             round:" . $game->getRound() . "}, 
-                                        success: function (result) {
-                                          alert('Spiel wurde beendet');
-                                          window.location.replace('../home');
-                                        }
-                                    });  
-                                    }
+                  
                                     
                    function stop(){
                         Check = confirm('Spiel beenden?');
                         if(Check == true){
-                            endgame();
+                            window.location.href = '" . $event->getId() . "/end';
+                            
                         };
                         }
 
