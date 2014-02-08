@@ -224,9 +224,11 @@ final class MySqlAdapter {
         $line1 = $card->getLine1();
         $line2 = $card->getLine2();
         $line3 = $card->getLine3();
+        $player = $card->getPlayer();
+        
   
 
-        $sql = "UPDATE fabingo.cards SET line1 = '$line1', line2 = '$line2', line3 = '$line3', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND cardnr = '$cardnr'";
+        $sql = "UPDATE fabingo.cards SET line1 = '$line1', line2 = '$line2', line3 = '$line3', player='$player', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND cardnr = '$cardnr'";
 
         $this->con->query($sql);
     }
@@ -305,12 +307,12 @@ final class MySqlAdapter {
                 )
                 VALUES
                 (
-                    '$firstname','$surname','$birthdate','$address','$zipcode','$city','$phone','$mobile','$mail',null,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()               
+                    '$firstname','$surname','$birthdate','$address','$zipcode','$city','$phone','$mobile','$mail',1,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP()               
                 );
          ";
 
         $this->con->query($sql);
-        print_r($sql);
+  
 
 
     }
@@ -332,6 +334,7 @@ final class MySqlAdapter {
         $sql = "UPDATE fabingo.players SET firstname = '$firstname', surname = '$surname', birthdate = '$birthdate', address = '$address', zipcode = '$zipcode', city = '$city', phone = '$phone', mobile = '$mobile', mail = '$mail', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
 
         $this->con->query($sql);
+        
         
     }
 
@@ -413,7 +416,7 @@ final class MySqlAdapter {
         $organizer = $event->getOrganizer();
         //$player = $event->getPlayers();
 
-        $sql = "UPDATE fabingo.events SET name = '$name', date = '$date', location = '$location', organizer = '$organizer', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
+        $sql = "UPDATE fabingo.events SET name = '$name', date = '$date', location = '$location', organizer = '$organizer', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND status = 1";
 
         $this->con->query($sql);
    

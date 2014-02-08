@@ -241,7 +241,7 @@ class Game {
             $countL1 = 0;
             $countL2 = 0;
             $countL3 = 0;
-            $name = "TestPreis";
+
             foreach ($this->lotteryNr as $winNr) {
                 foreach ($line1 as $nr) {
                     if ($nr == $winNr) {

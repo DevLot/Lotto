@@ -7,11 +7,24 @@ class CardFormView extends View {
 
         if (isset($this->vars['card'])) {
             $card = $this->vars['card'];
-             
-             echo '<div class="title">Karte bearbeiten</div>
+            
+            $playerlist = $this->vars['playerlist'];
+
+            echo '<div class="title">Karte bearbeiten</div>
              
                   
              <form id="form" action="update"  method="post">
+             
+            Spielkartenhalter: <select name="player" id="player"><option value="0"></option>';
+        foreach($playerlist as $player){ 
+            
+            if ($player->getId() == $card->getPlayer()) {
+                echo '<option value="'.$player->getId().'" selected>'.$player->getFirstname(). ' ' . $player->getSurname() . '</option>'; 
+            } else {
+                echo '<option value="'.$player->getId().'">'.$player->getFirstname(). ' ' . $player->getSurname() . '</option>'; 
+            }
+        } ;
+        echo'</select>
                  
              <input type="hidden" id="id" name="id" value="'.$card->getId().'">';
 
@@ -34,7 +47,9 @@ class CardFormView extends View {
         <input type="hidden" id="cardnr" name="cardnr" value="' .$card->getCardnr(). '">
        <div class = "number">'. $card->getCardnr() .'</div>
         </div>
+        
 
+      
       <input type="submit" value="Änderungen speichern">   
         </form>'; } else {
             
