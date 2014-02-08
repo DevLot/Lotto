@@ -34,7 +34,7 @@ class CardController extends Controller {
             $view = new CardDetailView();
             $view->assign('card', $card);
             $view->display();
-        }
+        }   
     }
 
     protected function init() {
@@ -46,9 +46,12 @@ class CardController extends Controller {
     protected function create() {
         
         $card = new Card(null,$_POST['cardnr'],$_POST['line1'],
-                $_POST['line2'],$_POST['line3'],$_POST['player']);
+                $_POST['line2'],$_POST['line3'],null,1);
                        
         $this->mysqlAdapter->createCard($card);
+        
+                echo '<p>Eintrag erfolgreich!</p>
+        <div class="subcontrol"><div class="button"><a href="/card">Danke!</a></div></div>';
  
 
     }
@@ -64,6 +67,17 @@ class CardController extends Controller {
     
     protected function delete() {
         echo "not avaible";
+    }
+    
+    protected function update() {
+        
+        
+        $card = new Card($_POST['id'],$_POST['cardnr'],$_POST['line1'],$_POST['line2'],$_POST['line3'],null,1);
+         
+        $this->mysqlAdapter->updateCard($card);
+  
+         echo '<p>Update erfolgreich!</p>
+       <div class="subcontrol"> <div class="button"><a href="/card">Danke!</a></div></div>';
     }
 
 }

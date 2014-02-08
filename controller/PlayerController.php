@@ -52,7 +52,7 @@ class PlayerController extends Controller {
         $this->mysqlAdapter->createPlayer($player);
         
          echo '<p>Neuer Eintrag erfolgreich!</p>
-        <div class="button"><a href="/player">Danke!</a></div>';
+        <div class="subcontrol"><div class="button"><a href="/player">Danke!</a></div></div>';
     }
 
     protected function edit() {
@@ -76,7 +76,7 @@ class PlayerController extends Controller {
 
     protected function update() {
 
-        $player = new Player(null,$_POST['firstname'],$_POST['surname'],
+        $player = new Player($_POST['id'],$_POST['firstname'],$_POST['surname'],
                 $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
                 $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail'],null);
                        
@@ -84,7 +84,7 @@ class PlayerController extends Controller {
         
   
          echo '<p>Update erfolgreich!</p>
-        <div class="button"><a href="/player">Danke!</a></div>';
+        <div class="subcontrol"><div class="button"><a href="/player">Danke!</a></div></div>';
     }
 
 }

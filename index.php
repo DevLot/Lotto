@@ -109,7 +109,7 @@ include_once 'config/config.php';
             </div>
 
             <div id="footer">
-                Developed with &#x2764; by Oliver und Fabian
+                Developed by Oliver und Fabian
             </div>
         </div>
 

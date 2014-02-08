@@ -12,17 +12,19 @@ class Card {
     private $line2;
     private $line3;
     private $player;
+    private $status;
     private $create_on;
     private $update_on;
     
     /* Konstruktor mit Übergabeparameter */
-    function __construct($id, $cardnr, $line1, $line2, $line3, $player) {
+    function __construct($id, $cardnr, $line1, $line2, $line3, $player, $status) {
         if (isset($id)) { $this->id = $id; }
         $this->cardnr = $cardnr;
         $this->line1 = $line1;
         $this->line2 = $line2;
         $this->line3 = $line3;
         $this->player = $player;
+        $this->status = $status;
         
     }
     //Holt Karten ID
@@ -66,6 +68,10 @@ class Card {
     //Holt Player
     public function getPlayer() {
         return $this->player;
+    }
+     //Holt Status
+    public function getStatus() {
+        return $this->status;
     }
     //Setzt Player
     public function setPlayer($player) {

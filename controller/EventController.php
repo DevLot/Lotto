@@ -43,6 +43,10 @@ class EventController extends Controller {
                        
         $this->mysqlAdapter->createEvent($event);
         
+        
+         echo '<p>Eintrag erfolgreich!</p>
+        <div class="subcontrol"><div class="button"><a href="/event">Danke!</a></div></div>';
+        
     }
     
         protected function edit() {
@@ -65,13 +69,13 @@ class EventController extends Controller {
     }
    protected function update() {
 
-        $player = new Event($_POST['id'], $_POST['name'], $_POST['organizer'], $_POST['date'], $_POST['location']);
+        $event = new Event($_POST['id'], $_POST['name'], $_POST['date'], $_POST['location'],$_POST['organizer']);
 
         $this->mysqlAdapter->updateEvent($event);
         
   
          echo '<p>Update erfolgreich!</p>
-        <div class="button"><a href="/player">Danke!</a></div>';
+       <div class="subcontrol"> <div class="button"><a href="/event">Danke!</a></div></div>';
     }
 
 }

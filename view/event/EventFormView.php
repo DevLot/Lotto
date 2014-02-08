@@ -20,8 +20,8 @@ class EventFormView extends View {
   <label>Veranstalter</label>
   <input type="text" id="organizer" name="organizer" value="'.$event->getOrganizer().'">
       
- <label>Dateum</label>
-  <input type="date" id="organizer" name="organizer" value="'.$event->getDate().'">
+ <label>Datum</label>
+  <input type="date" id="date" name="date" value="'.$event->getDate().'">
 
 
 
@@ -29,7 +29,7 @@ class EventFormView extends View {
       </form>';
         } else {
   
-         echo '<div class="title">Veranstaltung erstellen</div><form id="form" action="update"  method="post">
+         echo '<div class="title">Veranstaltung erstellen</div><form id="form" action="create"  method="post">
                  
 
        <label>Name</label>

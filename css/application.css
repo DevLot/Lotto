@@ -250,7 +250,6 @@ a {
     background-color: #79c3d2;
     padding: 15px;
     width: 25.6em;
-    height: 17em;
     margin-top: 4em;
     margin-bottom: 15px;
 }
@@ -262,11 +261,9 @@ a {
 
 .card td {
 
-    width:5em;
-    height:5em;
-    border-radius:5em;
-    background-color:white;
-    text-align: center;
+    height:3.6em;
+    color: white;
+    font-size: 1.4em;
 }
 
 .card .number {
