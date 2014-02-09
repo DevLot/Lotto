@@ -5,13 +5,11 @@ class LoginView extends View {
     public function display() {
         echo '
             
-<div class="grid grid_3">
+                    <div class="grid grid_3">
                         <h1>Login</h1>
-                        
-                        
-                        
-<div class="inputform">
-                            <form action="login/update" Method="post"> 
+                                            
+                    <div class="inputform">
+                    <form action="login/update" Method="post"> 
                             Benutzername<br/>
                             <input type="text" name="username" size="25">
                                 <br>Passwort<br />
@@ -20,8 +18,6 @@ class LoginView extends View {
 
                             </form>
 </div></div>';
-
     }
 
 }
-

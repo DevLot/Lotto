@@ -1,59 +1,71 @@
 <?php
 
 class History {
-    
-    /* Variabeln definieren */
+    /* Define properties */
+
     private $id;
     private $event;
     private $round;
     private $numbers;
     private $create_on;
     private $update_on;
-    
-    /* Konstruktor mit Übergabeparameter */
+
+    /* Constructor with parameters */
+
     function __construct($id, $event, $round, $numbers, $create_on, $update_on) {
-        if (isset($id)) { $this->id = $id; }
+        if (isset($id)) {
+            $this->id = $id;
+        }
         $this->event = $event;
         $this->round = $round;
         $this->numbers = $numbers;
         $this->create_on = $create_on;
         $this->update_on = $update_on;
-        
     }
-    //Holt Karten ID
+
+    //Get card id
     public function getId() {
         return $this->id;
     }
-    //Holt Event
+
+    //Get event 
     public function getEvent() {
         return $this->event;
     }
-    //Setzt Event
+
+    //Set event
     public function setEvent($event) {
         $this->event = $event;
     }
-    //Holt Set(Serie)
+
+    //Get set(Serie)
     public function getRound() {
         return $this->round;
     }
-    //Setzt Set(Serie)
+
+    //Set set(Serie)
     public function setRound($round) {
         $this->set = $round;
     }
-    //Holt Nummern
+
+    //Get numbers
     public function getNumbers() {
         return $this->numbers;
     }
-    //Setzt Nummern
+
+    //Set Nummerns
     public function setNumbers($numbers) {
         $this->numbers = $numbers;
     }
-    //Holt Erstell Datum/Zeit
+
+    //Get create date
     public function getCreateOn() {
         return $this->create_on;
     }
-    //Holt Aktuallisierungs Datum/Zeit
+
+    //Get update date
     public function getUpdateOn() {
         return $this->update_on;
     }
+
 }

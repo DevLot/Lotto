@@ -22,6 +22,12 @@ include_once 'view/game/GamePlayView.php';
 include_once 'view/View.php';
 include_once 'view/card/CardView.php';
 
+/**
+ * Game Controller
+ * 
+ *
+ * @author Fabingo Team
+ */
 class GameController extends Controller {
 
     private $mysqlAdapter;
@@ -33,7 +39,6 @@ class GameController extends Controller {
     }
 
     protected function index() {
-//        $eventList = $this->csvAdapter->getEventList();
         $view = new GameView();
         $view->assign('eventlist', $this->mysqlAdapter->getOpenEvents());
         $view->display();
@@ -44,18 +49,18 @@ class GameController extends Controller {
         if (!empty($event)) { // Event with transmitted ID was found
             $view = new GamePlayView();
 
-            //Beginn neues Game
+            //Create/Start a new game
             $this->game = new Game($this->resourceId);
-            // $this->game->addNumber(56);
 
-            $playerList = $this->game->getPlayerList();
-            $cardList = $this->game->getCardList();
+            $playerList = $this->game->getPlayerList(); //Get all registred players
+            $cardList = $this->game->getCardList(); //Get all registred cards
 
             $view->assign('event', $event);
             $view->assign('game', $this->game);
             $view->assign('playerlist', $playerList);
             $view->assign('cardlist', $cardList);
 
+            //Get all prices which are not yet assigned 
             $view->assign('pricesopenlist', $this->mysqlAdapter->getPricesOpen($this->resourceId));
 
             $view->display();
@@ -64,31 +69,19 @@ class GameController extends Controller {
 
     public function update() {
 
-        echo "Update wurde ausgeführt";
-//         echo $_POST['event'];
-//         echo $_POST['endround'];
-
         $game = new Game($_POST['event']);
 
-//         print_r($game);
-        //Nummer setzen und auf Gewinne prüfen
-        if (!empty($_POST['number'])) {
+        //Set numbers and check win
+        if (!empty($_POST['number'])) { //Check if number has been  sent
             $number = $_POST['number'];
             $lotterynr = $game->getLotteryNr($_POST['event'], $_POST['round']);
-//            echo "loggernummer";
-//            print_r($lotterynr);
-            //print_r($number);
             $winnernames = $game->addNumber($number);
-
-            print_r($winnernames);
-
-            // print_r($game->addNumber($number));         
-        } elseif (!empty($_POST['endround'])) {
+        } elseif (!empty($_POST['endround'])) { //Check if next set has been initiated
             $game->endRound($_POST['event'], $_POST['round']);
-        } elseif (!empty($_POST['endgame'])) {
+        } elseif (!empty($_POST['endgame'])) { //Check if the game has ended
             $game->endRound($_POST['event'], $_POST['round']);
             $game->endGame();
-        } elseif (!empty($_POST['setprice'])) {
+        } elseif (!empty($_POST['setprice'])) { //Check if price has been setted
             $game->setPriceWin($_POST['price'], $_POST['player'], $_POST['event'], $_POST['round']);
         }
     }
@@ -101,7 +94,10 @@ class GameController extends Controller {
         
     }
 
-    //Beendet das spiel und informiert die Spieler
+    /**
+     * Stop the game and inform the players
+     * 
+     */
     protected function end() {
         $winplayers = $this->mysqlAdapter->getWinPlayers($this->resourceId);
         $event = $this->mysqlAdapter->getEvent($this->resourceId);
@@ -112,12 +108,10 @@ class GameController extends Controller {
                 $mailtext = "Herzlichen Glückwunsch " . $winplayer->getFirstname() . ", du hast am " . $event->getName() .
                         " folgenden Preis gewonnen " . $winplayer->getName() . ". Beste Grüsse, das Lotto Team";
 
-                $to = $winplayer->getMail();
-                $from = "lottoteam@lotto.local";
-                $subject = "Lottogewinn im Event " + $event->getName();
-                $mailtext = "Moin Heinz!\nIch hoffe Deine eMailAdresse $empfaenger existiert noch.";
-                mail($to, $subject, $mailtext, "From: $from ");
-                
+                $to = $winplayer->getMail(); //Recipient
+                $from = "lottoteam@lotto.local"; //Sender
+                $subject = "Lottogewinn im Event " + $event->getName(); //Subject
+                mail($to, $subject, $mailtext, "From: $from "); //Send mail with content
             }
         }
     }

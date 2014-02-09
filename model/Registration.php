@@ -1,47 +1,55 @@
 <?php
 
 class Registration {
-    
-    /* Variabeln definieren */
+    /* Define properties */
+
     private $id;
     private $player;
     private $event;
     private $create_on;
     private $update_on;
-    
-    /* Konstruktor mit Übergabeparameter */
+
+    /* Constructor with parameters */
+
     function __construct($id, $player, $event) {
         $this->id = $id;
         $this->player = $player;
         $this->event = $event;
-        
     }
-    //Holt Registrations ID
+
+    //Get registrations ID
     public function getId() {
         return $this->id;
     }
-    //Holt Player
+
+    //Get player
     public function getPlayer() {
         return $this->player;
     }
-    //Setzt Player
+
+    //Set player
     public function setPlayer($player) {
         $this->player = $player;
     }
-    //Holt Event
+
+    //Get event
     public function getEvent() {
         return $this->event;
     }
-    //Setzt Event
+
+    //Set Event
     public function setEvent($event) {
         $this->event = $event;
     }
-    //Holt Erstell Datum/Zeit
+
+    //Get create date
     public function getCreateOn() {
         return $this->create_on;
     }
-    //Holt Aktuallisierungs Datum/Zeit
+
+    //Get update date
     public function getUpdateOn() {
         return $this->update_on;
     }
+
 }

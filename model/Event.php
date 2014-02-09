@@ -1,8 +1,8 @@
 <?php
 
 class Event {
-    
-    /* Variabeln definieren */
+    /* Define properties */
+
     private $id;
     private $name;
     private $date;
@@ -12,76 +12,93 @@ class Event {
     private $players = array();
     private $create_on;
     private $update_on;
-    
-    /* Konstruktor mit Übergabeparameter */
-   function __construct($id, $name, $date, $location, $organizer) {
-        
-        if (isset($id)) { $this->id = $id; }
+
+    /* Constructor with parameters */
+
+    function __construct($id, $name, $date, $location, $organizer) {
+
+        if (isset($id)) {
+            $this->id = $id;
+        }
         $this->name = $name;
         $this->date = $date;
         $this->location = $location;
-        $this->organizer = $organizer; 
-        //$this->duration = $duration;
-        //$this->players = $players;
-        
+        $this->organizer = $organizer;
     }
-    //Holt Karten ID
+
+    //Get card ID
     public function getId() {
         return $this->id;
-    }  
-   
-    //Holt Event Name
+    }
+
+    //Get eventname
     public function getName() {
         return $this->name;
     }
-    //Setzt Event Name
+
+    //Set eventname
     public function setName($name) {
         $this->name = $name;
     }
-    //Holt Event Datum
+
+    //Get date
     public function getDate() {
         return $this->date;
     }
-    //Setzt Event Datum
+
+    //Set date
     public function setDate($date) {
         $this->date = $date;
     }
-    //Holt Event Ort
+
+    //Get location
     public function getLocation() {
         return $this->location;
     }
-    //Setzt Event Ort
+
+    //Set eventlocation
     public function setLocation($location) {
         $this->location = $location;
     }
-    //Holt Eventveranstalter
+
+    //Get organizer
     public function getOrganizer() {
         return $this->organizer;
     }
-    //Setzt Eventveranstalter
+
+    //Set organizer
     public function setOrganizer($organizer) {
         $this->organizer = $organizer;
     }
-    //Holt Event Dauer
+
+    //Get duration
     public function getDuration() {
         return $this->duration;
     }
-    //Setzt Event Dauer
+
+    //Set duration
     public function setDuration($duration) {
         $this->duration = $duration;
     }
+
+    //Get all players of this game
     public function getPlayers() {
         return $this->players;
     }
+
+    //Set all Players of this game
     public function setPlayers($players) {
         $this->players = $players;
     }
-    //Holt Erstell Datum/Zeit
+
+    //Get create date
     public function getCreateOn() {
         return $this->create_on;
     }
-    //Holt Aktuallisierungs Datum/Zeit
+
+    //Get update date
     public function getUpdateOn() {
         return $this->update_on;
     }
+
 }

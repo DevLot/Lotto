@@ -3,19 +3,18 @@
 include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 include_once 'config/config.php';
-include_once 'lib/MySqlAdapter.php';
-include_once 'controller/Controller.php';
 
 include_once 'model/Registration.php';
 include_once 'model/Event.php';
 include_once 'model/Player.php';
+
 include_once 'view/View.php';
-//include_once 'view/card/CardView.php';
 include_once 'view/registration/RegistrationView.php';
 include_once 'view/registration/RegistrationDetailView.php';
 
-//include_once 'view/card/CardFormView.php';
-
+/**
+ * Registration controller
+ */
 class RegistrationController extends Controller {
 
     private $mysqlAdapter;
@@ -51,39 +50,33 @@ class RegistrationController extends Controller {
 
     protected function create() {
 
+        //Create registration from form
         $registration = new Registration(null, $_POST['player'], $_POST['event']);
-
         $this->mysqlAdapter->createRegistration($registration);
     }
 
     protected function edit() {
         $registration = $this->mysqlAdapter->getRegistration($eventId);
-        if (!empty($registration)) { // Card with transmitted ID was found
+        if (!empty($registration)) { // Registration with transmitted ID was found
             $view = new RegistrationFormView();
             $view->assign('registration', $registration);
             $view->display();
         }
     }
 
-    protected function delete() {
-       echo "not implemented";
-    }
-
+    /**
+     * Set the registrations from form
+     */
     protected function update() {
 
-        echo "Update wurde ausgeführt";
-
-        //AJAX Spieler hinzufügen / entfernen von der Registration
+        //Add or remove registration
         if (!empty($_POST['function']) && !empty($_POST['player']) && !empty($_POST['event'])) {
-            //Setze Objekt
             $registration = new Registration(null, $_POST['player'], $_POST['event']);
-            if ($_POST['function'] == "add") { //Hinzufügen
-                echo "hinzufügen ";
+            if ($_POST['function'] == "add") { //Add player to registration
                 $this->mysqlAdapter->setRegistration($registration);
-            } elseif ($_POST['function'] == "del") {//Entfernen
-                echo "deleted ";
-                 $this->mysqlAdapter->deleteRegistration($registration);
-               }
+            } elseif ($_POST['function'] == "del") {//Remove player to registration
+                $this->mysqlAdapter->deleteRegistration($registration);
+            }
         }
     }
 

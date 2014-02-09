@@ -9,7 +9,7 @@ final class MySqlAdapter {
     private $con;
     private $sql;
 
-    //Konstruktor
+    //Constructor
     function __construct($host, $user, $password, $db) {
         $this->host = $host;
         $this->user = $user;
@@ -19,12 +19,12 @@ final class MySqlAdapter {
         $this->open();
     }
 
-    //Dekonstruktor
+    //Destructor
     public function __destruct() {
         $this->close();
     }
 
-    //Erstellt eine Verbindung zur DB
+    //Create a db connection
     private function open() {
         $this->con = new mysqli($this->host, $this->user, $this->password, $this->db);
         if ($this->con->connect_errno) {
@@ -35,7 +35,7 @@ final class MySqlAdapter {
         }
     }
 
-    //Schliesst Verindung zur DB
+    //Close the db connection
     private function close() {
         if ($this->con != null) {
             $this->con->close();
@@ -43,7 +43,7 @@ final class MySqlAdapter {
         }
     }
 
-    /* Funktionen für Zugriff auf DB:
+    /* Functions to the db:
      * - getHistorys()
      * - getHistory($event)
      * - setHistory()
@@ -68,11 +68,16 @@ final class MySqlAdapter {
      * - getRegistration($event)
      * - setRegistration()
      * - updateRegistration()
-     * 
-     * 
+     * - getPricesOpen($event)
+     * - checkActiveGame($id)
+     * - getLastRound($event)
      */
 
-    //Holt History
+    /**
+     * Returns all Histories
+     * @return $historylist[] 
+     * 
+     */
     public function getHistorys() {
 
         $historylist = array();
@@ -85,7 +90,13 @@ final class MySqlAdapter {
         return $historylist;
     }
 
-    //Holt History von Event der Serie
+    /**
+     * Return histories of a round in a event 
+     *  @param int $event, int $round
+     * 
+     * @return $historylist[] 
+     * 
+     */
     public function getHistory($event, $round) {
 
         $res = $this->con->query("SELECT * FROM fabingo.history WHERE event='$event' AND round='$round'");
@@ -100,7 +111,10 @@ final class MySqlAdapter {
         }
     }
 
-    //Setzt History
+    /**
+     * Set a history 
+     *  @param history $history
+     */
     public function setHistory($history) {
 
         $event = $history->getEvent();
@@ -115,14 +129,15 @@ final class MySqlAdapter {
                 ('$event','$round','$numbers','$create_on','$update_on');";
 
         $this->con->query($sql);
-
-        //echo "History Import efoglreich";
     }
 
-    //Aktuallisiert History
+    /**
+     * Update a history
+     *  @param history $history
+     * 
+     */
     public function updateHistory($history) {
 
-        //$id = $history->getId();
         $event = $history->getEvent();
         $round = $history->getRound();
         $numbers = $history->getNumbers();
@@ -142,7 +157,10 @@ final class MySqlAdapter {
         echo "update erfolgreich";
     }
 
-    //Holt Spielkarten
+    /**
+     * Return all cards 
+     * @return $cardlist[] 
+     */
     public function getCards() {
 
         $cardlist = array();
@@ -156,7 +174,7 @@ final class MySqlAdapter {
     }
 
     /**
-     * Returns the event by given id if present, null otherwiset
+     * Return a card object
      * @param int $id
      * @return Card 
      */
@@ -189,7 +207,11 @@ final class MySqlAdapter {
         return $cardlist;
     }
 
-    //Erstellt Spielkarte
+    /**
+     * Create a new card
+     *  @param card $card
+     * 
+     */
     public function createCard($card) {
 
         $cardnr = $card->getCardnr();
@@ -209,14 +231,13 @@ final class MySqlAdapter {
          ";
 
         $this->con->query($sql);
-        
-      
-
-
-
     }
 
-    //Aktualisiert Spielkarte
+    /**
+     * Update card information
+     *  @param card $card
+     * 
+     */
     public function updateCard($card) {
 
         $id = $card->getId();
@@ -225,15 +246,17 @@ final class MySqlAdapter {
         $line2 = $card->getLine2();
         $line3 = $card->getLine3();
         $player = $card->getPlayer();
-        
-  
 
         $sql = "UPDATE fabingo.cards SET line1 = '$line1', line2 = '$line2', line3 = '$line3', player='$player', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND cardnr = '$cardnr'";
 
         $this->con->query($sql);
     }
 
-    //Holt Spieler
+    /**
+     * Return all players
+     * @return $playerlist[] 
+     * 
+     */
     public function getPlayers() {
 
         $playerlist = array();
@@ -246,7 +269,12 @@ final class MySqlAdapter {
         return $playerlist;
     }
 
-    //Holt Spieler, die in einem Event registriert sind
+    /**
+     * Return players of a registred event
+     *  @param int $event
+     * @return $playerlist[] 
+     * 
+     */
     public function getRegistrationPlayers($event) {
 
         $playerlist = array();
@@ -259,7 +287,12 @@ final class MySqlAdapter {
         return $playerlist;
     }
 
-    //Holt Spielervorname, Mail und deren Preis von einem Event
+    /**
+     * Return all winners of an event 
+     *  @param int $event
+     * @return $playerlist[] 
+     * 
+     */
     public function getWinPlayers($event) {
 
         $maillist = array();
@@ -287,7 +320,11 @@ final class MySqlAdapter {
         return $player;
     }
 
-    //Erstellt Spieler
+    /**
+     * Crate a new player
+     *  @param player $player 
+     * 
+     */
     public function createPlayer($player) {
 
         $firstname = $player->getFirstname();
@@ -312,12 +349,13 @@ final class MySqlAdapter {
          ";
 
         $this->con->query($sql);
-  
-
-
     }
 
-    //Aktuallisier Spieler
+    /**
+     * Update player information 
+     *  @param Player $player 
+     * 
+     */
     public function updatePlayer($player) {
 
         $id = $player->getId();
@@ -334,11 +372,13 @@ final class MySqlAdapter {
         $sql = "UPDATE fabingo.players SET firstname = '$firstname', surname = '$surname', birthdate = '$birthdate', address = '$address', zipcode = '$zipcode', city = '$city', phone = '$phone', mobile = '$mobile', mail = '$mail', update_on = CURRENT_TIMESTAMP() WHERE id = '$id'";
 
         $this->con->query($sql);
-        
-        
     }
 
-    //Holt Events
+    /**
+     * Return all events
+     * @return $eventlist[] 
+     * 
+     */
     public function getEvents() {
 
         $eventlist = array();
@@ -384,14 +424,17 @@ final class MySqlAdapter {
         return $eventlist;
     }
 
-    //Erstellt Event
+    /**
+     * Create a new event
+     *  @param Event $event
+     * 
+     */
     public function createEvent($event) {
 
         $name = $event->getName();
         $date = $event->getDate();
         $location = $event->getLocation();
         $organizer = $event->getOrganizer();
-        //$player = $event->getPlayes()
 
         $sql = "INSERT INTO fabingo.events
                 (
@@ -406,7 +449,11 @@ final class MySqlAdapter {
         $this->con->query($sql);
     }
 
-    //Aktuallisiert Event
+    /**
+     * Update event information
+     *  @param int $event
+     * 
+     */
     public function updateEvent($event) {
 
         $id = $event->getId();
@@ -419,10 +466,13 @@ final class MySqlAdapter {
         $sql = "UPDATE fabingo.events SET name = '$name', date = '$date', location = '$location', organizer = '$organizer', update_on = CURRENT_TIMESTAMP() WHERE id = '$id' AND status = 1";
 
         $this->con->query($sql);
-   
     }
 
-    //Holt Preis
+    /**
+     * Returns all prices 
+     * @return $pricelist[] 
+     * 
+     */
     public function getPrices() {
 
         $pricelist = array();
@@ -474,10 +524,12 @@ final class MySqlAdapter {
         $this->con->query($sql);
     }
 
-    //Aktuallisiert Preis
+    /**
+     * Update price information
+     *  @param Price $price 
+     */
     public function updatePrice($price) {
 
-        //$id = $price->getId();
         $name = $price->getName();
         $player = $price->getPlayer();
         $event = $price->getEvent();
@@ -489,7 +541,12 @@ final class MySqlAdapter {
         $this->con->query($sql);
     }
 
-    //Überprüft ob Treffer bereits in DB
+    /**
+     * Check if the price is setted of a event/round/line
+     *  @param int $player, int $event, int $round, int $line 
+     * @return true|false
+     * 
+     */
     public function checkPrice($player, $event, $round, $line) {
 
         $res = $this->con->query("SELECT * FROM fabingo.prices WHERE player='$player' AND event='$event' AND round='$round' AND line='$line'");
@@ -501,7 +558,12 @@ final class MySqlAdapter {
         return true;
     }
 
-    //Zeit alle Gewinne an ohne Preise
+    /**
+     * Return all wins which is not yet setted of a event
+     *  @param Event $event
+     * @return $pricelist[] 
+     * 
+     */
     public function getPricesOpen($event) {
 
         $pricelist = array();
@@ -514,7 +576,12 @@ final class MySqlAdapter {
         return $pricelist;
     }
 
-    //Holte Registration von einem Event
+    /**
+     * Returns all registrations of a event
+     * @param int $event
+     * @return $registrationlist[]
+     * 
+     */
     public function getRegistration($event) {
 
         $registrationlist = array();
@@ -527,7 +594,11 @@ final class MySqlAdapter {
         return $registrationlist;
     }
 
-    //Setzt Registration
+    /**
+     * Create a registration
+     * @param Registration $registration
+     * 
+     */
     public function setRegistration($registration) {
 
         $player = $registration->getPlayer();
@@ -546,7 +617,11 @@ final class MySqlAdapter {
         $this->con->query($sql);
     }
 
-    //Löscht Registration
+    /**
+     * Delete a registration
+     * @param registration $registration
+     * 
+     */
     public function deleteRegistration($registration) {
 
         $player = $registration->getPlayer();

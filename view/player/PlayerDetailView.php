@@ -3,13 +3,13 @@
 class PlayerDetailView extends View {
 
     public function display() {
-      
-      $player = $this->vars['player'];
-               
-     echo '<div class="subcontrol"><div class="button"><a href="/player/">Übersicht</a></div>';
-     echo '<div class="button"><a href="/player/'.$player->getId().'/edit">Bearbeiten</a></div>';
-     echo '<div class="button"><a href="/player/'.$player->getId().'/delete">Löschen</a></div>';
-      echo  "</div><div class=\"list\"><table><tr><td>ID</td><td>" . $player->getId() . "</td></tr>
+
+        $player = $this->vars['player'];
+
+        echo '<div class="subcontrol"><div class="button"><a href="/player/">Übersicht</a></div>';
+        echo '<div class="button"><a href="/player/' . $player->getId() . '/edit">Bearbeiten</a></div>';
+        echo '<div class="button"><a href="/player/' . $player->getId() . '/delete">Löschen</a></div>';
+        echo "</div><div class=\"list\"><table><tr><td>ID</td><td>" . $player->getId() . "</td></tr>
       <tr><td>Vorname</td><td>" . $player->getFirstname() . "</td></tr>
       <tr><td>Nachname</td><td>" . $player->getSurname() . "</td></tr>
       <tr><td>Geburtstag</td><td>" . $player->getBirthdate() . "</td></tr>
@@ -21,19 +21,15 @@ class PlayerDetailView extends View {
       <tr><td>Mail</td><td>" . $player->getMail() . "</td></tr>
    
       </table></div>";
-     
     }
-    
-     
-   public function editform() {
+
+    public function editform() {
         echo 'geili sach';
     }
-    
+
     public function deleteform() {
         $player = $this->vars['player'];
-                echo 'Möchten Sie den Spieler '. $player->getFirstname() .' '. $player->getSurname() .' wirklcih löschen?';
-                
+        echo 'Möchten Sie den Spieler ' . $player->getFirstname() . ' ' . $player->getSurname() . ' wirklcih löschen?';
     }
 
 }
-

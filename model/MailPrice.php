@@ -1,36 +1,34 @@
 <?php
 
 class MailPrice {
-    
-    /* Variabeln definieren */
+    /* Define properties */
+
     private $name;
     private $firstname;
     private $mail;
 
-    
-    /* Konstruktor mit Übergabeparameter */
+    /* Constructor with parameters */
+
     function __construct($name, $firstname, $mail) {
 
         $this->name = $name;
         $this->firstname = $firstname;
         $this->mail = $mail;
-        
     }
-        
-    //Holt preisname
+
+    //Get pricename
     public function getName() {
         $this->name = $name;
     }
-    
-    //Holt Vorname
+
+    //Get firstname of winner
     public function getFirstname() {
         $this->firstname = $firstname;
     }
-   
-    //Holt mailadresse
+
+    //Get mailaddress
     public function getMail() {
         $this->mail = $mail;
     }
-   
-   
+
 }

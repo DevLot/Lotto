@@ -1,8 +1,8 @@
 <?php
 
 class Player {
-    
-    /* Variabeln definieren */
+    /* Define properties */
+
     private $id;
     private $firstname;
     private $surname;
@@ -16,10 +16,13 @@ class Player {
     private $status;
     private $create_on;
     private $update_on;
-    
-    /* Konstruktor mit Übergabeparameter */
+
+    /* Constructor with parameters */
+
     function __construct($id, $firstname, $surname, $birthdate, $address, $zipcode, $city, $phone, $mobile, $mail) {
-        if (isset($id)) { $this->id = $id; }
+        if (isset($id)) {
+            $this->id = $id;
+        }
         $this->firstname = $firstname;
         $this->surname = $surname;
         $this->birthdate = $birthdate;
@@ -29,101 +32,123 @@ class Player {
         $this->phone = $phone;
         $this->mobile = $mobile;
         $this->mail = $mail;
-        //$this->status = $status;
         $this->create_on = date("Y-m-d H:i:s");
         $this->update_on = date("Y-m-d H:i:s");
-        
     }
-    //Holt Player ID
+
+    //Get player id
     public function getId() {
         return $this->id;
     }
-    //Holt Vornahme
+
+    //Get firstname
     public function getFirstname() {
         return $this->firstname;
     }
-    //Setzt Vornahme
+
+    //Set firstname
     public function setFirstname($firstname) {
         $this->firstname = $firstname;
     }
-    //Holt Nachnamen
+
+    //Get surname
     public function getSurname() {
         return $this->surname;
     }
-    //Setzt Nachnamen
+
+    //Set surname
     public function setSurname($surname) {
         $this->surname = $surname;
     }
-    //Holt Geburtsdatum
+
+    //Get birthdate
     public function getBirthdate() {
         return $this->birthdate;
     }
-    //Setzt Geburtsdatum
+
+    //Set birthdate
     public function setBirthdate($birthdate) {
         $this->birthdate = $birthdate;
     }
-    //Holt Adresse
+
+    //Get address
     public function getAddress() {
         return $this->address;
     }
-    //Setzt Adresse
+
+    //Set address
     public function setAddress($address) {
         $this->address = $address;
     }
-    //Holt PLZ
+
+    //Get zipcode
     public function getZipcode() {
         return $this->zipcode;
     }
-    //Setzt PLZ
+
+    //Set zipcode
     public function setZipcode($zipcode) {
         $this->zipcode = $zipcode;
     }
-    //Holt Ort
+
+    //Get city
     public function getCity() {
         return $this->city;
     }
-    //Setzt Ort
+
+    //Set city
     public function setCity($city) {
         $this->city = $city;
     }
-    //Holt TelefonNr.
+
+    //Get phone number
     public function getPhone() {
         return $this->phone;
     }
-    //Setzt TelefonNr.
+
+    //Set phone number
     public function setPhone($phone) {
         $this->phone = $phone;
     }
-    //Holt MobileNr.
+
+    //Get mobile number
     public function getMobile() {
         return $this->mobile;
     }
-    //Setzt MobileNr.
+
+    //Get mobile number
     public function setMobile($mobile) {
         $this->mobile = $mobile;
     }
-    //Holt E-Mail Adresse
+
+    //Get mail
     public function getMail() {
         return $this->mail;
     }
-    //Setzt E-Mail Adresse
+
+    //Set mail
     public function setMail($mail) {
         $this->mail = $mail;
     }
-    //Holt Spieler Status
+
+    //Get status
     public function getStatus() {
         return $this->status;
     }
-    //Setzt Spieler Status
+
+    //Set player
     public function setStatus($status) {
-        $this->status = $status;        
+        $this->status = $status;
     }
-    //Holt Erstell Datum/Zeit
+
+    //Get create date
     public function getCreateOn() {
         return $this->create_on;
     }
-    //Holt Aktuallisierungs Datum/Zeit
+
+    //Get update date
     public function getUpdateOn() {
         return $this->update_on;
     }
+
 }

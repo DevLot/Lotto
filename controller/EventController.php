@@ -13,11 +13,10 @@ class EventController extends Controller {
     private $mysqlAdapter;
 
     function __construct() {
-       $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $this->mysqlAdapter = new MySqlAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
 
     protected function index() {
-//        $eventList = $this->csvAdapter->getEventList();
         $view = new EventView();
         $view->assign('eventlist', $this->mysqlAdapter->getEvents());
         $view->display();
@@ -38,18 +37,15 @@ class EventController extends Controller {
     }
 
     protected function create() {
-        $event = new Event(null,$_POST['name'],$_POST['date'],
-                $_POST['location'],$_POST['organizer']);
-                       
+        $event = new Event(null, $_POST['name'], $_POST['date'], $_POST['location'], $_POST['organizer']);
+
         $this->mysqlAdapter->createEvent($event);
-        
-        
-         echo '<p>Eintrag erfolgreich!</p>
+
+        echo '<p>Eintrag erfolgreich!</p>
         <div class="subcontrol"><div class="button"><a href="/event">Danke!</a></div></div>';
-        
     }
-    
-        protected function edit() {
+
+    protected function edit() {
         $event = $this->mysqlAdapter->getEvent($this->resourceId);
 
         if (!empty($event)) { // Event with transmitted ID was found
@@ -67,16 +63,15 @@ class EventController extends Controller {
             $view->deleteform();
         }
     }
-   protected function update() {
 
-        $event = new Event($_POST['id'], $_POST['name'], $_POST['date'], $_POST['location'],$_POST['organizer']);
+    protected function update() {
+
+        $event = new Event($_POST['id'], $_POST['name'], $_POST['date'], $_POST['location'], $_POST['organizer']);
 
         $this->mysqlAdapter->updateEvent($event);
-        
-  
-         echo '<p>Update erfolgreich!</p>
+
+        echo '<p>Update erfolgreich!</p>
        <div class="subcontrol"> <div class="button"><a href="/event">Danke!</a></div></div>';
     }
 
 }
-

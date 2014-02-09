@@ -19,9 +19,7 @@ class EventDetailView extends View {
       </table></div>";
      
     }
-    
-      
-      
+   
     }
 
 

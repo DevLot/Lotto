@@ -93,7 +93,7 @@ class GamePlayView extends View {
         echo '</div>';
 
 
-        //Hier werden allfällige Gewinner angezeigt
+        //Show winners
         foreach ($pricesopenlist as $win) {
             echo '<div class="infobox warning">Bitte Gewinner bestätigen!</div>';
             echo '<div class="price-input">';
@@ -124,7 +124,7 @@ class GamePlayView extends View {
                 }
             }
             echo '<br />';
-            //echo $winner->getSurname();
+
             echo '<input type="text" id="player' . $win->getPlayer() . '"></input>
                 <a href="#" onclick="ackwin(' . $win->getPlayer() . ')" class="button">Preis/Gewinn bestätigen</a></div>';
         }

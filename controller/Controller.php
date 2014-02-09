@@ -3,7 +3,7 @@
 /**
  * abstract class for all controllers 
  *
- * @author Marc Jenzer
+ * @author Fabingo Team
  */
 abstract class Controller {
 
@@ -65,17 +65,6 @@ abstract class Controller {
                 break;
         }
     }
-
-//    /**
-//     * edit a instance of the resource
-//     */
-//    abstract protected function edit(); 
-//    
-//    /**
-//     * delete a instance of the resource
-//     */
-//    abstract protected function delete(); 
-
 
     public static function encodeUrl($url) {
         $specialChars = array(

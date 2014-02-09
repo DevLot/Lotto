@@ -6,7 +6,6 @@ class CardView extends View {
 
         $playerlist = $this->vars['playerlist'];
 
-
         echo '<div class="subcontrol"><div class="button"><a href="/card/new">Neue Karte</a></div>
                 </div><div class="list"><table>
                 <tbody><thead><th></th>
@@ -20,9 +19,10 @@ class CardView extends View {
                <a href="/card/' . $card->getId() . '/delete"> <img src="/images/icon_del_full.png" height="14" /></a></td>' .
             "<td>" . $card->getCardnr() . "</td>"
             . "<td>";
-
-            foreach ($playerlist as $player) {
-
+          
+          foreach ($playerlist as $player) {
+                
+                //Show card owner in the row
                 if ($player->getId() == $card->getPlayer()) {
                     echo $player->getFirstname();
                     echo ' ';
@@ -34,10 +34,6 @@ class CardView extends View {
             echo "</td>";
         }
         echo '</tr></tbody></table></div>';
-    }
-
-    public function newform() {
-        include 'form.php';
     }
 
 }

@@ -13,6 +13,11 @@ include_once 'view/card/CardView.php';
 include_once 'view/card/CardDetailView.php';
 include_once 'view/card/CardFormView.php';
 
+/**
+ * Card controller
+ *
+ * @author Fabingo Team
+ */
 class CardController extends Controller {
 
     private $mysqlAdapter;
@@ -49,8 +54,8 @@ class CardController extends Controller {
 
     protected function create() {
 
+        //GET card infos from form and insert into database
         $card = new Card(null, $_POST['cardnr'], $_POST['line1'], $_POST['line2'], $_POST['line3'], null, 1);
-
         $this->mysqlAdapter->createCard($card);
 
         echo '<p>Eintrag erfolgreich!</p>
@@ -69,11 +74,10 @@ class CardController extends Controller {
     }
 
     protected function delete() {
-        echo "not avaible";
+        echo "not implemented";
     }
 
     protected function update() {
-
 
         $card = new Card($_POST['id'], $_POST['cardnr'], $_POST['line1'], $_POST['line2'], $_POST['line3'], $_POST['player'], 1);
 

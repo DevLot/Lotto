@@ -3,15 +3,17 @@
 include_once 'lib/MySqlAdapter.php';
 include_once 'controller/Controller.php';
 include_once 'config/config.php';
-include_once 'lib/MySqlAdapter.php';
-include_once 'controller/Controller.php';
 
 include_once 'model/Player.php';
+
 include_once 'view/View.php';
 include_once 'view/player/PlayerView.php';
 include_once 'view/player/PlayerDetailView.php';
 include_once 'view/player/PlayerFormView.php';
 
+/**
+ * Player controller
+ */
 class PlayerController extends Controller {
 
     private $mysqlAdapter;
@@ -34,9 +36,6 @@ class PlayerController extends Controller {
             $view->assign('player', $player);
             $view->display();
         }
-
-//        $this->mysqlAdapter->getPlayers();
-//        $this->mysqlAdapter->getPlayer($id);
     }
 
     protected function init() {
@@ -47,11 +46,12 @@ class PlayerController extends Controller {
 
     protected function create() {
 
+        //Get new player data from from
         $player = new Player(null, $_POST['firstname'], $_POST['surname'], $_POST['birthdate'], $_POST['address'], $_POST['zipcode'], $_POST['city'], $_POST['phone'], $_POST['mobile'], $_POST['mail']);
 
         $this->mysqlAdapter->createPlayer($player);
-        
-         echo '<p>Neuer Eintrag erfolgreich!</p>
+
+        echo '<p>Neuer Eintrag erfolgreich!</p>
         <div class="subcontrol"><div class="button"><a href="/player">Danke!</a></div></div>';
     }
 
@@ -65,8 +65,11 @@ class PlayerController extends Controller {
         }
     }
 
+    /**
+     * Deletes player object in the db
+     */
     protected function delete() {
-        $player = $this->mysqlAdapter->getPlayer($this->resourceId);
+        $player = $this->mysqlAdapter->deletePlayer($this->resourceId);
         if (!empty($player)) { // Player with transmitted ID was found
             $view = new PlayerDetailView();
             $view->assign('player', $player);
@@ -74,16 +77,17 @@ class PlayerController extends Controller {
         }
     }
 
+    /**
+     * Update a player object in the database
+     */
     protected function update() {
 
-        $player = new Player($_POST['id'],$_POST['firstname'],$_POST['surname'],
-                $_POST['birthdate'],$_POST['address'],$_POST['zipcode'],
-                $_POST['city'],$_POST['phone'],$_POST['mobile'],$_POST['mail'],null);
-                       
+        //Create a new player object from from
+        $player = new Player($_POST['id'], $_POST['firstname'], $_POST['surname'], $_POST['birthdate'], $_POST['address'], $_POST['zipcode'], $_POST['city'], $_POST['phone'], $_POST['mobile'], $_POST['mail'], null);
+
         $this->mysqlAdapter->updatePlayer($player);
-        
-  
-         echo '<p>Update erfolgreich!</p>
+
+        echo '<p>Update erfolgreich!</p>
         <div class="subcontrol"><div class="button"><a href="/player">Danke!</a></div></div>';
     }
 

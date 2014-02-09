@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); //Start a session
 ?>
 
 <!doctype html>
@@ -39,7 +39,7 @@ include_once 'config/config.php';
             <div id="navtree">
                 <a href="/home">Start</a> > 
                 <a href="<?php echo getCurrentURI(); ?>"><?php echo getCurrentMenu(); ?></a>
-                
+
             </div>
 
 
@@ -99,7 +99,7 @@ include_once 'config/config.php';
 
                     include_once 'controller/LoginController.php';
                     $controller = new LoginController();
-                    
+
                     if ($controller != null) {
                         $controller->route();
                     }
@@ -167,11 +167,10 @@ function getCurrentURI() {
  * @return string the requested name
  */
 function getCurrentMenu() {
-    
-    
-    $uri = getCurrentURI() ;
-    $str= ltrim ($uri,'/');
+
+
+    $uri = getCurrentURI();
+    $str = ltrim($uri, '/');
     return ucfirst($str);
 }
 ?>
-

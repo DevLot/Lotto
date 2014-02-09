@@ -1,27 +1,23 @@
 <?php
 
-//include_once 'lib/CSVAdapter.php';
 include_once 'controller/Controller.php';
-//include_once 'model/Event.php';
-//include_once 'model/MusicEvent.php';
-//include_once 'model/Artist.php';
+
 include_once 'view/View.php';
 include_once 'view/login/LoginView.php';
 
+/**
+ * Login controller
+ * 
+ */
 class LoginController extends Controller {
 
-//    private $csvAdapter;
-
     function __construct() {
-//        $this->csvAdapter = new CSVAdapter("{$_SERVER['DOCUMENT_ROOT']}/resources/eventlist.csv");
+        
     }
 
     protected function index() {
-//        $eventList = $this->csvAdapter->getEventList();
-  
-        
+
         $view = new LoginView();
-//        $view->assign('list', $eventList);
         $view->display();
     }
 
@@ -30,37 +26,32 @@ class LoginController extends Controller {
     }
 
     protected function init() {
-           
-    echo "not implemented";
-   
-   
+
+        echo "not implemented";
     }
 
     protected function create() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      session_start();
+            session_start();
 
-      $username = $_POST['username'];
-      $password = $_POST['password'];
+            //Get credentials from login
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
- 
+            // Check credentials if matched
+            if ($username == 'fabingo' && $password == '123') {
+                //Start a session
+                $_SESSION['login'] = true;
 
-      // Benutzername und Passwort werden überprüft
-      if ($username == 'fabingo' && $password == '123') {
-       $_SESSION['login'] = true;
-
-       // Weiterleitung zur geschützten Startseite
-       
-
-       header('Location: http://lotto.local/home');
-       exit;
-       } else {
-           header('Location: http://lotto.local');
-            
-       exit;
-       }
-      }
+                // Redirect to the protected site
+                header('Location: http://lotto.local/home');
+                exit;
+            } else {
+                //Redirect to the login site
+                header('Location: http://lotto.local');
+                exit;
+            }
+        }
     }
-    
-}
 
+}

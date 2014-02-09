@@ -5,7 +5,7 @@ class GameView extends View {
     public function display() {
        
         
-               //Button and th of table
+       //Button and th of table
         include 'table_top.php';
 
         foreach ($this->vars['eventlist'] as $event) {
