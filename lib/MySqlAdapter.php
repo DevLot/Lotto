@@ -9,7 +9,9 @@ final class MySqlAdapter {
     private $con;
     private $sql;
 
-    //Constructor
+      /**
+     * Constructor
+     */
     function __construct($host, $user, $password, $db) {
         $this->host = $host;
         $this->user = $user;
@@ -19,12 +21,16 @@ final class MySqlAdapter {
         $this->open();
     }
 
-    //Destructor
+    /**
+     * Destructor
+     */
     public function __destruct() {
         $this->close();
     }
 
-    //Create a db connection
+    /**
+     * New connect to the DB 
+     */
     private function open() {
         $this->con = new mysqli($this->host, $this->user, $this->password, $this->db);
         if ($this->con->connect_errno) {
@@ -52,12 +58,15 @@ final class MySqlAdapter {
      * - getCard($id)
      * - createCards()
      * - updateCard()
+     * - deleteCard($id)
      * - getPlayers()
      * - getPlayer($id)
      * - createPlayer()
      * - updatePlayer()
+     * - deletePlayer($id)
      * - getEvents()
      * - getEvent($id)
+     * - deleteEvent($id)
      * - createEvent()
      * - updateEvent()
      * - getPrices()
@@ -251,6 +260,17 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
     }
+    
+     /**
+     * Deletes a Card from the Database
+     * @param int $id
+     * @return null 
+     * 
+     */
+    public function deleteCard($id) {
+        $this->con->query("DELET FROM fabingo.cards WHERE id='$id'");
+    }
+
 
     /**
      * Return all players
@@ -373,6 +393,16 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
     }
+    
+     /**
+     * Delets a Player from the Database
+     * @param int $id
+     * @return null 
+     * 
+     */
+    public function deletePlayer($id) {
+        $this->con->query("UPDATE fabingo.players SET status=0 WHERE id='$id'");
+    }
 
     /**
      * Return all events
@@ -467,6 +497,17 @@ final class MySqlAdapter {
 
         $this->con->query($sql);
     }
+    
+    
+    /**
+     * Delets a Event from the Database
+     * @param int $id 
+     * 
+     */
+    public function deleteEvent($id) {
+        $this->con->query("DELETE FROM fabingo.events WHERE id='$id'");
+    }
+
 
     /**
      * Returns all prices 
