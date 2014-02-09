@@ -191,7 +191,7 @@ final class MySqlAdapter {
     public function getCard($id) {
         $res = $this->con->query("SELECT * FROM fabingo.cards WHERE id='$id'");
         while ($row = $res->fetch_assoc()) {
-            $card = new Card($row['id'], $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], $row['status']);
+            $card = new Card($id, $row['cardnr'], $row['line1'], $row['line2'], $row['line3'], $row['player'], 1);
         }
 
 //        if (empty($row) || !is_object($row)) {
