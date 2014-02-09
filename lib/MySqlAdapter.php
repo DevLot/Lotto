@@ -520,7 +520,7 @@ final class MySqlAdapter {
         $registrationlist = array();
         $res = $this->con->query("SELECT * FROM fabingo.registration WHERE event='$event' ORDER BY id");
         while ($row = $res->fetch_assoc()) {
-            $registration = new Registration($row['id'], $row['player'], $row['event'], $row['created_on'], $row['updated_on']);
+            $registration = new Registration($row['id'], $row['player'], $row['event'], $row['create_on'], $row['update_on']);
             $registrationlist[] = $registration;
         }
         $res->free();
@@ -535,7 +535,7 @@ final class MySqlAdapter {
 
         $sql = "INSERT INTO fabingo.registration
                 (
-                    player,event,created_on,updated_on
+                    player,event,create_on,update_on
                 )
                 VALUES
                 (

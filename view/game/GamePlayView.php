@@ -24,7 +24,7 @@ class GamePlayView extends View {
                                 event:" . $event->getId() . ",
                                     round:" . $game->getRound() . "}, 
                         success: function (result) {
-                           location.reload();
+                                 location.reload();      
                            
                         }
                     });  

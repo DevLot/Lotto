@@ -241,10 +241,13 @@ class Game {
             $countL1 = 0;
             $countL2 = 0;
             $countL3 = 0;
+            
+          print_r($this->lotteryNr);
 
             foreach ($this->lotteryNr as $winNr) {
                 foreach ($line1 as $nr) {
                     if ($nr == $winNr) {
+                        echo $nr;
                         ++$countL1;
                     }
                     if ($countL1 == 5) {
